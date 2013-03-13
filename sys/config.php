@@ -1,5 +1,5 @@
 <?php
-namespace Canvas\Config;
+namespace Canvas;
 
 //If somebody is trying to directly access this file.
 defined('COMPONENT') or die('Access Denied.');
@@ -15,6 +15,6 @@ $config = array(
 	),
 
 	//Installation directory. Leave off the beginning "/".
-	'dir' => 'canvasbb/'
+	'dir' => 'canvasbb'
 )
 ?>
