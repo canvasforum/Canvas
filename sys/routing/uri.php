@@ -5,21 +5,30 @@ namespace Canvas\Routing;
 defined('COMPONENT') or die('Access Denied.');
 
 class URI {
-	//The requested URI as well as its arguements seperated using '/' as the delimeter.
+	//The requested URI as well as its arguements separated using '/' as the delimeter.
 	private $uri = null;
 	private $original = null;
 	private $args = array();
 
-	//Basic constructor.
-	function __construct(){
+	//A URI constructor.
+	function __construct($uri = null){
 		//Set the current URI.
-		$this->uri = $this->original = $_SERVER['REQUEST_URI'];
+		if(is_null($uri)){
+			$this->uri = $this->original = $_SERVER['REQUEST_URI'];
+		}
+		else{
+			$this->uri = $this->original = $uri;
+		}
 
 		//Remove the initial "/".
 		$this->uri = substr($this->uri, 1);
 
 		//Remove the installation directory from the path.
-		$this->uri = preg_replace('#^' . Controller::getConfig('dir') . '#', '', $this->uri);
+
+		/*
+		 * Note to self: Work on the Configuration class and move the config.php file to it's own sub-namespace.
+		 */
+		//$this->uri = preg_replace('#^' . Controller::getConfig('dir') . '#', '', $this->uri);
 
 		//Split the URI into args based on "/".
 		$this->args = explode('/', $this->uri);
@@ -36,8 +45,10 @@ class URI {
 
 	//Gets the argument at $index.
 	public function getArg($index){
-		if($index < $this->length()){
-			return $this->args[$index];
+		if(abs($index) < $this->length()){
+			//If the index is positive return the nth argument otherwise return the
+			//element with the index $this->length() - abs($index) - 1.
+			return $index > 0 ? $this->args[$index] : $this->args[$this->length() + $index - 1];
 		}
 		else{
 			return null;

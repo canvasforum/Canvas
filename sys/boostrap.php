@@ -31,5 +31,14 @@ use \Canvas\Database\DB as DB;
 //Connect to the database.
 DB::connect($config['db']);
 
-//Route ourselves.
+//Define an alias for the Router class.
+use \Canvas\Routing\Router as Router;
+
+//Load some paths.
+Router::load();
+
+/*
+ * CHANGE THIS LATER
+ */
+Router::load(PATH . SYS . THEMES . 'default' . DIRECTORY_SEPARATOR);
 ?>
