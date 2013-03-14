@@ -16,9 +16,6 @@ if(function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()){
 	ini_set('magic_quotes_sybase', false);
 }
 
-//Import the config.
-require PATH . SYS . 'config.php';
-
 //Import the autoloader.
 require PATH . SYS . 'autoloader.php';
 
@@ -38,7 +35,7 @@ use \Canvas\Routing\Router as Router;
 Router::load();
 
 /*
- * CHANGE THIS LATER
+ * CHANGE THIS LATER. THIS WILL STAY DEFAULT UNTIL THE CONFIGURATION CLASS IS CREATED.
  */
 Router::load(PATH . SYS . THEMES . 'default' . DIRECTORY_SEPARATOR);
 ?>
