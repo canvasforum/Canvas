@@ -1,6 +1,8 @@
 <?php
 namespace Canvas\Routing;
 
+use \Canvas\Configuration as Configuration;
+
 //If somebody is trying to directly access this file.
 defined('COMPONENT') or die('Access Denied.');
 
@@ -24,7 +26,6 @@ class URI {
 		$this->uri = substr($this->uri, 1);
 
 		//Remove the installation directory from the path.
-
 		$this->uri = preg_replace('#^' . Configuration::get('dir') . '#', '', $this->uri);
 
 		//Split the URI into args based on "/".
@@ -55,6 +56,11 @@ class URI {
 	//Returns the arguement list.
 	public function getArgs(){
 		return $this->args;
+	}
+
+	//Returns the requested resource path.
+	public function getURI(){
+		return implode('/', $this->getArgs());
 	}
 }
 ?>

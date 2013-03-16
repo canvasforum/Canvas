@@ -1,26 +1,22 @@
 <?php
 namespace Canvas\Routing;
 use FileSystemIterator;
+use \Canvas\Configuration as Configuration;
 
 //If somebody is trying to directly access this file.
 defined('COMPONENT') or die('Access Denied.');
 
 class Router {
-	private static $routes = array();
-	private static $base = null;
-
-	private static $errors = array(
-		'404' => '',
-		'500' => ''
+	private static $routes = array(
+		'404' => null
 	);
+	private static $base = null;
 
 	//Load all our routes.
 	public static function load($paths = null){
 		//Check to see if a path was even specified.
 		if(is_null($paths)){
-			//Just load all our ACP pages.
-			$acp = ADMIN . 'views' . DIRECTORY_SEPARATOR;
-			$paths = array('admin' => $acp);
+			return;
 		}
 		else{
 			//If an array was not passed.
@@ -95,34 +91,50 @@ class Router {
 
 	//Sets the resource path for the specified error type.
 	public static function setError($type, $path){
-		if(array_key_exists($type, static::$errors)){
-			if(array_key_exists($path, static::$routes)){
-				static::$errors[$type] = $path;
-			}
-			else{
-				//Log an error here.
-			}
+		if(array_key_exists($path, static::$routes)){
+			static::$errors[$type] = $path;
 		}
 		else{
 			//Log an error here.
-		}		
+		}
+	}
+
+	//Gets the path with the specified route.
+	public static function getPath($route){
+		if(array_key_exists($route, static::$routes)){
+			return static::$routes[$route];
+		}
+		else{
+			return null;
+		}
+	}
+
+	//Redirects the user to another page.
+	public static function redirect($path){
+		header('Location: ' . $path);
 	}
 
 	//Returns the resource to load based on the current URI.
 	public static function getResource(){
 		$uri = new URI();
+		$path = $uri->getURI();
 
-		/*
-		 * Fetch the requested URI
-		 * See if it matches any keys
-		 * If a match is found return the resource pointed to by the key
-		 * If not then return the resource pointed to by $errors['404']
-		 * If a 404 page is not specified:
+		if(!is_null(static::getPath($path))){
 
-			header('HTTP/1.0 404 Not Found');
-			echo '<h1>404 Error</h1>';
-			echo '<p>The page you were looking for was not found.</p>';
-		 */
+		}
+		else{
+			if($path == ''){
+				return static::getPath(Configuration::get('index'));
+			}
+			else if(is_null(static::getPath('404'))){
+				header('HTTP/1.0 404 Not Found');
+				echo '<h1>404 Error</h1>';
+				echo '<p>The page you were looking for was not found.</p>';
+			}
+			else{
+				//Route to our 404 page.
+			}
+		}
 	}
 }
 ?>

@@ -10,8 +10,8 @@ class Configuration {
 	//Attempt to load the current configuration.
 	public static function load(){
 		//Check to see if the config file is readable.
-		if(is_readable(PATH . APP . 'config/config.php')){
-			static::$config = include PATH . 'config/config.php';
+		if(is_readable(APP . 'config/config.php')){
+			static::$config = include APP . 'config/config.php';
 		}
 		else{
 			//Throw an error. File isn't readable or doesn't exist.

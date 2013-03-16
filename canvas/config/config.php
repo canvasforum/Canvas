@@ -13,9 +13,12 @@ return array(
 	),
 
 	//Installation directory. Leave off the beginning "/".
-	'dir' => 'canvasbb',
+	'dir' => 'canvasbb/',
 
 	//Application theme.
-	'theme' => 'default'
+	'theme' => 'default',
+
+	//Index page.
+	'index' => 'index'
 )
 ?>

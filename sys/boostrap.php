@@ -31,6 +31,9 @@ spl_autoload_register(array('Canvas\\Autoloader', 'load'));
 //Load the application configuration.
 Configuration::load();
 
+//Load application bootstrap.
+require APP . 'bootstrap.php';
+
 //Define an alias for the DB class.
 use \Canvas\Database\DB as DB;
 
@@ -40,11 +43,5 @@ DB::connect(Configuration::get('db'));
 //Define an alias for the Router class.
 use \Canvas\Routing\Router as Router;
 
-//Load some paths.
-Router::load();
-
-$theme = THEMES . Configuration::get('theme') . DIRECTORY_SEPARATOR;
-
-Router::load(array('' => $theme));
-Router::setBase(Configuration::get('theme'));
+include Router::getResource();
 ?>
