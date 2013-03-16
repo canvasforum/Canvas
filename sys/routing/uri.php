@@ -25,10 +25,7 @@ class URI {
 
 		//Remove the installation directory from the path.
 
-		/*
-		 * Note to self: Work on the Configuration class and move the config.php file to it's own sub-namespace.
-		 */
-		//$this->uri = preg_replace('#^' . Controller::getConfig('dir') . '#', '', $this->uri);
+		$this->uri = preg_replace('#^' . Configuration::get('dir') . '#', '', $this->uri);
 
 		//Split the URI into args based on "/".
 		$this->args = explode('/', $this->uri);

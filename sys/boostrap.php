@@ -17,16 +17,25 @@ if(function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()){
 }
 
 //Import the autoloader.
-require PATH . SYS . 'autoloader.php';
+require SYS . 'autoloader.php';
+
+//Load some handy tools.
+require SYS . 'arr.php';
+
+//Load class file aliases.
+Autoloader::map();
 
 //Set our autoloader.
 spl_autoload_register(array('Canvas\\Autoloader', 'load'));
+
+//Load the application configuration.
+Configuration::load();
 
 //Define an alias for the DB class.
 use \Canvas\Database\DB as DB;
 
 //Connect to the database.
-//DB::connect($config['db']);
+DB::connect(Configuration::get('db'));
 
 //Define an alias for the Router class.
 use \Canvas\Routing\Router as Router;
@@ -34,12 +43,8 @@ use \Canvas\Routing\Router as Router;
 //Load some paths.
 Router::load();
 
-/*
- * CHANGE THIS LATER. THIS WILL STAY DEFAULT UNTIL THE CONFIGURATION CLASS IS CREATED.
- */
+$theme = THEMES . Configuration::get('theme') . DIRECTORY_SEPARATOR;
 
-$themepath = THEMES . 'default' . DIRECTORY_SEPARATOR;
-
-Router::load(array('' => $themepath));
-Router::setBase('default');
+Router::load(array('' => $theme));
+Router::setBase(Configuration::get('theme'));
 ?>

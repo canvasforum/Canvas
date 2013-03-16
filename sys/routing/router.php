@@ -71,7 +71,7 @@ class Router {
 	}
 
 	//array_map() for our routes. The only difference is that this maps indices.
-	public static function map($func){
+	public static function mapRoutes($func){
 		foreach(static::$routes as $route => $path){
 			unset(static::$routes[$route]);
 
@@ -80,7 +80,7 @@ class Router {
 	}
 
 	//array_map() for our routes. This one works with direction paths.
-	public static function map_paths($func){
+	public static function mapPaths($func){
 		array_map($func, static::$routes);
 	}
 
@@ -88,7 +88,7 @@ class Router {
 	public static function setBase($base){
 		static::$base = $base;
 
-		static::map(function($index){
+		static::mapRoutes(function($index){
 			return preg_replace('/^' . static::$base . '\/?/', '', $index);
 		});
 	}

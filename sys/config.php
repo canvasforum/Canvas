@@ -5,6 +5,34 @@ namespace Canvas;
 defined('COMPONENT') or die('Access Denied.');
 
 class Configuration {
-	
+	private static $config = array();
+
+	//Attempt to load the current configuration.
+	public static function load(){
+		//Check to see if the config file is readable.
+		if(is_readable(PATH . APP . 'config/config.php')){
+			static::$config = include PATH . 'config/config.php';
+		}
+		else{
+			//Throw an error. File isn't readable or doesn't exist.
+		}
+	}
+
+	//Returns the setting with the key specified.
+	public static function get($key){
+		//Check if a setting with the key $key exists.
+		if(array_key_exists($key, static::$config)){
+			return static::$config[$key];
+		}
+		else{
+			//Throw an error.
+		}
+	}
+
+	//Defines the key specified to be the value specified.
+	public static function set($key, $val){
+		//If it doesn't exist create it. If it does then override it.
+		static::$config[$key] = $val;
+	}
 }
 ?>

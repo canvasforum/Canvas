@@ -12,20 +12,20 @@ define('COMPONENT', true);
 define('PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 
 //Define a global constant for our system directory.
-define('SYS', 'sys' . DIRECTORY_SEPARATOR);
+define('SYS', PATH . 'sys' . DIRECTORY_SEPARATOR);
 
 //Define a global constant for our application files.
-define('CANVAS', PATH . 'canvas' . DIRECTORY_SEPARATOR);
+define('APP', PATH . 'canvas' . DIRECTORY_SEPARATOR);
 
 //Define a global constant for our themes directory.
 define('THEMES', PATH . 'themes' . DIRECTORY_SEPARATOR);
 
 //Define a global constant for our admin directory.
-define('ADMIN', CANVAS . 'admin' . DIRECTORY_SEPARATOR);
+define('ADMIN', APP . 'admin' . DIRECTORY_SEPARATOR);
 
 //Define a global constant for the current version of Canvas.
 define('VERSION', '0.1');
 
 //Bootstrap the application.
-require PATH . SYS . 'boostrap.php';
+require SYS . 'boostrap.php';
 ?>
