@@ -37,12 +37,12 @@ class Router {
 
 				//For each file in the directory.
 				foreach($fsi as $file){
-					if(is_dir($file)){
+					if($file->isDir()){
 						//Recursively add any sub-directories.
 						$path = $file->getPathName();
 
 						$path = explode(DIRECTORY_SEPARATOR, $path);
-						$path = $path[count($path) - 2];
+						$path = $dir . $path[count($path) - 1];
 
 						static::load(array($path => $file->getPathName()));
 					}
