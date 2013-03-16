@@ -1,8 +1,9 @@
 <?php
+namespace Canvas;
 use \Canvas\Routing\Router as Router;
 
 //Load all our ACP pages.
-$acp = ADMIN . 'views' . DIRECTORY_SEPARATOR;
+$acp = APP . 'views' . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR;
 $paths = array('admin' => $acp);
 
 Router::load($paths);

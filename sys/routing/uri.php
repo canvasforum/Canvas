@@ -1,6 +1,5 @@
 <?php
 namespace Canvas\Routing;
-
 use \Canvas\Configuration as Configuration;
 
 //If somebody is trying to directly access this file.

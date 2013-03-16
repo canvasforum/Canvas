@@ -20,9 +20,6 @@ define('APP', PATH . 'canvas' . DIRECTORY_SEPARATOR);
 //Define a global constant for our themes directory.
 define('THEMES', PATH . 'themes' . DIRECTORY_SEPARATOR);
 
-//Define a global constant for our admin directory.
-define('ADMIN', APP . 'admin' . DIRECTORY_SEPARATOR);
-
 //Define a global constant for the current version of Canvas.
 define('VERSION', '0.1');
 

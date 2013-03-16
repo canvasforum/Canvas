@@ -2,6 +2,8 @@
 namespace Canvas\Routing;
 use FileSystemIterator;
 use \Canvas\Configuration as Configuration;
+use \Canvas\Arr as Arr;
+use Exception;
 
 //If somebody is trying to directly access this file.
 defined('COMPONENT') or die('Access Denied.');
@@ -51,11 +53,19 @@ class Router {
 							$path = $file->getPathName();
 							$path = explode(DIRECTORY_SEPARATOR, $path);
 
-							$fname = $path[count($path) - 2];
+							$fname = Arr::lastElement($path);
+
+							//Remove the file extension.
+							$fname = preg_replace('/\.[a-z]{2,4}/', '', $fname);
+
+							//Add a "/" if there's a parent directory.
+							if($dir != ''){
+								$dir .= '/';
+							}
 
 							//Add the current file path to our routes array and give it a key
 							//representing the request URI to be used by it.
-							static::$routes[$dir . '/' . $fname] = $file->getPathName();
+							static::$routes[$dir . $fname] = $file->getPathName();
 						}
 					}
 				}
@@ -85,7 +95,7 @@ class Router {
 		static::$base = $base;
 
 		static::mapRoutes(function($index){
-			return preg_replace('/^' . static::$base . '\/?/', '', $index);
+			return preg_replace('/^\/?' . static::$base . '\/?/', '', $index);
 		});
 	}
 
@@ -120,21 +130,24 @@ class Router {
 		$path = $uri->getURI();
 
 		if(!is_null(static::getPath($path))){
-
+			return static::getPath($path);
 		}
 		else{
 			if($path == ''){
 				return static::getPath(Configuration::get('index'));
 			}
 			else if(is_null(static::getPath('404'))){
-				header('HTTP/1.0 404 Not Found');
-				echo '<h1>404 Error</h1>';
-				echo '<p>The page you were looking for was not found.</p>';
+				return SYS . 'errors/404.php';
 			}
 			else{
-				//Route to our 404 page.
+				return static::getPath('404');
 			}
 		}
+	}
+
+	//Returns all routes loaded.
+	public static function fetch(){
+		return static::$routes;
 	}
 }
 ?>

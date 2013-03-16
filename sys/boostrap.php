@@ -28,20 +28,20 @@ Autoloader::map();
 //Set our autoloader.
 spl_autoload_register(array('Canvas\\Autoloader', 'load'));
 
+//Define an alias for the Router class.
+use \Canvas\Routing\Router as Router;
+
+//Define an alias for the DB class.
+use \Canvas\Database\DB as DB;
+
 //Load the application configuration.
 Configuration::load();
 
 //Load application bootstrap.
 require APP . 'bootstrap.php';
 
-//Define an alias for the DB class.
-use \Canvas\Database\DB as DB;
-
 //Connect to the database.
 DB::connect(Configuration::get('db'));
-
-//Define an alias for the Router class.
-use \Canvas\Routing\Router as Router;
 
 include Router::getResource();
 ?>
