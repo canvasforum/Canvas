@@ -26,7 +26,7 @@ spl_autoload_register(array('Canvas\\Autoloader', 'load'));
 use \Canvas\Database\DB as DB;
 
 //Connect to the database.
-DB::connect($config['db']);
+//DB::connect($config['db']);
 
 //Define an alias for the Router class.
 use \Canvas\Routing\Router as Router;
@@ -37,5 +37,9 @@ Router::load();
 /*
  * CHANGE THIS LATER. THIS WILL STAY DEFAULT UNTIL THE CONFIGURATION CLASS IS CREATED.
  */
-Router::load(PATH . SYS . THEMES . 'default' . DIRECTORY_SEPARATOR);
+
+$themepath = THEMES . 'default' . DIRECTORY_SEPARATOR;
+
+Router::load(array('' => $themepath));
+Router::setBase('default');
 ?>
