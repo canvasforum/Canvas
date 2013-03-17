@@ -3,7 +3,6 @@ namespace Canvas\Routing;
 use FileSystemIterator;
 use \Canvas\Configuration as Configuration;
 use \Canvas\Arr as Arr;
-use Exception;
 
 //If somebody is trying to directly access this file.
 defined('COMPONENT') or die('Access Denied.');
@@ -12,6 +11,7 @@ class Router {
 	private static $routes = array(
 		'404' => null
 	);
+
 	private static $base = null;
 
 	//Load all our routes.
@@ -41,7 +41,7 @@ class Router {
 						//Recursively add any sub-directories.
 						$path = $file->getPathName();
 
-						$path = explode(DIRECTORY_SEPARATOR, $path);
+						$path = explode(DS, $path);
 						$path = $dir . $path[count($path) - 1];
 
 						static::load(array($path => $file->getPathName()));
@@ -51,7 +51,7 @@ class Router {
 						if($file->isReadable() && pathinfo($file->getPathname(), PATHINFO_EXTENSION) == 'php'){
 							//Attempt to get the name of the current file. Exclude the extension.
 							$path = $file->getPathName();
-							$path = explode(DIRECTORY_SEPARATOR, $path);
+							$path = explode(DS, $path);
 
 							$fname = Arr::lastElement($path);
 

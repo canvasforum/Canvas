@@ -27,7 +27,7 @@ class Autoloader {
 			return strtolower($arg);
 		}, $args);
 
-		$path = implode(DIRECTORY_SEPARATOR, $args);
+		$path = implode(DS, $args);
 		$path = SYS . $path . '.php';
 
 		if(is_readable($path)){

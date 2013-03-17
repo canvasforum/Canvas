@@ -2,6 +2,7 @@
 namespace Canvas\Database;
 
 use PDO;
+use \Canvas\Error as Error;
 
 //If somebody is trying to directly access this file.
 defined('COMPONENT') or die('Access Denied.');
@@ -37,7 +38,7 @@ class DB {
 	}
 
 	//Perform database queries and returns the result.
-	public static function query($query, $param, $type){
+	public static function query($query, $param, $type = PDO::FETCH_ASSOC){
 		$query = static::queryObj($query, $param);
 
 		//Return the results.
