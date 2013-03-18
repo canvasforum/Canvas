@@ -1,6 +1,6 @@
 <?php
-namespace Canvas\Routing;
-use \Canvas\Configuration as Configuration;
+namespace Wires\Routing;
+use \Wires\Configuration as Configuration;
 
 //If somebody is trying to directly access this file.
 defined('COMPONENT') or die('Access Denied.');

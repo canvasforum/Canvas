@@ -1,5 +1,8 @@
 <?php
-namespace Canvas;
+namespace wires;
+use \Wires\Error as Error;
+use \Wires\Routing\Router as Router;
+use \Wires\Database\DB as DB;
 
 //If somebody is trying to directly access this file.
 defined('COMPONENT') or die('Access Denied.');
@@ -17,7 +20,7 @@ if(function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()){
 }
 
 //Suppress all errors.
-ini_set('display_errors', 'off');
+//ini_set('display_errors', 'off');
 
 //Import the autoloader.
 require SYS . 'autoloader.php';
@@ -29,9 +32,8 @@ require SYS . 'arr.php';
 Autoloader::map();
 
 //Set our autoloader.
-spl_autoload_register(array('Canvas\\Autoloader', 'load'));
+spl_autoload_register(array('Wires\\Autoloader', 'load'));
 
-/*
 //Set exception handlers.
 set_exception_handler(function($exception){
 	Error::log($exception);
@@ -41,22 +43,15 @@ set_exception_handler(function($exception){
 set_error_handler(function($code, $error, $file, $line){
 	Error::log($code, $error, $file, $line);
 });
-*/
-
-//Define an alias for the Router class.
-use \Canvas\Routing\Router as Router;
-
-//Define an alias for the DB class.
-use \Canvas\Database\DB as DB;
 
 //Load the application configuration.
 Configuration::load();
 
-//Load application bootstrap.
-require APP . 'bootstrap.php';
-
 //Connect to the database.
 DB::connect(Configuration::get('db'));
 
-include Router::getResource();
+Error::getErrors();
+
+//Load application bootstrap.
+require APP . 'bootstrap.php';
 ?>

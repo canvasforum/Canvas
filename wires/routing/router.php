@@ -1,8 +1,8 @@
 <?php
-namespace Canvas\Routing;
+namespace Wires\Routing;
 use FileSystemIterator;
-use \Canvas\Configuration as Configuration;
-use \Canvas\Arr as Arr;
+use \Wires\Configuration as Configuration;
+use \Wires\Arr as Arr;
 
 //If somebody is trying to directly access this file.
 defined('COMPONENT') or die('Access Denied.');

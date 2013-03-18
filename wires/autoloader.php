@@ -1,5 +1,5 @@
 <?php
-namespace Canvas;
+namespace Wires;
 
 //If somebody is trying to directly access this file.
 defined('COMPONENT') or die('Access Denied.');
@@ -30,12 +30,7 @@ class Autoloader {
 		$path = implode(DS, $args);
 		$path = SYS . $path . '.php';
 
-		if(is_readable($path)){
-			require $path;
-		}
-		else{
-			//Throw an error here.
-		}
+		require $path;
 	}
 
 	//Load the alias map.

@@ -1,6 +1,4 @@
 <?php
-namespace Canvas;
-
 /*
  * Define some global constants.
  */
@@ -15,7 +13,7 @@ define('DS', DIRECTORY_SEPARATOR);
 define('PATH', dirname(__FILE__) . DS);
 
 //Define a global constant for our system directory.
-define('SYS', PATH . 'sys' . DS);
+define('SYS', PATH . 'wires' . DS);
 
 //Define a global constant for our application files.
 define('APP', PATH . 'canvas' . DS);

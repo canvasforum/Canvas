@@ -1,6 +1,7 @@
 <?php
-namespace Canvas;
-use \Canvas\Routing\Router as Router;
+use \Wires\Routing\Router as Router;
+use \Wires\Configuration as Configuration;
+use \Wires\Error as Error;
 
 //Load all our ACP pages.
 $acp = APP . 'views' . DS . 'admin' . DS;
@@ -16,4 +17,11 @@ Router::setBase(Configuration::get('theme'));
 
 //Load all templating functions.
 require APP . 'canvas.php';
+
+//Load our page.
+include Router::getResource();
+
+foreach(Error::getErrors() as $error){
+	echo $error;
+}
 ?>
