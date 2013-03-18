@@ -1,4 +1,21 @@
 <?php
+
+/**
+ * Canvas
+ *
+ * A super simple, super flexible forum.
+ * 
+ * Released under the WTFPL.
+ * http://www.wtfpl.net/
+ * 
+ * Uses Wires as a framework.
+ * Wires is also released under the WTFPL.
+ * 
+ * @package Wires
+ * @author Andrew Lee
+ * @link http://andrewleenj.com
+ */
+ 
 use \Wires\Database\DB as DB;
 
 function canvas($mode, $type, $args = array()){
