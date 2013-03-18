@@ -1,4 +1,18 @@
 <?php
+
+/**
+ * Wires
+ *
+ * A super simple, super flexible framework built for lightning fast development.
+ * 
+ * Released under the WTFPL.
+ * http://www.wtfpl.net/
+ * 
+ * @package Wires
+ * @author Andrew Lee
+ * @link http://andrewleenj.com
+ */
+
 namespace Wires\Routing;
 use FileSystemIterator;
 use \Wires\Configuration as Configuration;
@@ -8,9 +22,7 @@ use \Wires\Arr as Arr;
 defined('COMPONENT') or die('Access Denied.');
 
 class Router {
-	private static $routes = array(
-		'404' => null
-	);
+	private static $routes = array();
 
 	private static $base = null;
 
@@ -63,56 +75,86 @@ class Router {
 								$dir .= '/';
 							}
 
-							//Add the current file path to our routes array and give it a key
-							//representing the request URI to be used by it.
-							static::$routes[$dir . $fname] = $file->getPathName();
+							//Create a new route object.
+							$route = new Route($dir . $fname, $file->getPathName());
+
+							//Add the route to our routes array.
+							static::$routes[] = $route;
 						}
 					}
 				}
 			}
 			else{
-				//Log an error here.
+				$route = new Route($dir, $syspath, true);
+				static::$routes[] = $route;
 			}
 		}
 	}
 
-	//array_map() for our routes. The only difference is that this maps indices.
+	//array_map() for our routes. The only difference is that this maps URIs.
 	public static function mapRoutes($func){
-		foreach(static::$routes as $route => $path){
-			unset(static::$routes[$route]);
-
-			static::$routes[$func($route)] = $path;
+		foreach(static::$routes as $route){
+			$newURI = $func($route->getURI());
+			$route->setURI($newURI);
 		}
 	}
 
-	//array_map() for our routes. This one works with direction paths.
+	//array_map() for our routes. This one works with paths.
 	public static function mapPaths($func){
-		array_map($func, static::$routes);
+		foreach(static::$routes as $route){
+			$newPath = $func($route->getPath());
+			$route->setPath($newPath);
+		}
 	}
 
 	//Set the default directory for our routes.
 	public static function setBase($base){
 		static::$base = $base;
 
-		static::mapRoutes(function($index){
-			return preg_replace('/^\/?' . static::$base . '\/?/', '', $index);
+		static::mapRoutes(function($route){
+			return preg_replace('/^\/?' . static::$base . '\/?/', '', $route);
 		});
 	}
 
 	//Sets the resource path for the specified error type.
 	public static function setError($type, $path){
-		if(array_key_exists($path, static::$routes)){
-			static::$errors[$type] = $path;
+		$error = null;
+
+		foreach(static::$routes as $route){
+			if($route->match($type)){
+				$error = $route;
+				break;
+			}
+		}
+
+		if(is_null($error)){
+			static::$routes[] = new Route($type, $path);
 		}
 		else{
-			//Log an error here.
+			$error->setPath($path);
 		}
 	}
 
+	//Gets the route object with the specified URI.
+	public static function getRoute($uri){
+		$r = null;
+
+		foreach(static::$routes as $route){ 
+			if($route->match($uri)){
+				$r = $route;
+				break;
+			}
+		}
+
+		return $r;
+	}
+
 	//Gets the path with the specified route.
-	public static function getPath($route){
-		if(array_key_exists($route, static::$routes)){
-			return static::$routes[$route];
+	public static function getPath($uri){
+		$route = static::getRoute($uri);
+
+		if(!is_null($route)){
+			return $route->getPath();
 		}
 		else{
 			return null;
@@ -148,6 +190,18 @@ class Router {
 	//Returns all routes loaded.
 	public static function fetch(){
 		return static::$routes;
+	}
+
+	//Sets the wildcard to true or false for the specified URI.
+	public static function setWildCard($uri, $set){
+		$route = static::getRoute($uri);
+
+		if(!is_null($route)){
+			$route->setWildCard($set);
+		}
+		else{
+			//Log an error.
+		}
 	}
 }
 ?>
