@@ -32,6 +32,9 @@ $theme = THEMES . Configuration::get('theme') . DS;
 Router::load(array('' => $theme));
 Router::setBase(Configuration::get('theme'));
 
+//Define a constant to represent the URL to our theme's directory.
+define('THEME_DIR', DS . Configuration::get('dir') . 'themes' . DS . Configuration::get('theme') . DS);
+
 //Load all templating functions.
 require APP . 'canvas.php';
 

@@ -27,7 +27,7 @@ class Router {
 	private static $base = null;
 
 	//Load all our routes.
-	public static function load($paths = null){
+	public static function load($paths = null, $deep = false){
 		//Check to see if a path was even specified.
 		if(is_null($paths)){
 			return;
@@ -50,13 +50,15 @@ class Router {
 				//For each file in the directory.
 				foreach($fsi as $file){
 					if($file->isDir()){
-						//Recursively add any sub-directories.
-						$path = $file->getPathName();
+						if($deep){
+							//Recursively add any sub-directories.
+							$path = $file->getPathName();
 
-						$path = explode(DS, $path);
-						$path = $dir . $path[count($path) - 1];
+							$path = explode(DS, $path);
+							$path = $dir . $path[count($path) - 1];
 
-						static::load(array($path => $file->getPathName()));
+							static::load(array($path => $file->getPathName()));
+						}
 					}
 					else{
 						//Make sure the file is readable and is a PHP file.

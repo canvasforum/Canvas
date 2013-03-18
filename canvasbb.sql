@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2013 at 04:09 AM
+-- Generation Time: Mar 18, 2013 at 10:05 PM
 -- Server version: 5.5.27-log
 -- PHP Version: 5.4.7
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `canvasbb`
 --
+CREATE DATABASE `canvasbb` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `canvasbb`;
 
 -- --------------------------------------------------------
 
@@ -28,40 +30,42 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cid` int(9) NOT NULL,
   `name` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `fid` (`cid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `cid`, `name`) VALUES
-(1, 641827425, 'First Category');
+INSERT INTO `categories` (`id`, `name`) VALUES
+(1, 'First Category'),
+(2, 'Second Category');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `forum`
+-- Table structure for table `forums`
 --
 
-CREATE TABLE IF NOT EXISTS `forum` (
+CREATE TABLE IF NOT EXISTS `forums` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fid` int(12) NOT NULL,
+  `fid` int(6) NOT NULL,
+  `cid` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `desc` text NOT NULL,
+  `description` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `fid` (`fid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `forum`
+-- Dumping data for table `forums`
 --
 
-INSERT INTO `forum` (`id`, `fid`, `name`, `desc`) VALUES
-(1, 978477108, 'First Forum', 'Lorem ipsum blah blah blah.');
+INSERT INTO `forums` (`id`, `fid`, `cid`, `name`, `description`) VALUES
+(1, 978477, 1, 'First Forum', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque rutrum dignissim nisi ut feugiat. Fusce id laoreet dolor.'),
+(2, 233054, 1, 'Second Forum', 'So what do you guys think of this so far?'),
+(3, 121872, 2, 'Another Forum', 'Hello World!');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

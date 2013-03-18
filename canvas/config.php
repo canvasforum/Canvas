@@ -15,7 +15,7 @@
  * @author Andrew Lee
  * @link http://andrewleenj.com
  */
- 
+
 //If somebody is trying to directly access this file.
 defined('COMPONENT') or die('Access Denied.');
 
