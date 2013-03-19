@@ -13,7 +13,7 @@
  * @link http://andrewleenj.com
  */
 
- namespace Wires\Routing;
+namespace Wires\Routing;
 
 //If somebody is trying to directly access this file.
 defined('COMPONENT') or die('Access Denied.');

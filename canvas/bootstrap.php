@@ -11,7 +11,7 @@
  * Uses Wires as a framework.
  * Wires is also released under the WTFPL.
  * 
- * @package Wires
+ * @package Canvas
  * @author Andrew Lee
  * @link http://andrewleenj.com
  */
@@ -19,6 +19,8 @@
 use \Wires\Routing\Router as Router;
 use \Wires\Configuration as Configuration;
 use \Wires\Error as Error;
+use \Wires\Routing\URI as URI;
+use \Wires\Autoloader as Autoloader;
 
 //Load all our ACP pages.
 $acp = APP . 'views' . DS . 'admin' . DS;
@@ -32,9 +34,6 @@ $theme = THEMES . Configuration::get('theme') . DS;
 Router::load(array('' => $theme));
 Router::setBase(Configuration::get('theme'));
 
-//Define a constant to represent the URL to our theme's directory.
-define('THEME_DIR', DS . Configuration::get('dir') . 'themes' . DS . Configuration::get('theme') . DS);
-
 //Load all templating functions.
 require APP . 'canvas.php';
 
@@ -44,6 +43,8 @@ $wildcards = require APP . 'wildcards.php';
 foreach($wildcards as $wildcard){
 	Router::setWildCard($wildcard, true);
 }
+
+Autoloader::loadDir(APP . 'components/');
 
 //Load our page.
 include Router::getResource();

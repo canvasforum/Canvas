@@ -14,6 +14,7 @@
  */
 
 namespace Wires;
+use FileSystemIterator;
 
 //If somebody is trying to directly access this file.
 defined('COMPONENT') or die('Access Denied.');
@@ -42,9 +43,24 @@ class Autoloader {
 		}, $args);
 
 		$path = implode(DS, $args);
+
 		$path = SYS . $path . '.php';
 
 		require $path;
+	}
+
+	//Loads all classes in the given directory.
+	public static function loadDir($path){
+		$fsi = new FileSystemIterator($path, FileSystemIterator::SKIP_DOTS);
+
+		foreach($fsi as $file){
+			if($file->isDir()){
+				static::loadDir($file->getPathName());
+			}
+			else{
+				require $file->getPathName();
+			}
+		}
 	}
 
 	//Load the alias map.

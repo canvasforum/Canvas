@@ -48,28 +48,39 @@ h3 {
 	padding: 12px 16px;
 	font-size: 14px;
 	color: #989898;
-	border-bottom: 1px solid #d3d3d3;
 	text-shadow: 0px 1px 0px #fff;
 	box-shadow: 0px 1px 0px #fff inset;
 }
 
-.category ~ .category {
+.wrap ~ .wrap {
 	margin-top: 30px;
 }
 
-.forums {
+.row {
 	padding: 12px 16px;
 	background: #fff;
-}
-
-.forums ~ .forums {
 	border-top: 1px solid #d3d3d3;
 }
 
-.forums header a {
+.row header a {
 	font-size: 14px;
 }
 
-p {
+.row p, .row span {
 	color: #a5a5a5;
+}
+
+.row aside, .row div {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.row div + .row aside {
+	width: 200px;
+	position: relative;
+	top: -2px;
+}
+
+.row div {
+	width: 90%;
 }
