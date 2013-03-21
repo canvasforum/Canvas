@@ -22,8 +22,8 @@ use \Wires\Database\DB as DB;
 defined('COMPONENT') or die('Access Denied.');
 
 //We need at least 5.3 for OOP
-if(version_compare(PHP_VERSION, '5.3.0') < 0.0){
-	die('Your version of PHP must be at least 5.3.0.');
+if(version_compare(PHP_VERSION, '5.4.0') < 0.0){
+	die('Your version of PHP must be at least 5.4.0.');
 }
 
 //Turn off retarded PHP magic quotes.

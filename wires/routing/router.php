@@ -15,6 +15,7 @@
 
 namespace Wires\Routing;
 use FileSystemIterator;
+use Closure;
 use \Wires\Configuration as Configuration;
 use \Wires\Arr as Arr;
 
@@ -95,6 +96,8 @@ class Router {
 
 	//array_map() for our routes. The only difference is that this maps URIs.
 	public static function mapRoutes($func){
+		$func = Closure::bind($func, null, __CLASS__);
+
 		foreach(static::$routes as $route){
 			$newURI = $func($route->getURI());
 			$route->setURI($newURI);
@@ -103,6 +106,8 @@ class Router {
 
 	//array_map() for our routes. This one works with paths.
 	public static function mapPaths($func){
+		$func = Closure::bind($func, null, __CLASS__);
+
 		foreach(static::$routes as $route){
 			$newPath = $func($route->getPath());
 			$route->setPath($newPath);
