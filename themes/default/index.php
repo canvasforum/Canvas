@@ -35,7 +35,9 @@
 			<section class="wrap">
 				<div class="innerwrap">
 					<section class="bodywrap">
-						<a href="https://github.com/canvasforum/Canvas">Help Me Build Canvas on Github!</a>
+						<article class="row">
+							<a href="https://github.com/canvasforum/Canvas">Help Me Build Canvas on Github!</a>
+						</article>
 					</section>
 				</div>
 			</section>

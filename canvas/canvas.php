@@ -112,6 +112,9 @@ class Canvas {
 				}
 			}
 		}
+		else if(isset($_SESSION['uid'], $_SESSION['uas'])){
+			return Fetcher::getUser($_SESSION['uid']);
+		}
 
 		return null;
 	}

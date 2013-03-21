@@ -130,10 +130,13 @@ h3 {
 	margin-top: 30px;
 }
 
+header ~ .row, .row ~ .row, .post {
+	border-top: 1px solid #d3d3d3;
+}
+
 .row {
 	padding: 12px 16px;
 	background: #fff;
-	border-top: 1px solid #d3d3d3;
 }
 
 .row header a {
