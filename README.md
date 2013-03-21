@@ -10,3 +10,9 @@ To Do:
 - Create a category, forum, topic, and post class.
 - Populate Database With Dummy Data
 - Create a Basic Index Page
+
+Demo
+===
+
+A demo is finally up! Please note that features are limited at the moment.  
+If you find any bugs please make an issue for each one. It would be greatly appreciated. :)
