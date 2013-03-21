@@ -45,9 +45,11 @@ require SYS . 'arr.php';
 //Load class file aliases.
 Autoloader::map();
 
+
 //Set our autoloader.
 spl_autoload_register(array('Wires\\Autoloader', 'load'));
 
+/*
 //Set exception handlers.
 set_exception_handler(function($exception){
 	Error::log($exception);
@@ -57,6 +59,7 @@ set_exception_handler(function($exception){
 set_error_handler(function($code, $error, $file, $line){
 	Error::log($code, $error, $file, $line);
 });
+*/
 
 //Load the application configuration.
 Configuration::load();

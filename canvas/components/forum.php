@@ -31,7 +31,7 @@ class Forum {
 			return $this->topics;
 		}
 		else{
-			$result = DB::queryObj('SELECT tid, fid, name, author, startDate FROM topics WHERE fid = :fid', array('fid' => $this->fid));
+			$result = DB::queryObj('SELECT tid, fid, name, author, startDate FROM topics WHERE fid = :fid ORDER BY id DESC', array('fid' => $this->fid));
 			$result = $result->fetchAll(PDO::FETCH_CLASS, 'Topic');
 
 			$this->topics = $result;

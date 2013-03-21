@@ -41,6 +41,7 @@ class DB {
 	//Performs database queries but returns the PDO object.
 	public static function queryObj($query, $param){
 		if(static::isConnected()){
+			$derp = $query;
 			//Prepare the query.
 			$query = static::$connection->prepare($query);
 
@@ -62,7 +63,7 @@ class DB {
 	}
 
 	//Perform database queries and returns the result. Null if empty.
-	public static function query($query, $param, $type = PDO::FETCH_ASSOC){
+	public static function query($query, $param = array(), $type = PDO::FETCH_ASSOC){
 		$query = static::queryObj($query, $param);
 
 		//Return the results.

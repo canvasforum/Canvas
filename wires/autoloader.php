@@ -46,6 +46,8 @@ class Autoloader {
 
 		$path = SYS . $path . '.php';
 
+		//echo $path . '<br />';
+
 		require $path;
 	}
 

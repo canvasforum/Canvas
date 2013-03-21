@@ -44,7 +44,13 @@ foreach($wildcards as $wildcard){
 	Router::setWildCard($wildcard, true);
 }
 
+Autoloader::loadDir(APP . 'models/');
 Autoloader::loadDir(APP . 'components/');
+Autoloader::loadDir(APP . 'forms/');
+AutoLoader::loadDir(APP . 'lib/');
+
+//Sessions are VERY important.
+session_start();
 
 //Load our page.
 include Router::getResource();

@@ -141,7 +141,7 @@ class Router {
 	public static function getRoute($uri){
 		$r = null;
 
-		foreach(static::$routes as $route){ 
+		foreach(static::$routes as $route){
 			if($route->match($uri)){
 				$r = $route;
 				break;
@@ -203,6 +203,13 @@ class Router {
 		}
 		else{
 			//Log an error.
+		}
+	}
+
+	//Returns the page response type.
+	public static function isResponse($type){
+		if($type == 'POST'){
+			return (!empty($_POST) && $_SERVER['REQUEST_METHOD'] == 'POST');
 		}
 	}
 }

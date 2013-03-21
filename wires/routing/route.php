@@ -35,7 +35,7 @@ class Route {
 			$regex = $this->uri;
 			$regex = preg_replace('/\*/', '.+?', $regex);
 			$regex .= '/.*';
-			$regex = '#' . $regex . '#';
+			$regex = '#^' . $regex . '$#';
 
 			return preg_match($regex, $uri);
 		}

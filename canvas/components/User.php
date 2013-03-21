@@ -23,14 +23,12 @@ class User {
 	private $username;
 	private $regDate;
 	private $lastLoginDate;
-	private $regIp;
-	private $lastLoginIp;
+	private $ip;
 	private $groupId;
 	private $posts;
 
 	public function __construct(){
 		$this->ip = long2ip($this->ip);
-		$this->lastLoginIp = long2ip($this->lastLoginIp);
 	}
 
 	//Returns the user's member number.
@@ -78,7 +76,5 @@ class User {
 	public function getPosts(){
 		return $this->posts;
 	}
-
-
 }
 ?>

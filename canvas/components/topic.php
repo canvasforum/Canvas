@@ -24,7 +24,7 @@ class Topic {
 	private $name;
 	private $author;
 	private $startDate;
-	private $posts = array();
+	private $posts = null;
 
 	public function __construct(){
 		$this->author = Canvas::getUser($this->author);
@@ -52,12 +52,35 @@ class Topic {
 
 	//Returns the date of the topics first post.
 	public function getStartDate($format = '%B %d, %Y'){
-		return strftime($format, $this->startDate);
+		return strftime($format, strtotime($this->startDate));
 	}
 
 	//Returns an array containing all the topic's posts.
 	public function getPosts(){
-		return $this->posts;
+		if(!is_null($this->posts)){
+			return $this->posts;
+		}
+		else{
+			$query = 'SELECT pid, author, contents, postdate, editedby, editedon FROM posts WHERE tid = :tid ORDER BY id ASC';
+
+			$result = DB::queryObj($query, array('tid' => $this->tid));
+
+			$result = $result->fetchAll(PDO::FETCH_CLASS, 'Post');
+
+			$this->posts = $result;
+
+			return is_null($result) ? array() : $result;
+		}
+	}
+
+	//Returns the first post in the topic and removes it from the list.
+	public function getFirstPost(){
+		$posts = $this->getPosts();
+		$post = $posts[0];
+
+		unset($this->posts[0]);
+
+		return $post;
 	}
 }
 ?>

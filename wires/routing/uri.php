@@ -59,7 +59,7 @@ class URI {
 		if(abs($index) < $this->length()){
 			//If the index is positive return the nth argument otherwise return the
 			//element with the index $this->length() - abs($index) - 1.
-			return $index > 0 ? $this->args[$index] : $this->args[$this->length() + $index - 1];
+			return $index >= 0 ? $this->args[$index] : $this->args[$this->length() + $index - 1];
 		}
 		else{
 			return null;
