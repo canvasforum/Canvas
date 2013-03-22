@@ -6,4 +6,6 @@ $(function(){
 			$('#preview_post').show().html(Q);
 		});
 	});
+
+	$('textarea').autosize();
 });

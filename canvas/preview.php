@@ -1,5 +1,5 @@
 <?php
-require 'lib/Markdown.php';
+require 'lib/markdown.php';
 
 if(isset($_POST['contents'])){
 	echo Markdown(htmlspecialchars($_POST['contents']));
