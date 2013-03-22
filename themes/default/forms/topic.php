@@ -14,7 +14,7 @@
 				<?php $success = Poster::post(); ?>
 				<?php if($success): ?>
 					<?php Canvas::redirect(Canvas::getBase() . 'topic/' . $success); ?>
-				<?php else if(count(Canvas::getErrors())); ?>
+				<?php elseif(count(Canvas::getErrors())): ?>
 					<aside id="errors">
 						<?php foreach(Canvas::getErrors() as $error): ?>
 							<span class="error"><?php echo $error; ?></span>
