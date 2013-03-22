@@ -94,7 +94,7 @@ class Register {
 					$res = DB::query($query, array(
 						'uid' => $uid,
 						'email' => $_POST['email'],
-						'username' => $_POST['username'],
+						'username' => htmlspecialchars($_POST['username']),
 						'password' => $hash,
 						'salt' => $salt,
 						'regDate' => date('Y-m-d h:i:s'),

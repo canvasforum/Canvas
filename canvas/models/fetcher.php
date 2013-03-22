@@ -82,7 +82,7 @@ class Fetcher {
 	//Returns the topic object for the topic currently being viewed.
 	public static function getTopic($tid = -1){
 		$tid = $tid == -1 ? Canvas::getID() : $tid;
-
+		
 		$query = 'SELECT tid, fid, name, author, startDate FROM topics WHERE tid = :tid LIMIT 1';
 
 		$result = DB::queryObj($query, array('tid' => $tid));

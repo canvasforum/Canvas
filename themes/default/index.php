@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="<?php echo Canvas::getBase('theme'); ?>css/font-awesome.min.css">
-		<link href="<?php echo Canvas::getBase('theme'); ?>css/default.css" rel="stylesheet" />
+		<title>Canvas Forums</title>
+		<?php include 'includes/head.php'; ?>
 	</head>
 	<body>
 		<?php include 'includes/header.php'; ?>

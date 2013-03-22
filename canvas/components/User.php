@@ -76,5 +76,10 @@ class User {
 	public function getPosts(){
 		return $this->posts;
 	}
+
+	//Returns the gravatar URL for the user.
+	public function getGravatar($size = 100){
+		return 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?s=' . $size;
+	}
 }
 ?>

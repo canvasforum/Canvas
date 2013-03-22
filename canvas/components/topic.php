@@ -42,7 +42,7 @@ class Topic {
 
 	//Returns the name of the topic.
 	public function getName(){
-		return $this->name;
+		return htmlspecialchars($this->name);
 	}
 
 	//Returns the topic starter as a User object.

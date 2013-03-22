@@ -66,6 +66,7 @@ h2 {
 
 h1, h2, h3 {
 	font-weight: 400;
+	line-height: 1em;
 }
 
 .innerwrap > header {
@@ -130,7 +131,7 @@ h3 {
 	margin-top: 30px;
 }
 
-header ~ .row, .row ~ .row, .post {
+header ~ .bodywrap .row, .row ~ .row, .post {
 	border-top: 1px solid #d3d3d3;
 }
 
@@ -282,4 +283,75 @@ ul, ol {
 
 #head nav a:hover {
 	box-shadow: 0px -4px 0px #416eb2 inset;
+}
+
+#preview_post {
+	display: none;
+}
+
+.postwrap .wrap, .postwrap .userinfo {
+	display: table-cell;
+	vertical-align: top;
+}
+
+.postwrap .wrap {
+	width: 830px;
+	position: relative;
+}
+
+.postwrap {
+	margin-bottom: 30px;
+}
+
+.postwrap .userinfo {
+	width: 130px;
+}
+
+.postwrap .wrap:after {
+	position: absolute;
+	top: 35px;
+	left: -19px;
+	content: '';
+	width: 0px;
+	height: 0px;
+	border: 10px solid;
+	border-color: transparent #eee transparent transparent;
+}
+
+.avatar {
+	border: 1px solid #d3d3d3;
+	width: 90px;
+	height: 90px;
+	box-sizing: border-box;
+	padding: 3px;
+	background: #fff;
+}
+
+.postauthor {
+	font-size: 18px;
+	color: #989898;
+}
+
+.postwrap .innerwrap {
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	right: 3px;
+	bottom: 3px;
+}
+
+.postwrap .post {
+	position: absolute;
+	bottom: 0px;
+	top: -1px;
+	left: 0px;
+	right: 0px;
+}
+
+#firstpost .innerwrap {
+	top: 3px;
+}
+
+#firstpost .post {
+	top: 38px;
 }
