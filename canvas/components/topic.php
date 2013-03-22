@@ -61,7 +61,7 @@ class Topic {
 			return $this->posts;
 		}
 		else{
-			$query = 'SELECT pid, author, contents, postdate, editedby, editedon FROM posts WHERE tid = :tid ORDER BY id ASC';
+			$query = 'SELECT pid, author, contents, postDate, editedBy, editedOn FROM posts WHERE tid = :tid ORDER BY id ASC';
 
 			$result = DB::queryObj($query, array('tid' => $this->tid));
 

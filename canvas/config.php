@@ -36,6 +36,9 @@ return array(
 	'theme' => 'default',
 
 	//Index page.
-	'index' => 'index'
+	'index' => 'index',
+
+	//Timezone.
+	'timezone' => 'America/New_York'
 )
 ?>

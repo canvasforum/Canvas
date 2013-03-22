@@ -11,6 +11,13 @@
 # <http://daringfireball.net/projects/markdown/>
 #
 
+/*
+ * Canvas Flavour Markdown
+ * 
+ * Features:
+ * New lines are treated literally meaning the spaces at the end of lines are not
+ */
+
 
 define( 'MARKDOWN_VERSION',  "1.0.1p" ); # Sun 13 Jan 2013
 
@@ -644,7 +651,7 @@ class Markdown_Parser {
 	
 	function doHardBreaks($text) {
 		# Do hard breaks:
-		return preg_replace_callback('/ {2,}\n/', 
+		return preg_replace_callback('/ {2,}\n|\n{1}/', 
 			array(&$this, '_doHardBreaks_callback'), $text);
 	}
 	function _doHardBreaks_callback($matches) {

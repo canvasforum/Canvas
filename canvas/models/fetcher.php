@@ -41,7 +41,7 @@ class Fetcher {
 		}
 	}
 
-	//Returns the user with the given ID.
+	//Returns the user with the given UID.
 	public static function getUser($id = -1){
 		if($id != -1){
 			$query = 'SELECT id, uid, email, username, regDate, lastLoginDate, groupId FROM users WHERE uid = :uid LIMIT 1';

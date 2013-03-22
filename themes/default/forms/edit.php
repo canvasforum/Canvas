@@ -1,7 +1,7 @@
 <section class="wrap">
 	<div class="innerwrap">
 		<header>
-			<h3>Post Reply</h3>
+			<h3>Editing Post</h3>
 			<div id="head_buttons">
 				<span id="preview">
 					<a title="Preview Post">&#xf108;</a>
@@ -21,13 +21,13 @@
 		<section class="bodywrap">
 			<article class="row" id="preview_post"></article>
 			<article class="row">
-				<form method="POST" action="<?php echo Canvas::getBase(); ?>post/post/<?php echo Canvas::getID(); ?>">
+				<form method="POST" action="<?php echo Canvas::getURL(); ?>">
 					<div>
-						<textarea name="contents" required></textarea>
+						<textarea name="contents" required><?php echo Poster::getContents(); ?></textarea>
 					</div>
 					<div class="clear">
 						<span class="left">
-							<input type="submit" name="sub" value="Post New Reply" />
+							<input type="submit" name="sub" value="Finish Editing Post" />
 						</span>
 						<span class="right">
 							Feel free to use <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a> in your posts.

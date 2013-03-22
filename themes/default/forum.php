@@ -23,7 +23,7 @@ $forum = Canvas::getForum();
 						<header>
 							<h3><?php echo $forum->getName(); ?></h3>
 							<div id="head_buttons">
-								<span><a href="<?php echo Canvas::getBase(); ?>post/topic/<?php echo $forum->getID(); ?>">&#xf040;</a></span>
+								<span><a href="<?php echo Canvas::getBase(); ?>post/topic/<?php echo $forum->getID(); ?>" title="New Topic">&#xf040;</a></span>
 							</div>
 						</header>
 						<section class="bodywrap">

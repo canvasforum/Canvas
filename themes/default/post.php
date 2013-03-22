@@ -4,8 +4,12 @@
 		<title>
 			<?php if(Poster::getType() == 'post'): ?>
 				New Post
-			<?php else: ?>
+			<?php elseif(Poster::getType() == 'topic'): ?>
 				New Topic
+			<?php elseif(Poster::getType() == 'edit'): ?>
+				Editing Post
+			<?php else: ?>
+				<?php Canvas::redirect(Canvas::getBase()); ?>
 			<?php endif; ?>
 		</title>
 		<?php include 'includes/head.php'; ?>
@@ -21,8 +25,8 @@
 				else if(Poster::getType() == 'topic'){
 					include 'forms/topic.php';
 				}
-				else{
-					echo 'Invalid arguments specified.';
+				else if(Poster::getType() == 'edit'){
+					include 'forms/edit.php';
 				}
 				?>
 			<?php else: ?>

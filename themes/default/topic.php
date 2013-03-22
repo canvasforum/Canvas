@@ -34,10 +34,25 @@ if($topic){
 							<header>
 								<h3><?php echo $topic->getName(); ?></h3>
 							</header>
+							<aside class="clear postinfo">
+								<span class="left">
+									<time>Posted on <?php echo $first->getPostDate('%B %d, %Y at %#I:%M %p'); ?>.</time>
+								</span>
+								<span class="right postbuttons">
+									<?php if(Canvas::getUser() == $first->getAuthor()): ?>
+										<span><a title="Edit Post" href="<?php echo Canvas::getBase(); ?>post/edit/<?php echo $topic->getID(); ?>/<?php echo $first->getID(); ?>">&#xf040;</a></span>
+									<?php endif; ?>
+								</span>
+							</aside>
 							<section class="bodywrap">
 								<article class="row post">
 									<?php echo Markdown($first->getContents()); ?>
 								</article>
+								<?php if($first->isEdited()): ?>
+									<aside class="row postedit">
+										<time>Edited by <?php echo $first->getEditedBy()->getUsername(); ?> on <?php echo $first->getEditDate('%B %d, %Y at %#I:%M %p'); ?>.</time>
+									</aside>
+								<?php endif; ?>
 							</section>
 						</div>
 					</section>
@@ -52,10 +67,25 @@ if($topic){
 						</aside>
 						<section class="wrap">
 							<div class="innerwrap">
+								<aside class="clear postinfo">
+									<span class="left">
+										<time>Posted on <?php echo $post->getPostDate('%B %d, %Y at %#I:%M %p'); ?>.</time>
+									</span>
+									<span class="right postbuttons">
+										<?php if(Canvas::getUser() == $post->getAuthor()): ?>
+											<span><a title="Edit Post" href="<?php echo Canvas::getBase(); ?>post/edit/<?php echo $topic->getID(); ?>/<?php echo $post->getID(); ?>">&#xf040;</a></span>
+										<?php endif; ?>
+									</span>
+								</aside>
 								<section class="bodywrap">
 									<article class="row post">
 										<?php echo Markdown($post->getContents()); ?>
 									</article>
+									<?php if($post->isEdited()): ?>
+									<aside class="row postedit">
+											<time>Edited by <?php echo $post->getEditedBy()->getUsername(); ?> on <?php echo $post->getEditDate('%B %d, %Y at %#I:%M %p'); ?>.</time>
+										</aside>
+									<?php endif; ?>
 								</section>
 							</div>
 						</section>

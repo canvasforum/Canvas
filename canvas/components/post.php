@@ -27,7 +27,10 @@ class Post {
 
 	public function __construct(){
 		$this->author = Canvas::getUser($this->author);
-		$this->editedby = Canvas::getUser($this->editedBy);
+
+		if(strlen($this->editedBy) == 6){
+			$this->editedBy = Canvas::getUser($this->editedBy);
+		}
 	}
 
 	//Returns the topic ID in which this post can be found.
@@ -47,17 +50,27 @@ class Post {
 
 	//Returns the date of the topics first post.
 	public function getPostDate($format = '%B %d, %Y'){
-		return strftime($format, $this->postDate);
+		return strftime($format, strtotime($this->postDate));
 	}
 
 	//Returns the date on which this post was edited.
 	public function getEditDate($format = '%B %d, %Y'){
-		return strftime($format, $this->editedBy);
+		return strftime($format, strtotime($this->editedOn));
 	}
 
 	//Returns the contents of the post.
 	public function getContents(){
 		return $this->contents;
+	}
+
+	//Returns whether or not the post was edited.
+	public function isEdited(){
+		return (strtotime($this->editedOn) != strtotime('0000-00-00 00:00:00'));
+	}
+
+	//Returns the post editor as an object.
+	public function getEditedBy(){
+		return $this->editedBy;
 	}
 }
 ?>

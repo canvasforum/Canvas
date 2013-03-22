@@ -64,10 +64,11 @@ set_error_handler(function($code, $error, $file, $line){
 //Load the application configuration.
 Configuration::load();
 
+//Set the default timezone.
+date_default_timezone_set(Configuration::get('timezone'));
+
 //Connect to the database.
 DB::connect(Configuration::get('db'));
-
-Error::getErrors();
 
 //Load application bootstrap.
 require APP . 'bootstrap.php';

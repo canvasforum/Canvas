@@ -130,6 +130,11 @@ class Canvas {
 
 	//Logs the user out.
 	public static function logout(){
+		DB::query('DELETE FROM autologin uid, userkey WHERE uid = :uid AND key = :key', array(
+			'uid' => $_SESSION['uid'],
+			'key' => $_COOKIE['rememberme']
+		));
+
 		unset($_SESSION['uid']);
 		unset($_SESSION['uas']);
 		

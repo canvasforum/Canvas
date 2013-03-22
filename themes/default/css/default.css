@@ -18,9 +18,16 @@ a:hover {
 	color: #416eb2;
 }
 
+hr {
+	background: #b7b7b7;
+	height: 1px;
+	border: none;
+	margin: 15px 0px;
+}
+
 #wrapper {
 	max-width: 960px;
-	margin: 50px auto 0px;
+	margin: 50px auto;
 }
 
 #loginwrapper {
@@ -64,6 +71,10 @@ h2 {
 	font-size: 20px;
 }
 
+h3 {
+	font-size: 14px;
+}
+
 h1, h2, h3 {
 	font-weight: 400;
 	line-height: 1em;
@@ -82,7 +93,7 @@ h1, h2, h3 {
 	overflow: auto;
 }
 
-h3 {
+header h3 {
 	color: #989898;
 	font-size: 14px;
 	margin: 0px;
@@ -91,7 +102,7 @@ h3 {
 	padding: 12px 16px;
 }
 
-#head_buttons {
+#head_buttons, .postbuttons {
 	display: inline-block;
 	font-family: FontAwesome;
 	float: right;
@@ -127,11 +138,11 @@ h3 {
 	box-shadow: 0px -1px 5px #dcdcdc inset;
 }
 
-.wrap ~ .wrap {
+.wrap + .wrap {
 	margin-top: 30px;
 }
 
-header ~ .bodywrap .row, .row ~ .row, .post {
+header + .bodywrap .row, .row + .row, .postinfo + .bodywrap .row {
 	border-top: 1px solid #d3d3d3;
 }
 
@@ -153,17 +164,18 @@ label {
 	margin-bottom: 10px;
 }
 
-label ~ img {
+label + img {
 	margin-bottom: 10px;
 }
 
-form div ~ div {
+form div + div {
 	margin-top: 10px;
 }
 
 input[type=text], input[type=email], input[type=password], textarea {
 	width: 100%;
 	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	padding: 8px 12px;
 	border: 1px solid #cacaca;
 }
@@ -190,7 +202,7 @@ input[type=checkbox] {
 	margin-right: 3px;
 	vertical-align: middle;
 	-webkit-appearance: none;
-	-moz-appearance: none;
+	/*-moz-appearance: none;*/
 	appearance: none;
 	background: #fff;
 	border: 1px solid #cacaca;
@@ -213,6 +225,7 @@ input[type=checkbox]:checked:after {
 textarea {
 	height: 120px;
 	font-family: Helvetica, Arial;
+	overflow: auto;
 }
 
 #errors {
@@ -221,6 +234,7 @@ textarea {
 	padding: 8px 12px;
 	width: 100%;
 	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	border-top: 1px solid #ffb0b0;
 }
 
@@ -228,7 +242,7 @@ textarea {
 	display: block;
 }
 
-#errors span ~ span {
+#errors span + span {
 	margin-top: 5px;
 }
 
@@ -240,8 +254,8 @@ ul, ol {
 	margin-left: 16px;
 }
 
-.post {
-	line-height: 24px;
+.post, #post_preview {
+	line-height: 16px;
 }
 
 #head {
@@ -274,10 +288,10 @@ ul, ol {
 #head nav a {
 	border-left: 1px solid #d3d3d3;
 	display: inline-block;
-	padding: 25px;
+	padding: 20px 25px 25px;
 }
 
-#head nav a ~ a {
+#head nav a + a {
 	margin-left: -4px;
 }
 
@@ -295,7 +309,7 @@ ul, ol {
 }
 
 .postwrap .wrap {
-	width: 830px;
+	width: 840px;
 	position: relative;
 }
 
@@ -304,7 +318,7 @@ ul, ol {
 }
 
 .postwrap .userinfo {
-	width: 130px;
+	width: 120px;
 }
 
 .postwrap .wrap:after {
@@ -323,6 +337,7 @@ ul, ol {
 	width: 90px;
 	height: 90px;
 	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	padding: 3px;
 	background: #fff;
 	display: block;
@@ -336,9 +351,58 @@ ul, ol {
 }
 
 .postwrap .post {
-	min-height: 59px;
+	min-height: 109px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 }
 
-.post p {
+#firstpost .post {
+	min-height: 84px;
+}
+
+.post p, #preview_post p {
 	color: #000;
+}
+
+.post p + p, #preview_post p + p {
+	margin-top: 24px;
+}
+
+.left {
+	float: left;
+	vertical-align: middle;
+}
+
+.right {
+	vertical-align: middle;
+	float: right;
+}
+
+.clear {
+	overflow: auto;
+	clear: both;
+	vertical-align: middle;
+}
+
+.postinfo {
+	background: #f7f7f7;
+	padding: 8px 16px;
+	color: #989898;
+}
+
+header + .postinfo {
+	border-top: 1px solid #d3d3d3;
+}
+
+.postbuttons a {
+	color: #989898;
+}
+
+.postbuttons a:hover {
+	color: #6398e6;
+}
+
+.postedit {
+	color: #989898;
+	font-size: 11px;
 }

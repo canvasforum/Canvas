@@ -26,11 +26,20 @@ class Poster {
 
 		if($uri->getArg(0) == 'post'){
 			if(!is_null($uri->getArg(1)) && !is_null($uri->getArg(2))){
-				if($uri->getArg(1) == 'post'){
+				if($uri->getArg(1) == 'post' && !is_null(Canvas::getTopic(Canvas::getID()))){
 					return 'post';
 				}
-				else if($uri->getArg(1) == 'topic'){
+				else if($uri->getArg(1) == 'topic' && !is_null(Canvas::getForum(Canvas::getID()))){
 					return 'topic';
+				}
+				else if($uri->getArg(1) == 'edit'){
+					if(!is_null(Canvas::getTopic($uri->getArg(2)))){
+						if(!is_null($uri->getArg(3))){
+							if(!is_null(Canvas::getPost($uri->getArg(3)))){
+								return 'edit';
+							}
+						}
+					}
 				}
 			}
 		}
@@ -41,15 +50,21 @@ class Poster {
 		return false;
 	}
 
+	public static function getContents(){
+		$uri = new URI();
+
+		return Canvas::getPost($uri->getArg(3))->getContents();
+	}
+
 	public static function post(){
 		if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == 'POST'){
 			if(static::getType() == 'topic'){
-				if(!isset($_POST['name']) || strlen(trim($_POST['name'])) == 0){
+				if(empty($_POST['name'])){
 					Canvas::logError('You must specify a topic name');
 				}
 
-				if(!isset($_POST['contents']) ||strlen(trim($_POST['contents'])) < 10){
-					Canvas::logError('You post must contain at least 10 characters');
+				if(empty($_POST['contents']) || strlen(trim($_POST['contents'])) < Settings::getSetting('minPostLength')){
+					Canvas::logError('You post must contain at least ' . Settings::getSetting('minPostLength') . ' characters');
 				}
 
 				if(!count(Canvas::getErrors())){
@@ -66,7 +81,7 @@ class Poster {
 						'fid' => Canvas::getID(),
 						'name' => htmlspecialchars(Form::getInput('name')),
 						'author' => Canvas::getUser()->getID(),
-						'startDate' => date('Y-m-d h:i:s')
+						'startDate' => date('Y-m-d H:i:s')
 					));
 
 					return static::newPost($tid);
@@ -75,6 +90,11 @@ class Poster {
 			else if(static::getType() == 'post'){
 				return static::newPost(Canvas::getID());
 			}
+			else if(static::getType() == 'edit'){
+				$uri = new URI();
+
+				return static::editPost($uri->getArg(2), $uri->getArg(3));
+			}
 		}
 
 		return false;
@@ -82,8 +102,8 @@ class Poster {
 
 	//Creates a new post.
 	public static function newPost($tid){
-		if(!isset($_POST['contents']) ||strlen(trim($_POST['contents'])) < 10){
-			Canvas::logError('You post must contain at least 10 characters');
+		if(empty($_POST['contents']) || strlen(trim($_POST['contents'])) < Settings::getSetting('minPostLength')){
+			Canvas::logError('You post must contain at least ' . Settings::getSetting('minPostLength') . ' characters');
 		}
 
 		if(!count(Canvas::getErrors())){
@@ -100,7 +120,28 @@ class Poster {
 				'pid' => $pid,
 				'author' => Canvas::getUser()->getID(),
 				'contents' => htmlspecialchars(Form::getInput('contents')),
-				'postDate' => date('Y-m-d h:i:s')
+				'postDate' => date('Y-m-d H:i:s')
+			));
+
+			return $tid;
+		}
+
+		return false;
+	}
+
+	public static function editPost($tid, $pid){
+		if(empty($_POST['contents']) || strlen(trim($_POST['contents'])) < Settings::getSetting('minPostLength')){
+			Canvas::logError('You post must contain at least ' . Settings::getSetting('minPostLength') . ' characters');
+		}
+
+		if(!count(Canvas::getErrors())){
+			$query = 'UPDATE posts SET contents = :contents, editedBy = :editedBy, editedOn = :editedOn WHERE pid = :pid';
+
+			DB::query($query, array(
+				'contents' => htmlspecialchars(Form::getInput('contents')),
+				'editedBy' => Canvas::getUser()->getID(),
+				'editedOn' => date('Y-m-d H:i:s'),
+				'pid' => $pid
 			));
 
 			return $tid;

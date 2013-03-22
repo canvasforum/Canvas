@@ -45,7 +45,7 @@ class Register {
 					Canvas::logError('The email address specified is already in use.');
 				}
 				else if(!preg_match('#\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b#', $_POST['email'])){
-					Canvas::logError('You must specify a valid email.');
+					Canvas::logError('You must specify a valid email such as janedoe@email.com.');
 				}
 
 				$result = Fetcher::getUserByHandle($_POST['username']);
@@ -54,7 +54,7 @@ class Register {
 					Canvas::logError('The username specified is already in use.');
 				}
 				else if(!preg_match('#\b[a-zA-Z0-9]+\b#', $_POST['username'])){
-					Canvas::logError('Your username may only letters and numbers');
+					Canvas::logError('Your username may only contain letters and numbers');
 				}
 
 				if($_POST['password'] != $_POST['passwordVal']){
@@ -97,8 +97,8 @@ class Register {
 						'username' => htmlspecialchars($_POST['username']),
 						'password' => $hash,
 						'salt' => $salt,
-						'regDate' => date('Y-m-d h:i:s'),
-						'lastLoginDate' => date('Y-m-d h:i:s'),
+						'regDate' => date('Y-m-d'),
+						'lastLoginDate' => date('Y-m-d H:i:s'),
 						'ip' => $ip
 					));
 

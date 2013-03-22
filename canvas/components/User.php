@@ -25,7 +25,6 @@ class User {
 	private $lastLoginDate;
 	private $ip;
 	private $groupId;
-	private $posts;
 
 	public function __construct(){
 		$this->ip = long2ip($this->ip);
@@ -71,12 +70,7 @@ class User {
 		//This will be changed later.
 		return $this->groupId;
 	}
-
-	//Returns the number of posts the user has made.
-	public function getPosts(){
-		return $this->posts;
-	}
-
+	
 	//Returns the gravatar URL for the user.
 	public function getGravatar($size = 100){
 		return 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?s=' . $size;
