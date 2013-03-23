@@ -2,6 +2,7 @@
 	padding: 0px;
 	margin: 0px;
 	outline: none;
+	word-wrap: break-word;
 }
 
 html, body {
@@ -223,9 +224,10 @@ input[type=checkbox]:checked:after {
 }
 
 textarea {
-	height: 120px;
+	min-height: 120px;
 	font-family: Helvetica, Arial;
-	overflow: auto;
+	overflow: hidden;
+	font-size: 12px;
 }
 
 #errors {
@@ -311,6 +313,7 @@ ul, ol {
 .postwrap .wrap {
 	width: 840px;
 	position: relative;
+	max-width: 840px;
 }
 
 .postwrap {
@@ -385,7 +388,7 @@ ul, ol {
 }
 
 .postinfo {
-	background: #f7f7f7;
+	background: #fafafa;
 	padding: 8px 16px;
 	color: #989898;
 }

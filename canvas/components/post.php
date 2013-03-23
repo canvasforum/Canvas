@@ -72,5 +72,11 @@ class Post {
 	public function getEditedBy(){
 		return $this->editedBy;
 	}
+
+	//Returns whether or not this post is the first post in a topic.
+	public function isFirstPost(){
+		$parent = Canvas::getTopic($this->tid);
+		return ($parent->getFirstPost()->getID() == $this->pid);
+	}
 }
 ?>

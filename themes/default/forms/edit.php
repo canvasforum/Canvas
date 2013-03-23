@@ -22,8 +22,15 @@
 			<article class="row" id="preview_post"></article>
 			<article class="row">
 				<form method="POST" action="<?php echo Canvas::getURL(); ?>">
+					<?php if(Poster::getPost()->isFirstPost()): ?>
+						<div>
+							<label>Topic Name</label>
+							<input type="text" name="name" value="<?php echo Poster::getTopic()->getName(); ?>" required />
+						</div>
+					<?php endif; ?>
 					<div>
-						<textarea name="contents" required><?php echo Poster::getContents(); ?></textarea>
+						<label>Contents</label>
+						<textarea name="contents" required><?php echo Poster::getPost()->getContents(); ?></textarea>
 					</div>
 					<div class="clear">
 						<span class="left">

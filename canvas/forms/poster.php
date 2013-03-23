@@ -50,10 +50,24 @@ class Poster {
 		return false;
 	}
 
-	public static function getContents(){
-		$uri = new URI();
+	public static function getPost(){
+		if(static::getType() == 'edit'){
+			$uri = new URI();
+			return Canvas::getPost($uri->getArg(3));
+		}
+		else{
+			return Canvas::getPost();
+		}		
+	}
 
-		return Canvas::getPost($uri->getArg(3))->getContents();
+	public static function getTopic(){
+		if(static::getType() == 'edit'){
+			$uri = new URI();
+			return Canvas::getTopic($uri->getArg(2));
+		}
+		else{
+			return Canvas::getTopic();
+		}
 	}
 
 	public static function post(){
@@ -134,7 +148,20 @@ class Poster {
 			Canvas::logError('You post must contain at least ' . Settings::getSetting('minPostLength') . ' characters');
 		}
 
+		if(isset($_POST['name']) && empty($_POST['name'])){
+			Canvas::logError('You must specify a topic name');
+		}
+
 		if(!count(Canvas::getErrors())){
+			if(isset($_POST['name'])){
+				$query = 'UPDATE topics SET name = :name WHERE tid = :tid';
+
+				DB::query($query, array(
+					'name' => htmlspecialchars(Form::getInput('name')),
+					'tid' => $tid
+				));
+			}	
+
 			$query = 'UPDATE posts SET contents = :contents, editedBy = :editedBy, editedOn = :editedOn WHERE pid = :pid';
 
 			DB::query($query, array(
