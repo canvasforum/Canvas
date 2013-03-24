@@ -46,7 +46,6 @@ foreach($wildcards as $wildcard){
 
 Autoloader::loadDir(APP . 'models/');
 Autoloader::loadDir(APP . 'components/');
-Autoloader::loadDir(APP . 'forms/');
 AutoLoader::loadDir(APP . 'lib/');
 
 //Sessions are VERY important.
