@@ -2,14 +2,14 @@
 <html>
 	<head>
 		<title>
-			<?php if(Poster::getType() == 'post'): ?>
+			<?php if(Poster::getType() == Poster::POST): ?>
 				New Post
-			<?php elseif(Poster::getType() == 'topic'): ?>
+			<?php elseif(Poster::getType() == Poster::TOPIC): ?>
 				New Topic
-			<?php elseif(Poster::getType() == 'edit'): ?>
+			<?php elseif(Poster::getType() == Poster::EDIT): ?>
 				Editing Post
 			<?php else: ?>
-				<?php Canvas::redirect(Canvas::getBase()); ?>
+				<?php //Canvas::redirect(Canvas::getBase()); ?>
 			<?php endif; ?>
 		</title>
 		<?php include 'includes/head.php'; ?>
@@ -19,13 +19,13 @@
 		<section id="wrapper">
 			<?php if(Canvas::loggedIn()): ?>
 				<?php
-				if(Poster::getType() == 'post'){
+				if(Poster::getType() == Poster::POST){
 					include 'forms/post.php';
 				}
-				else if(Poster::getType() == 'topic'){
+				else if(Poster::getType() == Poster::TOPIC){
 					include 'forms/topic.php';
 				}
-				else if(Poster::getType() == 'edit'){
+				else if(Poster::getType() == Poster::EDIT){
 					include 'forms/edit.php';
 				}
 				?>

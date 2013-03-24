@@ -23,7 +23,7 @@
 			<article class="row">
 				<form method="POST" action="<?php echo Canvas::getBase(); ?>post/post/<?php echo Canvas::getID(); ?>">
 					<div>
-						<textarea name="contents" required></textarea>
+						<textarea name="contents" required><?php echo Form::getInput('contents'); ?></textarea>
 					</div>
 					<div class="clear">
 						<span class="left">
