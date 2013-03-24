@@ -15,7 +15,7 @@
 					</header>
 					<section class="bodywrap">
 						<?php if(!Login::attempt() && !Canvas::loggedIn()): ?>
-							<?php if(count(Canvas::getErrors())): ?>
+							<?php if(Canvas::hasErrors()): ?>
 								<aside id="errors">
 									<?php foreach(Canvas::getErrors() as $error): ?>
 										<span class="error"><?php echo $error; ?></span>

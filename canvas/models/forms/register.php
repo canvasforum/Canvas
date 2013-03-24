@@ -72,7 +72,7 @@ class Register {
 					Canvas::logError('Please agree to the terms and conditions.');
 				}
 
-				if(!count(Canvas::getErrors())){
+				if(!Canvas::hasErrors()){
 					$salt = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 					$salt = substr(str_shuffle($salt), 0, 32);
 

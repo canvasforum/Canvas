@@ -18,6 +18,7 @@
 
 use \Wires\Routing\URI as URI;
 use \Wires\Configuration as Configuration;
+use \Wires\Database\DB as DB;
 
 class Canvas {
 	private static $errors = array();
@@ -88,9 +89,14 @@ class Canvas {
 		}
 	}
 
+	//Returns whether or not there are any errors.
+	public static function hasErrors(){
+		return !empty(static::$errors);
+	}
+
 	//Returns an array containing all errors if any.
 	public static function getErrors(){
-		return static::$errors;
+		return static::hasErrors() ? static::$errors : false;
 	}
 
 	//Redirects the user to the specified URL.

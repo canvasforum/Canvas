@@ -5,6 +5,6 @@ if(isset($_POST['contents'])){
 	echo Markdown(htmlspecialchars($_POST['contents']));
 }
 else{
-	echo 'lel';
+	echo 'lel what are you doing here?';
 }
 ?>

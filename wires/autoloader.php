@@ -46,8 +46,6 @@ class Autoloader {
 
 		$path = SYS . $path . '.php';
 
-		//echo $path . '<br />';
-
 		require $path;
 	}
 
@@ -55,7 +53,7 @@ class Autoloader {
 	public static function loadDir($path){
 		$fsi = new FileSystemIterator($path, FileSystemIterator::SKIP_DOTS);
 
-		foreach($fsi as $file){
+		foreach($fsi as $file){			
 			if($file->isDir()){
 				static::loadDir($file->getPathName());
 			}

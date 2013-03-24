@@ -9,7 +9,7 @@
 			<?php elseif(Poster::getType() == Poster::EDIT): ?>
 				Editing Post
 			<?php else: ?>
-				<?php //Canvas::redirect(Canvas::getBase()); ?>
+				<?php Canvas::redirect(Canvas::getBase()); ?>
 			<?php endif; ?>
 		</title>
 		<?php include 'includes/head.php'; ?>
@@ -31,7 +31,7 @@
 				?>
 			<?php else: ?>
 				<h2>
-					Sorry. You can't post without being logged in. <a href="<?php echo Canvas::getBase() . 'login'; ?>">Click here</a> to log in.
+					Sorry. You can't do this without being logged in. <a href="<?php echo Canvas::getBase() . 'login'; ?>">Click here</a> to log in.
 				</h2>
 			<?php endif; ?>
 		</section>

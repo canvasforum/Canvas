@@ -78,5 +78,10 @@ class Post {
 		$parent = Canvas::getTopic($this->tid);
 		return ($parent->getFirstPost()->getID() == $this->pid);
 	}
+
+	//Returns whether or not this post can be edited by the current use.
+	public function canEdit(){
+		return ($this->author->getID() == Canvas::getUser()->getID());
+	}
 }
 ?>

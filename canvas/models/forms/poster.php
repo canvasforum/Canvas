@@ -74,7 +74,7 @@ class Poster {
 					Canvas::logError('You post must contain at least ' . Settings::getSetting('minPostLength') . ' characters');
 				}
 
-				if(!count(Canvas::getErrors())){
+				if(!Canvas::hasErrors()){
 					$tid = rand(100000, 999999);
 
 					while(Canvas::getTopic($tid)){
@@ -113,7 +113,7 @@ class Poster {
 			Canvas::logError('Your post must contain at least ' . Settings::getSetting('minPostLength') . ' characters');
 		}
 
-		if(!count(Canvas::getErrors())){
+		if(!Canvas::hasErrors()){
 			$pid = rand(100000, 999999);
 
 			while(Canvas::getPost($pid)){
@@ -145,7 +145,7 @@ class Poster {
 			Canvas::logError('You must specify a topic name');
 		}
 
-		if(!count(Canvas::getErrors())){
+		if(!Canvas::hasErrors()){
 			if(isset($_POST['name'])){
 				$query = 'UPDATE topics SET name = :name WHERE tid = :tid';
 

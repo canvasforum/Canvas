@@ -39,7 +39,7 @@ if($topic){
 									<time>Posted on <?php echo $first->getPostDate('%B %d, %Y at %#I:%M %p'); ?>.</time>
 								</span>
 								<span class="right postbuttons">
-									<?php if(Canvas::getUser() == $first->getAuthor()): ?>
+									<?php if($first->canEdit()): ?>
 										<span><a title="Edit Post" href="<?php echo Canvas::getBase(); ?>post/edit/<?php echo $topic->getID(); ?>/<?php echo $first->getID(); ?>">&#xf040;</a></span>
 									<?php endif; ?>
 								</span>
@@ -72,7 +72,7 @@ if($topic){
 										<time>Posted on <?php echo $post->getPostDate('%B %d, %Y at %#I:%M %p'); ?>.</time>
 									</span>
 									<span class="right postbuttons">
-										<?php if(Canvas::getUser() == $post->getAuthor()): ?>
+										<?php if($post->canEdit()): ?>
 											<span><a title="Edit Post" href="<?php echo Canvas::getBase(); ?>post/edit/<?php echo $topic->getID(); ?>/<?php echo $post->getID(); ?>">&#xf040;</a></span>
 										<?php endif; ?>
 									</span>

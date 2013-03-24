@@ -12,10 +12,11 @@
 #
 
 /*
- * Canvas Flavour Markdown
+ * Canvas Flavor Markdown
  * 
  * Features:
- * New lines are treated literally meaning the spaces at the end of lines are not
+ * New lines are treated literally.
+ * Modified for htmlspecialchars escape.
  */
 
 
@@ -239,7 +240,7 @@ class Markdown_Parser {
 			str_repeat('\])*', $this->nested_brackets_depth);
 	
 		$this->nested_url_parenthesis_re = 
-			str_repeat('(?>[^()\s]+|\(', $this->nested_url_parenthesis_depth).
+			str_repeat('(?>(?!javascript:)[^()\'"\s]+|\(', $this->nested_url_parenthesis_depth).
 			str_repeat('(?>\)))*', $this->nested_url_parenthesis_depth);
 		
 		$this->escape_chars_re = '['.preg_quote($this->escape_chars).']';
@@ -1431,12 +1432,12 @@ class Markdown_Parser {
 
 
 	function doAutoLinks($text) {
-		$text = preg_replace_callback('{<((https?|ftp|dict):[^\'">\s]+)>}i', 
+		$text = preg_replace_callback('{(&lt;|<)((https?|ftp|dict):[^\'">\s]+)(&gt;|>)}i', 
 			array(&$this, '_doAutoLinks_url_callback'), $text);
 
 		# Email addresses: <address@domain.foo>
 		$text = preg_replace_callback('{
-			<
+			(&lt;|<)
 			(?:mailto:)?
 			(
 				(?:
@@ -1451,19 +1452,19 @@ class Markdown_Parser {
 					\[[\d.a-fA-F:]+\]	# IPv4 & IPv6
 				)
 			)
-			>
+			(&gt;|>)
 			}xi',
 			array(&$this, '_doAutoLinks_email_callback'), $text);
 
 		return $text;
 	}
 	function _doAutoLinks_url_callback($matches) {
-		$url = $this->encodeAttribute($matches[1]);
+		$url = $this->encodeAttribute($matches[2]);
 		$link = "<a href=\"$url\">$url</a>";
 		return $this->hashPart($link);
 	}
 	function _doAutoLinks_email_callback($matches) {
-		$address = $matches[1];
+		$address = $matches[2];
 		$link = $this->encodeEmailAddress($address);
 		return $this->hashPart($link);
 	}
