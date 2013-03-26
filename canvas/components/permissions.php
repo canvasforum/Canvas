@@ -19,7 +19,7 @@
 class Permissions {
 	const USE_AVATAR = 1;
 	const USE_SIGNATURE = 2;
-	const POST_REPIES = 4;
+	const POST_REPLIES = 4;
 	const POST_TOPICS = 8;
 	const EDIT_OWN_POSTS = 16;
 	const SEND_PM = 32;
