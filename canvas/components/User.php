@@ -25,9 +25,11 @@ class User {
 	private $lastLoginDate;
 	private $ip;
 	private $groupId;
+	private $group;
 
 	public function __construct(){
 		$this->ip = long2ip($this->ip);
+		$this->group = Canvas::getGroup($this->groupId);
 	}
 
 	//Returns the user's member number.
@@ -67,8 +69,12 @@ class User {
 
 	//Returns the user's group as an object.
 	public function getGroup(){
-		//This will be changed later.
-		return $this->groupId;
+		return $this->group;
+	}
+
+	//Returns whether or not this user has permission to do something.
+	public function hasPermission($action){
+		return $this->group->hasPermission($action);
 	}
 	
 	//Returns the gravatar URL for the user.

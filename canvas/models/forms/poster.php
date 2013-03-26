@@ -70,8 +70,10 @@ class Poster {
 					Canvas::logError('You must specify a topic name');
 				}
 
-				if(empty($_POST['contents']) || strlen(trim($_POST['contents'])) < Settings::getSetting('minPostLength')){
-					Canvas::logError('You post must contain at least ' . Settings::getSetting('minPostLength') . ' characters');
+				if(!Canvas::getUser()->hasPermission(Permissions::BYPASS_MIN_CHAR)){
+					if(empty($_POST['contents']) || strlen(trim($_POST['contents'])) < Settings::getSetting('minPostLength')){
+						Canvas::logError('Your post must contain at least ' . Settings::getSetting('minPostLength') . ' characters');
+					}
 				}
 
 				if(!Canvas::hasErrors()){
@@ -109,8 +111,10 @@ class Poster {
 
 	//Creates a new post.
 	public static function newPost($tid){
-		if(empty($_POST['contents']) || strlen(trim($_POST['contents'])) < Settings::getSetting('minPostLength')){
-			Canvas::logError('Your post must contain at least ' . Settings::getSetting('minPostLength') . ' characters');
+		if(!Canvas::getUser()->hasPermission(Permissions::BYPASS_MIN_CHAR)){
+			if(empty($_POST['contents']) || strlen(trim($_POST['contents'])) < Settings::getSetting('minPostLength')){
+				Canvas::logError('Your post must contain at least ' . Settings::getSetting('minPostLength') . ' characters');
+			}
 		}
 
 		if(!Canvas::hasErrors()){
@@ -137,8 +141,10 @@ class Poster {
 	}
 
 	public static function editPost($tid, $pid){
-		if(empty($_POST['contents']) || strlen(trim($_POST['contents'])) < Settings::getSetting('minPostLength')){
-			Canvas::logError('You post must contain at least ' . Settings::getSetting('minPostLength') . ' characters');
+		if(!Canvas::getUser()->hasPermission(Permissions::BYPASS_MIN_CHAR)){
+			if(empty($_POST['contents']) || strlen(trim($_POST['contents'])) < Settings::getSetting('minPostLength')){
+				Canvas::logError('Your post must contain at least ' . Settings::getSetting('minPostLength') . ' characters');
+			}
 		}
 
 		if(isset($_POST['name']) && empty($_POST['name'])){

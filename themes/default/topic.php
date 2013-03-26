@@ -91,7 +91,7 @@ if($topic){
 						</section>
 					</section>
 				<?php endforeach; ?>
-				<?php if(Canvas::loggedIn()): ?>
+				<?php if(Canvas::loggedIn() && Canvas::getUser()->hasPermission(Permissions::POST_REPLY)): ?>
 					<?php include 'forms/post.php'; ?>
 				<?php endif; ?>
 			<?php else: ?>

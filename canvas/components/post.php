@@ -81,7 +81,11 @@ class Post {
 
 	//Returns whether or not this post can be edited by the current use.
 	public function canEdit(){
-		return ($this->author->getID() == Canvas::getUser()->getID());
+		$isAuthor = ($this->author->getID() == Canvas::getUser()->getID());
+		$canEditOwn = Canvas::getUser()->hasPermission(Permissions::EDIT_OWN_POSTS);
+		$canEditOthers = Canvas::getUser()->hasPermission(Permissions::EDIT_OTHER_POSTS);
+
+		return $isAuthor && $canEditOwn || !$isAuthor && $canEditOthers;
 	}
 }
 ?>

@@ -24,6 +24,11 @@ class Canvas {
 	private static $errors = array();
 	private static $bases = null;
 
+	//Returns the group specified by the given ID.
+	public static function getGroup($id){
+		return Fetcher::getGroup($id);
+	}
+
 	//Returns all forum categories as an array.
 	public static function getCategories(){
 		return Fetcher::getCategories();

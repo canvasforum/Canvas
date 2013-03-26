@@ -17,6 +17,7 @@
  * Features:
  * New lines are treated literally.
  * Modified for htmlspecialchars escape.
+ * Do not parse any links containing JS.
  */
 
 

@@ -18,17 +18,13 @@
 		<?php include 'includes/header.php'; ?>
 		<section id="wrapper">
 			<?php if(Canvas::loggedIn()): ?>
-				<?php
-				if(Poster::getType() == Poster::POST){
-					include 'forms/post.php';
-				}
-				else if(Poster::getType() == Poster::TOPIC){
-					include 'forms/topic.php';
-				}
-				else if(Poster::getType() == Poster::EDIT){
-					include 'forms/edit.php';
-				}
-				?>
+				<?php if(Poster::getType() == Poster::POST): ?>
+					<?php include 'forms/post.php'; ?>
+				<?php  elseif(Poster::getType() == Poster::TOPIC): ?>
+					<?php include 'forms/topic.php'; ?>
+				<?php elseif(Poster::getType() == Poster::EDIT): ?>
+					<?php include 'forms/edit.php'; ?>
+				<?php endif; ?>
 			<?php else: ?>
 				<h2>
 					Sorry. You can't do this without being logged in. <a href="<?php echo Canvas::getBase() . 'login'; ?>">Click here</a> to log in.

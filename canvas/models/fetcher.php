@@ -110,5 +110,15 @@ class Fetcher {
 
 		return $result;
 	}
+
+	//Returns the specified group as an object.
+	public static function getGroup($id){
+		$query = 'SELECT name, permissions FROM groups WHERE id = :id LIMIT 1';
+
+		$result = DB::queryObj($query, array('id' => $id));
+		$result->setFetchMode(PDO::FETCH_CLASS, 'Group');
+
+		return $result->fetch();
+	}
 }
 ?>
