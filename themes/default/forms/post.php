@@ -1,4 +1,4 @@
-<?php if(Canvas::getUser()->hasPermission(Permission::POST_REPLIES)): ?>
+<?php if(Canvas::getUser()->hasPermission(Permissions::POST_REPLIES)): ?>
 	<section class="wrap">
 		<div class="innerwrap">
 			<header>
