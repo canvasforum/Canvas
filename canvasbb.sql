@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2013 at 03:32 AM
+-- Generation Time: Mar 26, 2013 at 01:18 AM
 -- Server version: 5.5.27-log
 -- PHP Version: 5.4.7
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `canvasbb`
 --
-CREATE DATABASE `canvasbb` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `canvasbb`;
 
 -- --------------------------------------------------------
 
@@ -33,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `autologin` (
   `uid` int(6) NOT NULL,
   `userkey` varchar(256) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
@@ -83,6 +81,28 @@ INSERT INTO `forums` (`id`, `fid`, `cid`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `groups`
+--
+
+CREATE TABLE IF NOT EXISTS `groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `permissions` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `groups`
+--
+
+INSERT INTO `groups` (`id`, `name`, `permissions`) VALUES
+(1, 'Administrator', 32767),
+(2, 'Moderator', 13683),
+(3, 'Member', 127);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `posts`
 --
 
@@ -96,16 +116,27 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `editedBy` int(6) NOT NULL,
   `editedOn` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `posts`
+-- Table structure for table `settings`
 --
 
-INSERT INTO `posts` (`id`, `tid`, `pid`, `author`, `contents`, `postDate`, `editedBy`, `editedOn`) VALUES
-(3, 537887, 707873, 426942, 'Day 7? I think I kinda lost track.\r\n\r\nAnyway...this works :O', '2013-03-21 12:05:42', 0, '0000-00-00 00:00:00'),
-(4, 733993, 427172, 426942, 'Hello World!', '2013-03-21 12:08:16', 0, '0000-00-00 00:00:00'),
-(5, 888406, 973797, 426942, '# Hello World\r\n\r\n> This is a blockquote.\r\n\r\n*   List Item 1\r\n*   List Item 2\r\n*   List Item 3\r\n\r\n[Links are fun. Click here to go back to the index page.](../)\r\n\r\n**Bold Text**  \r\n*Italic Text*\r\n\r\n![Alternate Text!](http://cache.desktopnexus.com/thumbnails/585234-bigthumbnail.jpg)\r\n', '2013-03-21 01:08:19', 0, '0000-00-00 00:00:00');
+CREATE TABLE IF NOT EXISTS `settings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `setting` varchar(255) NOT NULL,
+  `value` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`id`, `setting`, `value`) VALUES
+(1, 'minPostLength', '5');
 
 -- --------------------------------------------------------
 
@@ -121,21 +152,7 @@ CREATE TABLE IF NOT EXISTS `topics` (
   `author` int(6) NOT NULL,
   `startDate` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
-
---
--- Dumping data for table `topics`
---
-
-INSERT INTO `topics` (`id`, `tid`, `fid`, `name`, `author`, `startDate`) VALUES
-(1, 864430, 233054, 'My First Topic!', 426942, '2013-03-18 00:00:00'),
-(2, 864431, 233054, 'More Topics', 426942, '2013-03-19 00:00:00'),
-(3, 864432, 233054, 'More Topics', 426942, '2013-03-19 00:00:00'),
-(4, 854431, 233054, 'More Topics', 426942, '2013-03-19 00:00:00'),
-(5, 864438, 233054, 'More Topics', 426942, '2013-03-19 00:00:00'),
-(31, 537887, 978477, 'Wow A Topic!', 426942, '2013-03-21 12:05:42'),
-(32, 733993, 978477, 'Just another test.', 426942, '2013-03-21 12:08:16'),
-(33, 888406, 978477, 'Testing Markdown!', 426942, '2013-03-21 01:08:19');
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
 
 -- --------------------------------------------------------
 
@@ -154,10 +171,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `lastLoginDate` datetime NOT NULL,
   `ip` int(11) NOT NULL,
   `groupId` int(11) NOT NULL DEFAULT '4',
-  `posts` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uid` (`uid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
