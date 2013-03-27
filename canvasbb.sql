@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2013 at 01:18 AM
+-- Generation Time: Mar 27, 2013 at 06:25 PM
 -- Server version: 5.5.27-log
 -- PHP Version: 5.4.7
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `autologin` (
   `uid` int(6) NOT NULL,
   `userkey` varchar(256) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 -- --------------------------------------------------------
 
@@ -44,14 +44,6 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `categories`
---
-
-INSERT INTO `categories` (`id`, `name`) VALUES
-(1, 'First Category'),
-(2, 'Second Category');
 
 -- --------------------------------------------------------
 
@@ -69,15 +61,6 @@ CREATE TABLE IF NOT EXISTS `forums` (
   UNIQUE KEY `fid` (`fid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
---
--- Dumping data for table `forums`
---
-
-INSERT INTO `forums` (`id`, `fid`, `cid`, `name`, `description`) VALUES
-(1, 978477, 1, 'First Forum', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque rutrum dignissim nisi ut feugiat. Fusce id laoreet dolor.'),
-(2, 233054, 1, 'Second Forum', 'So what do you guys think of this so far?'),
-(3, 121872, 2, 'Another Forum', 'Hello World!');
-
 -- --------------------------------------------------------
 
 --
@@ -90,15 +73,6 @@ CREATE TABLE IF NOT EXISTS `groups` (
   `permissions` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Dumping data for table `groups`
---
-
-INSERT INTO `groups` (`id`, `name`, `permissions`) VALUES
-(1, 'Administrator', 32767),
-(2, 'Moderator', 13683),
-(3, 'Member', 127);
 
 -- --------------------------------------------------------
 
@@ -116,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `editedBy` int(6) NOT NULL,
   `editedOn` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=60 ;
 
 -- --------------------------------------------------------
 
@@ -151,8 +125,9 @@ CREATE TABLE IF NOT EXISTS `topics` (
   `name` varchar(255) NOT NULL,
   `author` int(6) NOT NULL,
   `startDate` datetime NOT NULL,
+  `updateDate` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
 
 -- --------------------------------------------------------
 
@@ -163,6 +138,7 @@ CREATE TABLE IF NOT EXISTS `topics` (
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(6) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `username` varchar(32) NOT NULL,
   `password` varchar(128) NOT NULL,
@@ -171,9 +147,10 @@ CREATE TABLE IF NOT EXISTS `users` (
   `lastLoginDate` datetime NOT NULL,
   `ip` int(11) NOT NULL,
   `groupId` int(11) NOT NULL DEFAULT '4',
+  `timezone` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uid` (`uid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

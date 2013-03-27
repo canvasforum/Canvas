@@ -44,7 +44,7 @@ class Fetcher {
 	//Returns the user with the given UID.
 	public static function getUser($id = -1){
 		if($id != -1){
-			$query = 'SELECT id, uid, email, username, regDate, lastLoginDate, groupId FROM users WHERE uid = :uid LIMIT 1';
+			$query = 'SELECT id, name, uid, email, username, regDate, lastLoginDate, groupId, timezone FROM users WHERE uid = :uid LIMIT 1';
 			$result = DB::queryObj($query, array('uid' => $id));
 
 			$result->setFetchMode(PDO::FETCH_CLASS, 'User');
@@ -107,6 +107,14 @@ class Fetcher {
 	public static function getAutoLogin($key){
 		$query = 'SELECT uid FROM autologin WHERE userkey = :key';
 		$result = DB::single($query, array('key' => $key), 'uid');
+
+		return $result;
+	}
+
+	//Returns the auto login key that matches the UID specified.
+	public static function getAutoLoginKey($uid){
+		$query = 'SELECT userkey FROM autologin WHERE uid = :uid';
+		$result = DB::single($query, array('uid' => $uid), 'userkey');
 
 		return $result;
 	}

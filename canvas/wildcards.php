@@ -19,6 +19,7 @@
 return array(
 	'forum',
 	'topic',
-	'post'
+	'post',
+	'preferences'
 );
 ?>

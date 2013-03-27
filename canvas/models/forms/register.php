@@ -73,10 +73,8 @@ class Register {
 				}
 
 				if(!Canvas::hasErrors()){
-					$salt = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-					$salt = substr(str_shuffle($salt), 0, 32);
-
-					$hash = md5(md5($_POST['password']) . md5($salt));
+					$salt = Hasher::createSalt();
+					$hash = Hasher::hashPass($_POST['password'], $salt);
 
 					$uid = rand(100000, 999999);
 

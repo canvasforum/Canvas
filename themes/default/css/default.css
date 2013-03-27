@@ -175,12 +175,16 @@ form div + div {
 	margin-top: 10px;
 }
 
-input[type=text], input[type=email], input[type=password], textarea {
+input[type=text], input[type=email], input[type=password], select, textarea {
 	width: 100%;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	padding: 8px 12px;
 	border: 1px solid #cacaca;
+}
+
+select {
+	padding: 8px;
 }
 
 input:focus, textarea:focus {
@@ -425,15 +429,23 @@ header + .postinfo {
 }
 
 #notices {
-	background: #e4efff;
-	border-top: 1px solid #8fbcff;
-	border-bottom: 1px solid #8fbcff;
-	color: #5e8ed5;
+	background: #e0edff;
+	border-top: 1px solid #a1c2f3;
+	border-bottom: 1px solid #a1c2f3;
+	color: #83a9df;
 	padding: 8px 12px;
 	width: 100%;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	margin-bottom: 20px;
+}
+
+#rightcol #notices {
+	margin-bottom: 0px;
+}
+
+#rightcol #notices + .row {
+	border-top: none;
 }
 
 #notices span {
@@ -446,6 +458,7 @@ header + .postinfo {
 
 #leftcol, #rightcol {
 	display: table-cell;
+	vertical-align: top;
 }
 
 #leftcol {

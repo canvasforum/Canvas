@@ -90,8 +90,7 @@ class Poster {
 						'fid' => Canvas::getID(),
 						'name' => htmlspecialchars(Form::getInput('name')),
 						'author' => Canvas::getUser()->getID(),
-						'startDate' => date('Y-m-d H:i:s'),
-						'updateDate' => date('Y-m-d H:i:s')
+						'startDate' => date('Y-m-d H:i:s')
 					));
 
 					return static::newPost($tid);

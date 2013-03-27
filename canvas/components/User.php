@@ -19,6 +19,7 @@
 class User {
 	private $id;
 	private $uid;
+	private $name;
 	private $email;
 	private $username;
 	private $regDate;
@@ -26,10 +27,15 @@ class User {
 	private $ip;
 	private $groupId;
 	private $group;
+	private $timezone;
 
 	public function __construct(){
 		$this->ip = long2ip($this->ip);
 		$this->group = Canvas::getGroup($this->groupId);
+
+		if(empty($this->timezone)){
+			$this->timezone = Canvas::getTimeZone();
+		}
 	}
 
 	//Returns the user's member number.
@@ -40,6 +46,11 @@ class User {
 	//Returns the user's ID.
 	public function getID(){
 		return $this->uid;
+	}
+
+	//Returns the user's name.
+	public function getName(){
+		return $this->name;
 	}
 
 	//Returns the user's email address.
@@ -80,6 +91,11 @@ class User {
 	//Returns the gravatar URL for the user.
 	public function getGravatar($size = 100){
 		return 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?s=' . $size;
+	}
+
+	//Returns the user's designated timezone.
+	public function getTImezone(){
+		return $this->timezone;
 	}
 }
 ?>

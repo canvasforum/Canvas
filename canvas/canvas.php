@@ -22,6 +22,7 @@ use \Wires\Database\DB as DB;
 
 class Canvas {
 	private static $errors = array();
+	private static $notices = array();
 	private static $bases = null;
 
 	//Returns the group specified by the given ID.
@@ -68,6 +69,11 @@ class Canvas {
 		return Configuration::get('theme');
 	}
 
+	//Returns the default time zone.
+	public static function getTimeZone(){
+		return Configuration::get('timezone');
+	}
+
 	//Returns the current URL.
 	public static function getURL(){
 		$uri = new URI();
@@ -102,6 +108,23 @@ class Canvas {
 	//Returns an array containing all errors if any.
 	public static function getErrors(){
 		return static::hasErrors() ? static::$errors : false;
+	}
+
+	//Returns whether or not there are any notices.
+	public static function hasNotices(){
+		return !empty(static::$notices);
+	}
+
+	//Returns an array containing all notices if any.
+	public static function getNotices(){
+		return static::hasNotices() ? static::$notices : false;
+	}
+
+	//Logs a notice in the system.
+	public static function logNotice($notice){
+		if(is_string($notice)){
+			static::$notices[] = $notice;
+		}
 	}
 
 	//Redirects the user to the specified URL.
@@ -141,17 +164,18 @@ class Canvas {
 
 	//Logs the user out.
 	public static function logout(){
-		DB::query('DELETE FROM autologin uid, userkey WHERE uid = :uid AND key = :key', array(
-			'uid' => $_SESSION['uid'],
-			'key' => $_COOKIE['rememberme']
-		));
+		if(Canvas::loggedIn()){
+			DB::query('DELETE FROM autologin WHERE uid = :uid', array(
+				'uid' => static::getUser()->getID()
+			));
 
-		unset($_SESSION['uid']);
-		unset($_SESSION['uas']);
-		
-		setcookie('rememberme', '', time() - 24 * 365 * 60);
+			unset($_SESSION['uid']);
+			unset($_SESSION['uas']);
+			
+			setcookie('rememberme', '', time() - 24 * 365 * 60);
 
-		session_destroy();
+			session_destroy();
+		}
 
 		static::redirect(static::getBase());
 	}

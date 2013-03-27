@@ -52,7 +52,9 @@ class Topic {
 
 	//Returns the date of the topics first post.
 	public function getStartDate($format = '%B %d, %Y'){
-		return strftime($format, strtotime($this->startDate));
+		$startDate = changeTimeZone(Canvas::getUser()->getTimeZone(), $this->startDate);
+
+		return strftime($format, strtotime($startDate));
 	}
 
 	//Returns an array containing all the topic's posts.

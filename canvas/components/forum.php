@@ -27,10 +27,10 @@ class Forum {
 
 	//Returns all topics associated with this forum.
 	public function getTopics(){
-		if(!is_null($this->topics) && count($this->topics)){
+		if(!is_null($this->topics) && count($this->topics)){		
 			return $this->topics;
 		}
-		else{
+		else{		
 			$result = DB::queryObj('SELECT tid, fid, name, author, startDate FROM topics WHERE fid = :fid ORDER BY updateDate DESC', array('fid' => $this->fid));
 			$result = $result->fetchAll(PDO::FETCH_CLASS, 'Topic');
 

@@ -33,21 +33,17 @@ class Login {
 				))->fetch(PDO::FETCH_OBJ);
 
 				if(!is_null($result) && $result){
-					$attempt = md5(md5($_POST['password']) . md5($result->salt));
+					$attempt = Hasher::hashPass($_POST['password'], $result->salt);
 
 					if($attempt == $result->password){
 						$_SESSION['uid'] = $result->uid;
 						$_SESSION['uas'] = $_SERVER['HTTP_USER_AGENT'];
 
 						if(isset($_POST['remember']) && $_POST['remember'] == true){
-							//Login key.
 							$key = md5($_SESSION['uas']) . md5(time()) . md5($result->salt);
-
-							//Randomize the key.
 							$key = str_shuffle($key);
 							$key .= $result->uid;
 
-							//One month persistent login cookie.
 							setcookie('rememberme', $key, time() + 2592000);
 
 							DB::query('INSERT INTO autologin (uid, userkey) VALUES (:uid, :key)', array(

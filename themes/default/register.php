@@ -14,7 +14,7 @@
 						<h3>Register</h3>
 					</header>
 					<section class="bodywrap">
-						<?php if(!Register::attempt() && !Canvas::loggedIn()): ?>
+						<?php if(!Canvas::loggedIn() && !Register::attempt()): ?>
 							<?php if(Canvas::hasErrors()): ?>
 								<aside id="errors">
 									<?php foreach(Canvas::getErrors() as $error): ?>

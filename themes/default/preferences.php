@@ -21,32 +21,25 @@
 					<section class="bodywrap">
 						<nav id="leftcol">
 							<article class="row">
-								<a href="<?php echo Canvas::getBase(); ?>preferences">Basic Preferences</a>
+								<a href="<?php echo Canvas::getBase(); ?>preferences/basic">Basic Preferences</a>
 							</article>
 							<article class="row">
 								<a href="<?php echo Canvas::getBase(); ?>preferences/password">Change Password</a>
 							</article>
 							<article class="row">
-								<a href="<?php echo Canvas::getBase(); ?>preferences/password">Update Profile</a>
+								<a href="<?php echo Canvas::getBase(); ?>preferences/profile">Update Profile</a>
 							</article>
 						</nav>
 						<section id="rightcol">
-							<article class="row">
-								<form method="POST" action="<?php echo Canvas::getURL(); ?>">
-									<div>
-										<label>Name</label>
-										<input type="text" name="name" />
-									</span>
-									</div>
-									<div>
-										<label>Email Address</label>
-										<input type="email" name="email" required />
-									</div>
-									<div>
-										<input type="submit" value="Save Changes" />
-									</div>
-								</form>
-							</article>
+							<?php if(Preferences::getType() == Preferences::BASIC): ?>
+								<?php include 'forms/preferences_basic.php'; ?>
+							<?php elseif(Preferences::getType() == Preferences::PASSWORD): ?>
+								<?php include 'forms/preferences_pass.php'; ?>
+							<?php elseif(Preferences::getType() == Preferences::PROFILE): ?>
+								<article class="row">
+									Be patient. This will come soon. :)
+								</article>
+							<?php endif; ?>
 						</section>
 					</section>
 				</div>
