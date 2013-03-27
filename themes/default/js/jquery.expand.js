@@ -41,8 +41,9 @@
 			expand($(this)[0]);
 
 			$(this).bind('keyup input', function(){
+				var ct = $('html').height() - $(window).scrollTop();
 				expand($(this)[0]);
-				$(window).scrollTop($(this).parents(op.parent).position().top + $(this).parents(op.parent).height());
+				$(window).scrollTop($('html').height() - ct);
 			});
 		});
 	}

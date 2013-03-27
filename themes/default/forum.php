@@ -23,8 +23,10 @@ $forum = Canvas::getForum();
 						<header>
 							<h3><?php echo $forum->getName(); ?></h3>
 							<div id="head_buttons">
-								<?php if(Canvas::getUser()->hasPermission(Permissions::POST_TOPICS)): ?>
-									<span><a href="<?php echo Canvas::getBase(); ?>post/topic/<?php echo $forum->getID(); ?>" title="New Topic">&#xf040;</a></span>
+								<?php if(Canvas::loggedIn()): ?>
+									<?php if(Canvas::getUser()->hasPermission(Permissions::POST_TOPICS)): ?>
+										<span><a href="<?php echo Canvas::getBase(); ?>post/topic/<?php echo $forum->getID(); ?>" title="New Topic" class="icon-pencil"></a></span>
+									<?php endif; ?>
 								<?php endif; ?>
 							</div>
 						</header>

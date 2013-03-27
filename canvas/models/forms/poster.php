@@ -90,7 +90,8 @@ class Poster {
 						'fid' => Canvas::getID(),
 						'name' => htmlspecialchars(Form::getInput('name')),
 						'author' => Canvas::getUser()->getID(),
-						'startDate' => date('Y-m-d H:i:s')
+						'startDate' => date('Y-m-d H:i:s'),
+						'updateDate' => date('Y-m-d H:i:s')
 					));
 
 					return static::newPost($tid);
@@ -132,6 +133,13 @@ class Poster {
 				'author' => Canvas::getUser()->getID(),
 				'contents' => htmlspecialchars(Form::getInput('contents')),
 				'postDate' => date('Y-m-d H:i:s')
+			));
+
+			$query = 'UPDATE topics SET updateDate = :updateDate WHERE tid = :tid';
+
+			DB::query($query, array(
+				'updateDate' => date('Y-m-d H:i:s'),
+				'tid' => $tid
 			));
 
 			return $tid;

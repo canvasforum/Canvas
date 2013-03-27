@@ -87,5 +87,10 @@ class Post {
 
 		return $isAuthor && $canEditOwn || !$isAuthor && $canEditOthers;
 	}
+
+	//Returns the URL at which this post can be edited.
+	public function getEditURL(){
+		return Canvas::getBase() . 'post/edit/' . $this->tid . '/' . $this->pid;
+	}
 }
 ?>

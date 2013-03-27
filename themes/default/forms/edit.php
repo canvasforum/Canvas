@@ -5,7 +5,7 @@
 				<h3>Editing Post</h3>
 				<div id="head_buttons">
 					<span id="preview">
-						<a title="Preview Post">&#xf108;</a>
+						<a title="Preview Post" class="icon-desktop"></a>
 					</span>
 				</div>
 			</header>

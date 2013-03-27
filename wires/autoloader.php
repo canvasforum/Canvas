@@ -23,7 +23,7 @@ class Autoloader {
 	private static $map = array();
 
 	//Load the class with the specified fully qualified name.
-	public static function load($classpath){		
+	public static function load($classpath){
 		$args = explode('\\', $classpath);
 
 		//Remove the global application namespace.

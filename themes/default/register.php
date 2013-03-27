@@ -40,7 +40,7 @@
 										<input type="password" name="password" autocomplete="off" required />
 									</div>
 									<div>
-										<label>Re-type Password</label>
+										<label>Confirm Password</label>
 										<input type="password" name="passwordVal" autocomplete="off" required />
 									</div>
 									<div>

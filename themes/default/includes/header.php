@@ -5,6 +5,7 @@
 		</aside>
 		<nav>
 			<?php if(Canvas::loggedIn()): ?>
+				<a href="<?php echo Canvas::getBase() ?>preferences">Preferences</a>
 				<a href="<?php echo Canvas::getBase(); ?>logout">Log Out</a>
 			<?php else: ?>
 				<a href="<?php echo Canvas::getBase(); ?>login">Log In</a>
