@@ -50,14 +50,24 @@ class Post {
 
 	//Returns the date of the topics first post.
 	public function getPostDate($format = '%B %d, %Y'){
-		$postDate = changeTimeZone(Canvas::getUser()->getTimeZone(), $this->postDate);
+		if(Canvas::loggedIn()){
+			$postDate = changeTimeZone(Canvas::getUser()->getTimeZone(), $this->postDate);
+		}
+		else{
+			$postDate = changeTimeZone(Canvas::getTimeZone(), $this->postDate);
+		}
 
 		return strftime($format, strtotime($postDate));
 	}
 
 	//Returns the date on which this post was edited.
 	public function getEditDate($format = '%B %d, %Y'){
-		$editDate = changeTimeZone(Canvas::getUser()->getTimeZone(), $this->editedOn);
+		if(Canvas::loggedIn()){
+			$editDate = changeTimeZone(Canvas::getUser()->getTimeZone(), $this->editedOn);
+		}
+		else{
+			$editDate = changeTimeZone(Canvas::getTimeZone(), $this->editedOn);
+		}
 
 		return strftime($format, strtotime($editDate));
 	}
