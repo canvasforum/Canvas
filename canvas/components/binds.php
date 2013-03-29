@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * Canvas
  *
  * A super simple, super flexible forum.
@@ -15,12 +15,10 @@
  * @author Andrew Lee
  * @link http://andrewleenj.com
  */
-
-use \Wires\Configuration as Configuration;
-
-return array(
-	'root' => DS . Configuration::get('dir'),
-	'canvas' => DS . Configuration::get('dir') . 'canvas' . DS,
-	'theme' => DS . Configuration::get('dir') . 'themes' . DS . Configuration::get('theme') . DS
-);
+ 
+class Binds {
+	const UNBOUND = 0;
+	const ALL = 1;
+	const POST_FORM = 2;
+}
 ?>

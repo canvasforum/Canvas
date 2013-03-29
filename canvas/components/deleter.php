@@ -11,7 +11,7 @@
  * Uses Wires as a framework.
  * Wires is also released under the WTFPL.
  * 
- * @package Wires
+ * @package Canvas
  * @author Andrew Lee
  * @link http://andrewleenj.com
  */
@@ -56,13 +56,13 @@ class Deleter {
 			if($post->canDelete()){
 				Garbage::removeTopic($post->getParent());
 
-				Canvas::logNotice('Topic Successfully Deleted', true);
+				new Message(Message::NOTICE, 'Topic Successfully Deleted', true);
 				header('Location: ' . Canvas::getBase() . 'forum/' . $topic->getParent());
 
 				return true;
 			}
 
-			Canvas::logError('You do not have permission to delete this item.', true);
+			new Message(Message::ERROR, 'You do not have permission to delete this item.', true);
 			header('Location: ' . $_SERVER['HTTP_REFERER']);
 		}
 		else if(static::getType() == Deleter::POST){
@@ -71,17 +71,17 @@ class Deleter {
 			if($post->canDelete()){
 				Garbage::removePost($post->getID());
 
-				Canvas::logNotice('Post Successfully Deleted', true);
+				new Message(Message::NOTICE, 'Post Successfully Deleted', true);
 				header('Location: ' . Canvas::getBase() . 'topic/' . $post->getParent());
 
 				return true;
 			}
 
-			Canvas::logError('You do not have permission to delete this item.', true);
+			new Message(Message::ERROR, 'You do not have permission to delete this item.', true);
 			header('Location: ' . $_SERVER['HTTP_REFERER']);
 		}
 		
-		Canvas::logError('Invalid command specified.', true);
+		new Message(Message::ERROR, 'Invalid command specified.', true);
 		header('Location: ' . $_SERVER['HTTP_REFERER']);
 
 		return false;

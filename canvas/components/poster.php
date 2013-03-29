@@ -11,7 +11,7 @@
  * Uses Wires as a framework.
  * Wires is also released under the WTFPL.
  * 
- * @package Wires
+ * @package Canvas
  * @author Andrew Lee
  * @link http://andrewleenj.com
  */
@@ -67,12 +67,12 @@ class Poster {
 	public static function post(){
 		if(Response::isPost()){			
 			if(Form::used('name') && !Form::getInput('name')){
-				Canvas::logError('You must specify a topic name');
+				new Message(Message::ERROR, 'You must specify a topic name', false, Binds::POST_FORM);
 			}
 
 			if(!Canvas::getUser()->hasPermission(Permissions::BYPASS_MIN_CHAR)){
 				if(!Form::getInput('contents') || strlen(trim(Form::getInput('contents'))) < Settings::getSetting('minPostLength')){
-					Canvas::logError('Your post must contain at least ' . Settings::getSetting('minPostLength') . ' characters');
+					new Message(Message::ERROR, 'Your post must contain at least ' . Settings::getSetting('minPostLength') . ' characters', false, Binds::POST_FORM);
 				}
 			}
 
@@ -84,7 +84,7 @@ class Poster {
 					return Posting::newPost(static::getTopic()->getID());
 				}
 				else if(static::getType() == static::EDIT){
-					Canvas::logNotice('Post Successfully Edited', true);
+					new Message(Message::NOTICE, 'Post Successfully Edited', true);
 
 					return Posting::editPost();
 				}		

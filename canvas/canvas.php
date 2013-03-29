@@ -11,7 +11,7 @@
  * Uses Wires as a framework.
  * Wires is also released under the WTFPL.
  * 
- * @package Wires
+ * @package Canvas
  * @author Andrew Lee
  * @link http://andrewleenj.com
  */
@@ -94,56 +94,98 @@ class Canvas {
 	}
 
 	//Logs an error in the system.
-	public static function logError($error, $persist = false){
-		if(is_string($error)){
-			if(!$persist){
-				static::$errors[] = $error;
-			}
-			else{
-				$_SESSION['notices'][] = $error;
-			}
+	public static function logError($error){
+		if($error instanceof Message){
+			static::$errors[] = $error;
 		}
 	}
 
 	//Returns whether or not there are any errors.
-	public static function hasErrors(){
+	public static function hasErrors($bind = Binds::UNBOUND){
+		$dupe = static::$errors;
+
 		if(!empty($_SESSION['errors'])){
-			static::$errors = array_merge(static::$errors, $_SESSION['errors']);
-			unset($_SESSION['errors']);
+			$dupe = array_merge(static::$errors, $_SESSION['errors']);
 		}
 
-		return !empty(static::$errors);
+		$_SESSION['bind'] = $bind;
+
+		$dupe = array_filter($dupe, function($msg){
+			return $msg->getBind() == $_SESSION['bind'];
+		});
+
+		unset($_SESSION['bind']);
+
+		return count($dupe);
 	}
 
 	//Returns an array containing all errors if any.
-	public static function getErrors(){
-		return static::hasErrors() ? static::$errors : false;
+	public static function getErrors($bind = Binds::UNBOUND){
+		if(static::hasErrors($bind)){
+			$_SESSION['bind'] = $bind;
+
+			if(!empty($_SESSION['errors'])){
+				static::$errors = array_merge(static::$errors, $_SESSION['errors']);
+				unset($_SESSION['errors']);
+			}
+
+			static::$errors = array_filter(static::$errors, function($msg){
+				return $msg->getBind() == $_SESSION['bind'];
+			});
+
+			unset($_SESSION['bind']);
+
+			return static::$errors;
+		}
+
+		return false;
 	}
 
 	//Returns whether or not there are any notices.
-	public static function hasNotices(){		
+	public static function hasNotices($bind = Binds::UNBOUND){
+		$dupe = static::$notices;
+
 		if(!empty($_SESSION['notices'])){
-			static::$notices = array_merge(static::$notices, $_SESSION['notices']);
-			unset($_SESSION['notices']);
+			$dupe = array_merge(static::$notices, $_SESSION['notices']);
 		}
 
-		return !empty(static::$notices);
+		$_SESSION['bind'] = $bind;
+
+		$dupe = array_filter($dupe, function($msg){
+			return $msg->getBind() == $_SESSION['bind'];
+		});
+
+		unset($_SESSION['bind']);
+
+		return count($dupe);
 	}
 
 	//Returns an array containing all notices if any.
-	public static function getNotices(){
-		return static::hasNotices() ? static::$notices : false;
+	public static function getNotices($bind = Binds::UNBOUND){
+		if(static::hasNotices($bind)){
+			$_SESSION['bind'] = $bind;
+
+			if(!empty($_SESSION['notices'])){
+				static::$notices = array_merge(static::$notices, $_SESSION['notices']);
+				unset($_SESSION['notices']);
+			}
+
+			static::$notices = array_filter(static::$notices, function($msg){
+				return $msg->getBind() == $_SESSION['bind'];
+			});
+
+			unset($_SESSION['bind']);
+
+			return static::$notices;
+		}
+
+		return false;
 	}
 
 	//Logs a notice in the system.
-	public static function logNotice($notice, $persist = false){
-		if(is_string($notice)){
-			if(!$persist){
-				static::$notices[] = $notice;
-			}
-			else{
-				$_SESSION['notices'][] = $notice;
-			}
+	public static function logNotice($notice){
+		if($notice instanceof Message){
+			static::$notices[] = $notice;
 		}
 	}
 

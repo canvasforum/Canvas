@@ -11,7 +11,7 @@
  * Uses Wires as a framework.
  * Wires is also released under the WTFPL.
  * 
- * @package Wires
+ * @package Canvas
  * @author Andrew Lee
  * @link http://andrewleenj.com
  */
@@ -47,10 +47,10 @@ class Preferences {
 				$result = Fetcher::getUserByHandle($_POST['email']);
 
 				if($result && $result->getID() != Canvas::getUser()->getID()){
-					Canvas::logError('The email address specified is already in use.');
+					new Message(Message::ERROR, 'The email address specified is already in use.');
 				}
 				else if(!preg_match('#\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b#', $_POST['email'])){
-					Canvas::logError('You must specify a valid email such as janedoe@email.com.');
+					new Message(Message::ERROR, 'You must specify a valid email such as janedoe@email.com.');
 				}
 
 				if(!Canvas::hasErrors()){
@@ -63,7 +63,7 @@ class Preferences {
 						'uid' => Canvas::getUser()->getID()
 					));
 
-					Canvas::logNotice('Your preferences have been successfully updated.');
+					new Message(Message::NOTICE, 'Your preferences have been successfully updated.');
 
 					return true;
 				}
@@ -80,10 +80,10 @@ class Preferences {
 
 					if($hash == $result->password){
 						if($_POST['npassword'] != $_POST['cnpassword']){
-							Canvas::logError('Please make sure both passwords match.');
+							new Message(Message::ERROR, 'Please make sure both passwords match.');
 						}
 						else if(!preg_match('#^[^\s]{5,}$#', $_POST['npassword'])){
-							Canvas::logError('Your password must be at least 5 characters long and may not contain any spaces.');
+							new Message(Message::ERROR, 'Your password must be at least 5 characters long and may not contain any spaces.');
 						}
 
 						if(!Canvas::hasErrors()){
@@ -115,18 +115,18 @@ class Preferences {
 									'uid' => Canvas::getUser()->getID()
 								));
 
-								Canvas::logNotice('Your password has been successfully updated.');
+								new Message(Message::NOTICE, 'Your password has been successfully updated.');
 
 								return true;
 							}
 						}
 					}
 					else{
-						Canvas::logError('Incorrect password specified. Please check your current password and try again.');
+						new Message(Message::ERROR, 'Incorrect password specified. Please check your current password and try again.');
 					}
 				}
 				else{
-					Canvas::logError('You must fill in every field.');
+					new Message(Message::ERROR, 'You must fill in every field.');
 				}
 			}
 			else if(static::getType() == static::PROFILE){

@@ -12,10 +12,10 @@
 			<?php $success = Poster::post(); ?>
 			<?php if($success): ?>
 				<?php Canvas::redirect(Canvas::getBase() . 'topic/' . Poster::getTopic()->getID() . '#' . $success); ?>
-			<?php elseif(Canvas::hasErrors()): ?>
+			<?php elseif(Canvas::hasErrors(Binds::POST_FORM)): ?>
 				<aside id="errors">
-					<?php foreach(Canvas::getErrors() as $error): ?>
-						<span class="error"><?php echo $error; ?></span>
+					<?php foreach(Canvas::getErrors(Binds::POST_FORM) as $error): ?>
+						<span class="error"><?php echo $error->getMessage(); ?></span>
 					<?php endforeach; ?>
 				</aside>
 			<?php endif; ?>

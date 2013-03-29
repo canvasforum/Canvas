@@ -18,7 +18,7 @@
 							<?php if(Canvas::hasErrors()): ?>
 								<aside id="errors">
 									<?php foreach(Canvas::getErrors() as $error): ?>
-										<span class="error"><?php echo $error; ?></span>
+										<span class="error"><?php echo $error->getMessage(); ?></span>
 									<?php endforeach; ?>
 								</aside>
 							<?php endif; ?>

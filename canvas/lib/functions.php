@@ -1,4 +1,21 @@
 <?php
+
+/*
+ * Canvas
+ *
+ * A super simple, super flexible forum.
+ * 
+ * Released under the WTFPL.
+ * http://www.wtfpl.net/
+ * 
+ * Uses Wires as a framework.
+ * Wires is also released under the WTFPL.
+ * 
+ * @package Canvas
+ * @author Andrew Lee
+ * @link http://andrewleenj.com
+ */
+ 
 //The PHP equivalent of Python's all() function.
 function all($arr, $func){
 	foreach($arr as $key => $val){

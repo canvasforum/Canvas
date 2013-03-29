@@ -244,6 +244,8 @@ textarea {
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	border-top: 1px solid #ffb0b0;
+	border-bottom: 1px solid #ffb0b0;
+	margin-bottom: 20px;
 }
 
 #errors span {
@@ -254,8 +256,9 @@ textarea {
 	margin-top: 5px;
 }
 
-#errors + .row {
-	border-top: 1px solid #ffb0b0;
+#errors + .row, #errors + .bodywrap .row {
+	border-top: none;
+	margin-top: -20px;
 }
 
 ul {

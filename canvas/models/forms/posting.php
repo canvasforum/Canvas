@@ -11,7 +11,7 @@
  * Uses Wires as a framework.
  * Wires is also released under the WTFPL.
  * 
- * @package Wires
+ * @package Canvas
  * @author Andrew Lee
  * @link http://andrewleenj.com
  */
@@ -82,12 +82,14 @@ class Posting {
 		$pid = $uri->getArg(3);
 
 		if(!Canvas::hasErrors()){
-			$query = 'UPDATE topics SET name = :name WHERE tid = :tid';
+			if(Form::getInput('name')){
+				$query = 'UPDATE topics SET name = :name WHERE tid = :tid';
 
-			DB::query($query, array(
-				'name' => htmlspecialchars(Form::getInput('name')),
-				'tid' => $tid
-			));
+				DB::query($query, array(
+					'name' => htmlspecialchars(Form::getInput('name')),
+					'tid' => $tid
+				));
+			}
 
 			$query = 'UPDATE posts SET contents = :contents, editedBy = :editedBy, editedOn = :editedOn WHERE pid = :pid';
 

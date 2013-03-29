@@ -11,7 +11,7 @@
  * Uses Wires as a framework.
  * Wires is also released under the WTFPL.
  * 
- * @package Wires
+ * @package Canvas
  * @author Andrew Lee
  * @link http://andrewleenj.com
  */
@@ -53,24 +53,24 @@ class Login {
 							));
 						}
 
-						Canvas::logNotice('You are now logged in. Welcome back.', true);
+						new Message(Message::NOTICE, 'You are now logged in. Welcome back.', true);
 
 						Canvas::redirect(Canvas::getBase());
 					}
 					else{
-						Canvas::logError('An invalid password was specified.');
+						new Message(Message::ERROR, 'An invalid password was specified.');
 
 						return false;
 					}
 				}
 				else{
-					Canvas::logError('The specified user does not exist.');
+					new Message(Message::ERROR, 'The specified user does not exist.');
 
 					return false;
 				}
 			}
 			else{
-				Canvas::logError('Please specify a username or email and a password.');
+				new Message(Message::ERROR, 'Please specify a username or email and a password.');
 
 				return false;
 			}

@@ -11,7 +11,7 @@
  * Uses Wires as a framework.
  * Wires is also released under the WTFPL.
  * 
- * @package Wires
+ * @package Canvas
  * @author Andrew Lee
  * @link http://andrewleenj.com
  */
@@ -43,34 +43,34 @@ class Register {
 				$result = Fetcher::getUserByHandle($_POST['email']);
 
 				if($result){
-					Canvas::logError('The email address specified is already in use.');
+					new Message(Message::ERROR, 'The email address specified is already in use.');
 				}
 				else if(!preg_match('#\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b#', $_POST['email'])){
-					Canvas::logError('You must specify a valid email such as janedoe@email.com.');
+					new Message(Message::ERROR, 'You must specify a valid email such as janedoe@email.com.');
 				}
 
 				$result = Fetcher::getUserByHandle($_POST['username']);
 
 				if($result){
-					Canvas::logError('The username specified is already in use.');
+					new Message(Message::ERROR, 'The username specified is already in use.');
 				}
 				else if(!preg_match('#\b[a-zA-Z0-9]+\b#', $_POST['username'])){
-					Canvas::logError('Your username may only contain letters and numbers');
+					new Message(Message::ERROR, 'Your username may only contain letters and numbers');
 				}
 
 				if($_POST['password'] != $_POST['passwordVal']){
-					Canvas::logError('Please make sure both passwords match.');
+					new Message(Message::ERROR, 'Please make sure both passwords match.');
 				}
 				else if(!preg_match('#^[^\s]{5,}$#', $_POST['password'])){
-					Canvas::logError('Your password must be at least 5 characters long and may not contain any spaces.');
+					new Message(Message::ERROR, 'Your password must be at least 5 characters long and may not contain any spaces.');
 				}
 
 				if($_POST['captcha'] != $_SESSION['captcha']){
-					Canvas::logError('Please make sure you enter the captcha correctly.');
+					new Message(Message::ERROR, 'Please make sure you enter the captcha correctly.');
 				}
 
 				if(!$_POST['tos']){
-					Canvas::logError('Please agree to the terms and conditions.');
+					new Message(Message::ERROR, 'Please agree to the terms and conditions.');
 				}
 
 				if(!Canvas::hasErrors()){
@@ -101,13 +101,13 @@ class Register {
 						'ip' => $ip
 					));
 
-					Canvas::logNotice('Thanks. You are now registered and logged in.', true);
+					new Message(Message::NOTICE, 'Thanks. You are now registered and logged in.', true);
 
 					Canvas::redirect(Canvas::getBase());	
 				}
 			}
 			else{
-				Canvas::logError('Please fill out all the fields.');
+				new Message(Message::ERROR, 'Please fill out all the fields.');
 
 				return false;
 			}
