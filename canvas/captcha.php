@@ -1,12 +1,15 @@
 <?php
 
 /**
- * Wires
+ * Canvas
  *
- * A super simple, super flexible framework built for lightning fast development.
+ * A super simple, super flexible forum.
  * 
  * Released under the WTFPL.
  * http://www.wtfpl.net/
+ * 
+ * Uses Wires as a framework.
+ * Wires is also released under the WTFPL.
  * 
  * @package Wires
  * @author Andrew Lee

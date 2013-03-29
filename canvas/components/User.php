@@ -90,7 +90,7 @@ class User {
 	
 	//Returns the gravatar URL for the user.
 	public function getGravatar($size = 100){
-		return 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?s=' . $size;
+		return 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?d=identicon&s=' . $size;
 	}
 
 	//Returns the user's designated timezone.
