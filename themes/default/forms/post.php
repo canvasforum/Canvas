@@ -11,7 +11,7 @@
 			</header>
 			<?php $success = Poster::post(); ?>
 			<?php if($success): ?>
-				<?php Canvas::redirect(Canvas::getBase() . 'topic/' . $success); ?>
+				<?php Canvas::redirect(Canvas::getBase() . 'topic/' . Poster::getTopic()->getID() . '#' . $success); ?>
 			<?php elseif(Canvas::hasErrors()): ?>
 				<aside id="errors">
 					<?php foreach(Canvas::getErrors() as $error): ?>

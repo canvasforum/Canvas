@@ -52,13 +52,18 @@ class Form {
 		return $html;
 	}
 
+	//Returns whether or not an input field was posted.
+	public static function used($field){
+		return isset($_POST[$field]);
+	}
+
 	//Returns the value of a posted form element.
 	public static function getInput($field){
-		if(isset($_POST[$field])){
+		if(!empty($_POST[$field])){
 			return $_POST[$field];
 		}
 		else{
-			return '';
+			return false;
 		}
 	}
 }

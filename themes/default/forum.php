@@ -17,6 +17,7 @@ $forum = Canvas::getForum();
 	<body>
 		<?php include 'includes/header.php'; ?>
 		<section id="wrapper">
+			<?php include 'includes/notes.php'; ?>
 			<?php if($forum): ?>
 				<section class="wrap">
 					<div class="innerwrap">

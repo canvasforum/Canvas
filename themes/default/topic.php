@@ -1,10 +1,6 @@
 <?php
 //Always a good idea to cache our results to save time.
 $topic = Canvas::getTopic();
-
-if($topic){
-	$first = $topic->getFirstPost();
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,48 +17,10 @@ if($topic){
 	<body>
 		<?php include 'includes/header.php'; ?>
 		<section id="wrapper">
+			<?php include 'includes/notes.php'; ?>
 			<?php if($topic): ?>
-				<section class="postwrap" id="firstpost">
-					<aside class="userinfo">
-						<img class="avatar" src="<?php echo $first->getAuthor()->getGravatar(90); ?>" />
-						<span class="postauthor">
-							<?php echo $first->getAuthor()->getUsername(); ?>
-						</span>
-					</aside>
-					<section class="wrap">
-						<div class="innerwrap">
-							<header>
-								<h3><?php echo $topic->getName(); ?></h3>
-							</header>
-							<aside class="clear postinfo">
-								<span class="left">
-									<time>Posted on <?php echo $first->getPostDate('%B %d, %Y at %#I:%M %p'); ?>.</time>
-								</span>
-								<span class="right postbuttons">
-									<?php if(Canvas::loggedIn()): ?>
-										<?php if($first->canEdit()): ?>
-											<span>
-												<a title="Edit Post" href="<?php echo $first->getEditURL(); ?>" class="icon-pencil editpost"></a>
-											</span>
-										<?php endif; ?>
-									<?php endif; ?>
-								</span>
-							</aside>
-							<section class="bodywrap">
-								<article class="row post">
-									<?php echo Markdown($first->getContents()); ?>
-								</article>
-								<?php if($first->isEdited()): ?>
-									<aside class="row postedit">
-										<time>Edited by <?php echo $first->getEditedBy()->getUsername(); ?> on <?php echo $first->getEditDate('%B %d, %Y at %#I:%M %p'); ?>.</time>
-									</aside>
-								<?php endif; ?>
-							</section>
-						</div>
-					</section>
-				</section>
 				<?php foreach($topic->getPosts() as $post): ?>
-					<section class="postwrap">
+					<section class="postwrap" id="<?php echo $post->getID(); ?>">
 						<aside class="userinfo">
 							<img class="avatar" src="<?php echo $post->getAuthor()->getGravatar(90); ?>" />
 							<span class="postauthor">
@@ -71,6 +29,11 @@ if($topic){
 						</aside>
 						<section class="wrap">
 							<div class="innerwrap">
+								<?php if($post->isFirstPost()): ?>
+									<header>
+										<h3><?php echo $topic->getName(); ?></h3>
+									</header>
+								<?php endif; ?>
 								<aside class="clear postinfo">
 									<span class="left">
 										<time>Posted on <?php echo $post->getPostDate('%B %d, %Y at %#I:%M %p'); ?>.</time>
@@ -79,7 +42,12 @@ if($topic){
 										<?php if(Canvas::loggedIn()): ?>
 											<?php if($post->canEdit()): ?>
 												<span>
-													<a title="Edit Post" href="<?php echo $post->getEditURL(); ?>" class="icon-pencil editpost"></a>
+													<a title="Edit Post" href="<?php echo $post->getEditURL(); ?>" class="icon-pencil"></a>
+												</span>
+											<?php endif; ?>
+											<?php if($post->canDelete()): ?>
+												<span>
+													<a title="Delete Post" href="<?php echo $post->getDeleteURL(); ?>" class="icon-remove"></a>
 												</span>
 											<?php endif; ?>
 										<?php endif; ?>

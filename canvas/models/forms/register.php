@@ -18,11 +18,12 @@
 
 use \Wires\Database\DB as DB;
 use \Wires\Routing\URI as URI;
+use \Wires\Routing\Response as Response;
 
 class Register {
 	//Attempts to log the user in. Returns false if the log in failed.
 	public static function attempt(){
-		if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == 'POST'){
+		if(Response::isPost()){
 			$uri = new URI();
 
 			$required = array(
@@ -99,6 +100,8 @@ class Register {
 						'lastLoginDate' => date('Y-m-d H:i:s'),
 						'ip' => $ip
 					));
+
+					Canvas::logNotice('Thanks. You are now registered and logged in.', true);
 
 					Canvas::redirect(Canvas::getBase());	
 				}

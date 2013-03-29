@@ -31,7 +31,7 @@ class Route {
 
 	//Checks to see if the URI provided matches this route's URI.
 	public function match($uri){
-		if($this->wildcard){
+		if($this->wildcard){		
 			$regex = $this->uri;
 			$regex = preg_replace('/\*/', '.+?', $regex);
 			$regex .= '/.*';

@@ -239,7 +239,7 @@ textarea {
 #errors {
 	background: #ffcfcf;
 	color: #e06f6f;
-	padding: 8px 12px;
+	padding: 8px 16px;
 	width: 100%;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -411,6 +411,10 @@ header + .postinfo {
 	border-top: 1px solid #d3d3d3;
 }
 
+.postbuttons span + span {
+	margin-left: 8px;
+}
+
 .postbuttons a {
 	color: #989898;
 }
@@ -433,7 +437,7 @@ header + .postinfo {
 	border-top: 1px solid #a1c2f3;
 	border-bottom: 1px solid #a1c2f3;
 	color: #83a9df;
-	padding: 8px 12px;
+	padding: 8px 16px;
 	width: 100%;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;

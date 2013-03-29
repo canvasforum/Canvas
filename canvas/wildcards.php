@@ -20,6 +20,7 @@ return array(
 	'forum',
 	'topic',
 	'post',
-	'preferences'
+	'preferences',
+	'delete'
 );
 ?>

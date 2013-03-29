@@ -9,9 +9,8 @@
 					</span>
 				</div>
 			</header>
-			<?php $success = Poster::post(); ?>
-			<?php if($success): ?>
-				<?php Canvas::redirect(Canvas::getBase() . 'topic/' . $success); ?>
+			<?php if(Poster::post()): ?>
+				<?php Canvas::redirect(Canvas::getBase() . 'topic/' . Poster::getTopic()->getID() . '#' . Poster::getPost()->getID()); ?>
 			<?php elseif(Canvas::hasErrors()): ?>
 				<aside id="errors">
 					<?php foreach(Canvas::getErrors() as $error): ?>

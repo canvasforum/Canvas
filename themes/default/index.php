@@ -7,6 +7,7 @@
 	<body>
 		<?php include 'includes/header.php'; ?>
 		<section id="wrapper">
+			<?php include 'includes/notes.php'; ?>
 			<?php foreach(Canvas::getCategories() as $category): ?>
 				<section class="wrap">
 					<div class="innerwrap">

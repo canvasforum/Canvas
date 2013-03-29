@@ -15,13 +15,7 @@
 					</header>
 					<section class="bodywrap">
 						<?php if(!Canvas::loggedIn() && !Register::attempt()): ?>
-							<?php if(Canvas::hasErrors()): ?>
-								<aside id="errors">
-									<?php foreach(Canvas::getErrors() as $error): ?>
-										<span class="error"><?php echo $error; ?></span>
-									<?php endforeach; ?>
-								</aside>
-							<?php endif; ?>
+							<?php include 'includes/notes.php'; ?>
 							<article class="row">
 								<p>All fields are required. You will be able to customize your profile further after registering.</p>
 							</article>

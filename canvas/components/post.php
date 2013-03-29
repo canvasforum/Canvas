@@ -93,13 +93,45 @@ class Post {
 		return ($parent->getFirstPost()->getID() == $this->pid);
 	}
 
-	//Returns whether or not this post can be edited by the current use.
+	//Returns whether or not the current user is the author of this post.
+	public function isAuthor(){
+		return $this->author->getID() == Canvas::getUser()->getID();
+	}
+
+	//Returns whether or not this post can be edited by the current user.
 	public function canEdit(){
-		$isAuthor = ($this->author->getID() == Canvas::getUser()->getID());
+		$isAuthor = static::isAuthor();
 		$canEditOwn = Canvas::getUser()->hasPermission(Permissions::EDIT_OWN_POSTS);
 		$canEditOthers = Canvas::getUser()->hasPermission(Permissions::EDIT_OTHER_POSTS);
 
 		return $isAuthor && $canEditOwn || !$isAuthor && $canEditOthers;
+	}
+
+	//Returns whether or not this post can be deleted by the current user.
+	public function canDelete(){
+		$isAuthor = static::isAuthor();
+		$canDeleteOwn = Canvas::getUser()->hasPermission(Permissions::DELETE_OWN_POSTS);
+		
+		if($isAuthor && $canDeleteOwn){
+			return true;
+		}
+		else{
+			if(!$isAuthor){
+				return Canvas::getUser()->hasPermission(Permissions::DELETE_OTHER_POSTS);
+			}
+		}
+
+		return false;
+	}
+
+	//Returns the URL at which this post can be deleted.
+	public function getDeleteURL(){
+		if($this->isFirstPost()){
+			return Canvas::getBase() . 'delete/topic/' . $this->tid;
+		}
+		else{
+			return Canvas::getBase() . 'delete/post/' . $this->pid;
+		}
 	}
 
 	//Returns the URL at which this post can be edited.

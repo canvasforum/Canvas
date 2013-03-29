@@ -15,8 +15,6 @@
  * @author Andrew Lee
  * @link http://andrewleenj.com
  */
- 
-require 'lib/markdown.php';
 
 if(isset($_POST['contents'])){
 	echo Markdown(htmlspecialchars($_POST['contents']));

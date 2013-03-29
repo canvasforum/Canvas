@@ -28,11 +28,12 @@ class Permissions {
 	const CLOSE_TOPIC = 256;
 	const DELETE_OWN_POSTS = 512;
 	const EDIT_OTHER_POSTS = 1024;
-	const MOVE_TOPICS = 2048;
-	const MERGE_TOPICS = 4096;
-	const WARN_USERS = 8192;
-	const BAN_USERS = 16384;
-	const ADMIN_PANEL = 32768;
+	const DELETE_OTHER_POSTS = 2048;
+	const MOVE_TOPICS = 4096;
+	const MERGE_TOPICS = 8192;
+	const WARN_USERS = 16384;
+	const BAN_USERS = 32768;
+	const ADMIN_PANEL = 65536;
 
 	private $permissions;
 

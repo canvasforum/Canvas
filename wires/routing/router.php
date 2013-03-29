@@ -88,7 +88,13 @@ class Router {
 				}
 			}
 			else{
-				$route = new Route($dir, $syspath, true);
+				$path = explode(DS, $syspath);
+				$fname = Arr::lastElement($path);
+
+				//Remove the file extension.
+				$fname = preg_replace('/\.[a-z]{2,4}/', '', $fname);
+
+				$route = new Route($fname, $syspath, false);
 				static::$routes[] = $route;
 			}
 		}

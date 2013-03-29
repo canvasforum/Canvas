@@ -27,7 +27,7 @@
 			<input type="email" name="email" value="<?php echo Canvas::getUser()->getEmail(); ?>" required />
 		</div>
 		<div>
-			<label>Timezone</label>
+			<label>Location</label>
 			<?php echo Preferences::buildTimeSelect(); ?>
 		</div>
 		<div>

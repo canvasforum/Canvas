@@ -18,11 +18,12 @@
 
 use \Wires\Database\DB as DB;
 use \Wires\Routing\URI as URI;
+use \Wires\Routing\Response as Response;
 
 class Login {
 	//Attempts to log the user in. Returns false if the log in failed.
 	public static function attempt(){
-		if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == 'POST'){
+		if(Response::isPost()){
 			$uri = new URI();
 
 			if($uri->getArg(0) == 'login' && isset($_POST['handle'], $_POST['password'], $_POST['sub'])){
@@ -50,7 +51,9 @@ class Login {
 								'uid' => $result->uid,
 								'key' => $key
 							));
-						}						
+						}
+
+						Canvas::logNotice('You are now logged in. Welcome back.', true);
 
 						Canvas::redirect(Canvas::getBase());
 					}

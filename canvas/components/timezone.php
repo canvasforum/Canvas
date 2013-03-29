@@ -32,41 +32,20 @@ class Timezone {
 
 	public static function buildSelect($selected){
 		$select = '<select name="timezone">';
-
-		$utc = new DateTimeZone('UTC');
-		$c = new DateTime('now', $utc);
-		$selected = new DateTimeZone($selected);
-
-		$neg = array();
-		$pos = array();
+		$zones = array();
 
 		foreach(DateTimeZone::listIdentifiers() as $zone){
-			$cz = new DateTimeZone($zone);
-			$offset =  static::getOffset($c, $cz);
+			$disp = preg_replace('#_#', ' ', $zone);
 
-			if(!in_array($offset, $neg) && !in_array($offset, $pos)){
-				if($offset[0] == '-'){
-					$neg[$offset] = $zone;
-				}
-				else{
-					$pos[$offset] = $zone;
-				}
-			}
+			$zones[$disp] = $zone;
 		}
 
-		krsort($neg);
-		ksort($pos);
+		ksort($zones);
 
-		foreach($neg as $offset => $zone){
-			$selects = $offset == static::getOffset($c, $selected) ? ' selected' : '';
+		foreach($zones as $disp => $zone){
+			$selects = $zone == $selected ? ' selected' : '';
 
-			$select .= '<option value="' . $zone . '"' . $selects . '>GMT ' . $offset . ' Hours</option>';
-		}
-
-		foreach($pos as $offset => $zone){
-			$selects = $offset == static::getOffset($c, $selected) ? ' selected' : '';
-
-			$select .= '<option value="' . $zone . '"' . $selects . '>GMT ' . $offset . ' Hours</option>';
+			$select .= '<option value="' . $zone . '"' . $selects . '>' . $disp . '</option>';
 		}
 
 		$select .= '</select>';

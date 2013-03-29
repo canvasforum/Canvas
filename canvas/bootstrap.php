@@ -32,6 +32,7 @@ Router::load($paths);
 $theme = THEMES . Configuration::get('theme') . DS;
 
 Router::load(array('' => $theme));
+Router::load(APP . 'preview.php');
 Router::setBase(Configuration::get('theme'));
 
 //Load all templating functions.

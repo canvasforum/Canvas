@@ -1,6 +1,6 @@
 $(function(){
 	$('#head_buttons #preview').click(function(){
-		$.post(Canvas.BASE + 'canvas/preview.php', {
+		$.post(Canvas.BASE + 'preview', {
 			'contents': $('textarea[name=contents]').val()
 		}, function(Q){
 			$('#preview_post').show().html(Q);

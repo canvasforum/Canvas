@@ -94,14 +94,24 @@ class Canvas {
 	}
 
 	//Logs an error in the system.
-	public static function logError($error){
+	public static function logError($error, $persist = false){
 		if(is_string($error)){
-			static::$errors[] = $error;
+			if(!$persist){
+				static::$errors[] = $error;
+			}
+			else{
+				$_SESSION['notices'][] = $error;
+			}
 		}
 	}
 
 	//Returns whether or not there are any errors.
 	public static function hasErrors(){
+		if(!empty($_SESSION['errors'])){
+			static::$errors = array_merge(static::$errors, $_SESSION['errors']);
+			unset($_SESSION['errors']);
+		}
+
 		return !empty(static::$errors);
 	}
 
@@ -111,7 +121,12 @@ class Canvas {
 	}
 
 	//Returns whether or not there are any notices.
-	public static function hasNotices(){
+	public static function hasNotices(){		
+		if(!empty($_SESSION['notices'])){
+			static::$notices = array_merge(static::$notices, $_SESSION['notices']);
+			unset($_SESSION['notices']);
+		}
+
 		return !empty(static::$notices);
 	}
 
@@ -121,9 +136,14 @@ class Canvas {
 	}
 
 	//Logs a notice in the system.
-	public static function logNotice($notice){
+	public static function logNotice($notice, $persist = false){
 		if(is_string($notice)){
-			static::$notices[] = $notice;
+			if(!$persist){
+				static::$notices[] = $notice;
+			}
+			else{
+				$_SESSION['notices'][] = $notice;
+			}
 		}
 	}
 
