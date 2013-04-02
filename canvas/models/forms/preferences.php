@@ -142,11 +142,11 @@ class Preferences {
 						'val' => $val,
 						'uid' => Canvas::getUser()->getID()
 					));
-
-					new Message(Message::NOTICE, 'Your profile has been successfully updated.');
-
-					return true;
 				}
+
+				new Message(Message::NOTICE, 'Your profile has been successfully updated.');
+
+				return true;
 			}
 		}
 
