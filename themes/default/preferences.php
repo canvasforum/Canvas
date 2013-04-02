@@ -36,9 +36,7 @@
 							<?php elseif(Preferences::getType() == Preferences::PASSWORD): ?>
 								<?php include 'forms/preferences_pass.php'; ?>
 							<?php elseif(Preferences::getType() == Preferences::PROFILE): ?>
-								<article class="row">
-									Be patient. This will come soon. :)
-								</article>
+								<?php include 'forms/preferences_profile.php'; ?>
 							<?php endif; ?>
 						</section>
 					</section>

@@ -21,6 +21,7 @@ return array(
 	'topic',
 	'post',
 	'preferences',
-	'delete'
+	'delete',
+	'profile'
 );
 ?>

@@ -17,24 +17,20 @@
 <?php endif; ?>
 <article class="row">
 	<form method="POST" action="<?php echo Canvas::getURL(); ?>">
+		<?php foreach(Profile::getFields() as $field): ?>
+			<div>
+				<label>
+					<?php echo $field->label; ?>
+				</label>
+				<?php if($field->type == 'varchar'): ?>
+					<input type="text" name="<?php echo $field->name; ?>" value="<?php echo Canvas::getUser()->getProfile()->getField($field->name); ?>" maxlength="255" />
+				<?php else: ?>
+					<textarea name="<?php echo $field->name; ?>"><?php echo Canvas::getUser()->getProfile()->getField($field->name); ?></textarea>
+				<?php endif; ?>
+			</div>
+		<?php endforeach; ?>
 		<div>
-			<label>Current Password</label>
-			<input type="password" name="cpassword" autocomplete="off" maxlength="255" required />
-		</span>
-		</div>
-		<div>
-			<label>New Password</label>
-			<input type="password" name="npassword" autocomplete="off" maxlength="255" required />
-		</div>
-		<div>
-			<label>Confirm New Password</label>
-			<input type="password" name="cnpassword" autocomplete="off" maxlength="255" required />
-		</div>
-		<div>
-			<span>
-				<input type="submit" value="Save Changes" />
-				<input type="checkbox" id="reveal" title="Having trouble typing your password?" /> Show Password
-			</span>
+			<input type="submit" value="Save Changes" />
 		</div>
 	</form>
 </article>

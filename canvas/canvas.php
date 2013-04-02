@@ -40,6 +40,11 @@ class Canvas {
 		return Fetcher::getUser($id);
 	}
 
+	//Returns a user's profile.
+	public static function getProfile($id){
+		return Fetcher::getProfile($id);
+	}
+
 	//Returns the forum object for the forum currently being viewed.
 	public static function getForum($fid = -1){
 		return Fetcher::getForum($fid);

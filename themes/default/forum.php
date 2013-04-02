@@ -1,13 +1,9 @@
-<?php
-//Always a good idea to cache our results to save time.
-$forum = Canvas::getForum();
-?>
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>
-			<?php if($forum): ?>
-				<?php echo $forum->getName(); ?>
+			<?php if(Canvas::getForum()): ?>
+				<?php echo Canvas::getForum()->getName(); ?>
 			<?php else: ?>
 				Forum Not Found
 			<?php endif; ?>
@@ -18,22 +14,22 @@ $forum = Canvas::getForum();
 		<?php include 'includes/header.php'; ?>
 		<section id="wrapper">
 			<?php include 'includes/notes.php'; ?>
-			<?php if($forum): ?>
+			<?php if(Canvas::getForum()): ?>
 				<section class="wrap">
 					<div class="innerwrap">
 						<header>
-							<h3><?php echo $forum->getName(); ?></h3>
+							<h3><?php echo Canvas::getForum()->getName(); ?></h3>
 							<div id="head_buttons">
 								<?php if(Canvas::loggedIn()): ?>
 									<?php if(Canvas::getUser()->hasPermission(Permissions::POST_TOPICS)): ?>
-										<span><a href="<?php echo Canvas::getBase(); ?>post/topic/<?php echo $forum->getID(); ?>" title="New Topic" class="icon-pencil"></a></span>
+										<span><a href="<?php echo Canvas::getBase(); ?>post/topic/<?php echo Canvas::getForum()->getID(); ?>" title="New Topic" class="icon-pencil"></a></span>
 									<?php endif; ?>
 								<?php endif; ?>
 							</div>
 						</header>
 						<section class="bodywrap">
-							<?php if(count($forum->getTopics())): ?>
-								<?php foreach($forum->getTopics() as $topic): ?>
+							<?php if(count(Canvas::getForum()->getTopics())): ?>
+								<?php foreach(Canvas::getForum()->getTopics() as $topic): ?>
 									<article class="row">
 										<header>
 											<a href="<?php echo Canvas::getBase(); ?>topic/<?php echo $topic->getID(); ?>">
@@ -41,7 +37,11 @@ $forum = Canvas::getForum();
 											</a>
 										</header>
 										<aside>
-											<span>Started by <?php echo $topic->getAuthor()->getUsername(); ?> on <?php echo $topic->getStartDate('%B %d, %Y at %#I:%M %p'); ?>.</span>
+											<time>
+												Started by
+												 <a href="<?php echo $topic->getAuthor()->getProfileURL(); ?>"><?php echo $topic->getAuthor()->getUsername(); ?></a>
+												 on <?php echo $topic->getStartDate('%B %d, %Y at %#I:%M %p'); ?>.
+											</time>
 										</aside>
 									</article>
 								<?php endforeach; ?>

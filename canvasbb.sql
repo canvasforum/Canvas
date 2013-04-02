@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2013 at 06:25 PM
+-- Generation Time: Apr 03, 2013 at 12:57 AM
 -- Server version: 5.5.27-log
 -- PHP Version: 5.4.7
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `autologin` (
   `uid` int(6) NOT NULL,
   `userkey` varchar(256) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -44,6 +44,14 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`) VALUES
+(1, 'First Category'),
+(2, 'Second Category');
 
 -- --------------------------------------------------------
 
@@ -61,6 +69,15 @@ CREATE TABLE IF NOT EXISTS `forums` (
   UNIQUE KEY `fid` (`fid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
+--
+-- Dumping data for table `forums`
+--
+
+INSERT INTO `forums` (`id`, `fid`, `cid`, `name`, `description`) VALUES
+(1, 978477, 1, 'First Forum', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque rutrum dignissim nisi ut feugiat. Fusce id laoreet dolor.'),
+(2, 233054, 1, 'Second Forum', 'So what do you guys think of this so far?'),
+(3, 121872, 2, 'Another Forum', 'Hello World!');
+
 -- --------------------------------------------------------
 
 --
@@ -73,6 +90,15 @@ CREATE TABLE IF NOT EXISTS `groups` (
   `permissions` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `groups`
+--
+
+INSERT INTO `groups` (`id`, `name`, `permissions`) VALUES
+(1, 'Administrator', 131071),
+(2, 'Moderator', 65535),
+(3, 'Member', 127);
 
 -- --------------------------------------------------------
 
@@ -90,7 +116,44 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `editedBy` int(6) NOT NULL,
   `editedOn` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=60 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=78 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `profilefields`
+--
+
+CREATE TABLE IF NOT EXISTS `profilefields` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `label` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `profilefields`
+--
+
+INSERT INTO `profilefields` (`id`, `name`, `label`, `type`) VALUES
+(1, 'about', 'About', 'text'),
+(2, 'website', 'Website', 'varchar'),
+(3, 'location', 'Location', 'varchar');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `profiles`
+--
+
+CREATE TABLE IF NOT EXISTS `profiles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(6) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `value` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
 -- --------------------------------------------------------
 
@@ -127,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `topics` (
   `startDate` datetime NOT NULL,
   `updateDate` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
 
 -- --------------------------------------------------------
 
@@ -146,11 +209,11 @@ CREATE TABLE IF NOT EXISTS `users` (
   `regDate` datetime NOT NULL,
   `lastLoginDate` datetime NOT NULL,
   `ip` int(11) NOT NULL,
-  `groupId` int(11) NOT NULL DEFAULT '4',
+  `groupId` int(11) NOT NULL DEFAULT '3',
   `timezone` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uid` (`uid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

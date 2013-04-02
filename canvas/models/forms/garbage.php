@@ -17,8 +17,6 @@
  */
 
 use \Wires\Database\DB as DB;
-use \Wires\Routing\URI as URI;
-use \Wires\Routing\Response as Response;
 
 class Garbage {
 	public static function removeTopic($tid){

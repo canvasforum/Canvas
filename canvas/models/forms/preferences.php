@@ -130,7 +130,23 @@ class Preferences {
 				}
 			}
 			else if(static::getType() == static::PROFILE){
+				foreach($_POST as $name => $val){
+					$query = 'INSERT INTO profiles (uid, name, value) VALUES (:uid, :name, :val)';
 
+					if(!is_null(Canvas::getUser()->getProfile()->getField($name))){
+						$query = 'UPDATE profiles SET value = :val WHERE uid = :uid AND name = :name';
+					}
+
+					DB::query($query, array(
+						'name' => $name,
+						'val' => $val,
+						'uid' => Canvas::getUser()->getID()
+					));
+
+					new Message(Message::NOTICE, 'Your profile has been successfully updated.');
+
+					return true;
+				}
 			}
 		}
 

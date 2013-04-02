@@ -138,5 +138,10 @@ class Post {
 	public function getEditURL(){
 		return Canvas::getBase() . 'post/edit/' . $this->tid . '/' . $this->pid;
 	}
+
+	//Returns the URL at which this post can be found.
+	public function getURL(){
+		return Canvas::getBase() . 'topic/' . $this->tid . '#' . $this->pid;
+	}
 }
 ?>

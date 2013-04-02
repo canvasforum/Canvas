@@ -28,6 +28,8 @@ class User {
 	private $groupId;
 	private $group;
 	private $timezone;
+	private $profile;
+	private $posts;
 
 	public function __construct(){
 		$this->ip = long2ip($this->ip);
@@ -96,6 +98,33 @@ class User {
 	//Returns the user's designated timezone.
 	public function getTImezone(){
 		return $this->timezone;
+	}
+
+	//Returns the user's profile.
+	public function getProfile(){
+		if(is_null($this->profile)){
+			$this->profile = new Profile($this->uid);
+		}
+
+		return $this->profile;
+	}
+
+	//Returns the profile URL for this user.
+	public function getProfileURL(){
+		return Canvas::getBase() . 'profile/' . $this->uid;
+	}
+
+	//Returns all posts made by this user. Sorted in reverse chronological order.
+	public function getPosts($limit = -1){
+		if(is_null($this->posts)){
+			$this->posts = Fetcher::getPostsByAuthor($this->uid);
+		}
+
+		if($limit != -1){
+			return array_splice($this->posts, 0, $limit);
+		}
+
+		return $this->posts;
 	}
 }
 ?>

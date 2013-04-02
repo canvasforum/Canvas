@@ -19,15 +19,15 @@
 	<form method="POST" action="<?php echo Canvas::getURL(); ?>">
 		<div>
 			<label>Name</label>
-			<input type="text" name="name" value="<?php echo Canvas::getUser()->getName(); ?>"/>
+			<input type="text" name="name" value="<?php echo Canvas::getUser()->getName(); ?>" maxlength="255" />
 		</span>
 		</div>
 		<div>
 			<label>Email Address</label>
-			<input type="email" name="email" value="<?php echo Canvas::getUser()->getEmail(); ?>" required />
+			<input type="email" name="email" value="<?php echo Canvas::getUser()->getEmail(); ?>" maxlength="255" required />
 		</div>
 		<div>
-			<label>Location</label>
+			<label>Timezone</label>
 			<?php echo Preferences::buildTimeSelect(); ?>
 		</div>
 		<div>

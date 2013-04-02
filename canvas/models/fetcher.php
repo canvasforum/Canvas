@@ -23,6 +23,8 @@ use \Wires\Routing\URI as URI;
 class Fetcher {
 	private static $categories = null;
 	private static $user = null;
+	private static $forum = null;
+	private static $topic = null;
 
 	//Returns all forum categories as an array.
 	public static function getCategories(){
@@ -69,7 +71,13 @@ class Fetcher {
 
 	//Returns the forum object for the forum currently being viewed.
 	public static function getForum($fid = -1){
-		$fid = $fid == -1 ? Canvas::getID() : $fid;
+		if($fid == -1){
+			if(is_null(static::$forum)){
+				static::$forum = static::getForum(Canvas::getID());
+			}
+
+			return static::$forum;
+		}
 
 		$query = 'SELECT fid, name, description FROM forums WHERE fid = :fid LIMIT 1';
 
@@ -81,8 +89,14 @@ class Fetcher {
 
 	//Returns the topic object for the topic currently being viewed.
 	public static function getTopic($tid = -1){
-		$tid = $tid == -1 ? Canvas::getID() : $tid;
-		
+		if($tid == -1){
+			if(is_null(static::$topic)){
+				static::$topic = static::getTopic(Canvas::getID());
+			}
+
+			return static::$topic;
+		}
+
 		$query = 'SELECT tid, fid, name, author, startDate FROM topics WHERE tid = :tid LIMIT 1';
 
 		$result = DB::queryObj($query, array('tid' => $tid));
@@ -101,6 +115,15 @@ class Fetcher {
 		$result->setFetchMode(PDO::FETCH_CLASS, 'Post');
 
 		return $result->fetch();
+	}
+
+	//Returns all posts made by the user specified.
+	public static function getPostsByAuthor($uid){
+		$query = 'SELECT tid, pid, author, contents, postDate, editedBy, editedOn FROM posts WHERE author = :uid ORDER BY id DESC';
+
+		$results = DB::queryObj($query, array('uid' => $uid));
+
+		return $results->fetchAll(PDO::FETCH_CLASS, 'Post');
 	}
 
 	//Returns the UID of the user whose auto login key matches the one specified.
@@ -127,6 +150,29 @@ class Fetcher {
 		$result->setFetchMode(PDO::FETCH_CLASS, 'Group');
 
 		return $result->fetch();
+	}
+
+	//Returns a user's profile.
+	public static function getProfile($id){
+		$query = 'SELECT * FROM profiles WHERE uid = :uid';
+
+		$result = DB::query($query, array('uid' => $id), PDO::FETCH_OBJ);
+
+		foreach($result as $key => $val){
+			$result[$val->name] = $val;
+			unset($result[$key]);
+		}
+
+		return $result;
+	}
+
+	//Returns all profile fields available.
+	public static function getProfileFields(){
+		$query = 'SELECT name, label, type FROM profilefields ORDER BY id ASC';
+
+		$results = DB::query($query, null, PDO::FETCH_OBJ);
+
+		return $results;
 	}
 }
 ?>

@@ -1,13 +1,9 @@
-<?php
-//Always a good idea to cache our results to save time.
-$topic = Canvas::getTopic();
-?>
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>
-			<?php if($topic): ?>
-				<?php echo $topic->getName(); ?>
+			<?php if(Canvas::getTopic()): ?>
+				<?php echo Canvas::getTopic()->getName(); ?>
 			<?php else: ?>
 				Topic Not Found
 			<?php endif; ?>
@@ -18,20 +14,23 @@ $topic = Canvas::getTopic();
 		<?php include 'includes/header.php'; ?>
 		<section id="wrapper">
 			<?php include 'includes/notes.php'; ?>
-			<?php if($topic): ?>
-				<?php foreach($topic->getPosts() as $post): ?>
+			<?php if(Canvas::getTopic()): ?>
+				<?php foreach(Canvas::getTopic()->getPosts() as $post): ?>
 					<section class="postwrap" id="<?php echo $post->getID(); ?>">
 						<aside class="userinfo">
 							<img class="avatar" src="<?php echo $post->getAuthor()->getGravatar(90); ?>" />
-							<span class="postauthor">
+							<a href="<?php echo $post->getAuthor()->getProfileURL(); ?>" class="postauthor">
 								<?php echo $post->getAuthor()->getUsername(); ?>
+							</a>
+							<span>
+								<?php echo $post->getAuthor()->getGroup()->getName(); ?>
 							</span>
 						</aside>
 						<section class="wrap">
 							<div class="innerwrap">
 								<?php if($post->isFirstPost()): ?>
 									<header>
-										<h3><?php echo $topic->getName(); ?></h3>
+										<h3><?php echo Canvas::getTopic()->getName(); ?></h3>
 									</header>
 								<?php endif; ?>
 								<aside class="clear postinfo">

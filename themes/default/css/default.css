@@ -158,7 +158,7 @@ header + .bodywrap .row, .row + .row, .postinfo + .bodywrap .row {
 	font-size: 14px;
 }
 
-.row p, .row span, form label {
+.row p, .row span, form label, .row time, #recentactivity {
 	color: #a5a5a5;
 }
 
@@ -352,7 +352,7 @@ li {
 	border-color: transparent #eee transparent transparent;
 }
 
-.avatar {
+.postwrap .avatar {
 	border: 1px solid #d3d3d3;
 	width: 90px;
 	height: 90px;
@@ -366,7 +366,6 @@ li {
 .postauthor {
 	margin-top: 5px;
 	font-size: 18px;
-	color: #989898;
 	display: block;
 }
 
@@ -463,15 +462,19 @@ header + .postinfo {
 	margin-top: 5px;
 }
 
-#leftcol, #rightcol {
+#leftcol, #rightcol, #profilebar {
 	display: table-cell;
 	vertical-align: top;
 }
 
-#leftcol {
+#leftcol, #profilebar {
 	width: 160px;
 	background: #fff;
 	border-right: 1px solid #d3d3d3;
+}
+
+#profilebar {
+	width: 200px;
 }
 
 #rightcol {
@@ -491,4 +494,33 @@ nav .row a {
 
 nav#leftcol .row ~ .row {
 	border-top: none;
+}
+
+.noborder {
+	border: none !important;
+}
+
+#profilebar header {
+	padding-bottom: 5px;
+	margin: 15px 0px 5px;
+	border-bottom: 1px solid #d3d3d3;
+	text-transform: uppercase;
+}
+
+#recentactivity header {
+	text-transform: uppercase;
+	font-size: 14px;
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #d3d3d3;
+}
+
+.activity {
+	padding: 5px 0px 10px;
+	display: block;
+}
+
+.activity + .activity {
+	padding: 10px 0px;
+	border-top: 1px solid #d3d3d3;
 }

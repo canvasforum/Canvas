@@ -23,24 +23,24 @@
 								<form method="POST" action="<?php echo Canvas::getURL(); ?>">
 									<div>
 										<label>Email Address</label>
-										<input type="email" name="email" autocomplete="off" value="<?php echo Form::getInput('email'); ?>" required />
+										<input type="email" name="email" autocomplete="off" maxlength="255" value="<?php echo Form::getInput('email'); ?>" required />
 									</div>
 									<div>
 										<label>Username</label>
-										<input type="text" name="username" autocomplete="off" value="<?php echo Form::getInput('username'); ?>" required />
+										<input type="text" name="username" autocomplete="off" maxlength="255" value="<?php echo Form::getInput('username'); ?>" required />
 									</div>
 									<div>
 										<label>Password</label>
-										<input type="password" name="password" autocomplete="off" required />
+										<input type="password" name="password" maxlength="255" autocomplete="off" required />
 									</div>
 									<div>
 										<label>Confirm Password</label>
-										<input type="password" name="passwordVal" autocomplete="off" required />
+										<input type="password" name="passwordVal" maxlength="255" autocomplete="off" required />
 									</div>
 									<div>
 										<label>Please Fill Out The Captcha</label>
 										<img src="<?php echo Canvas::getBase('canvas') . 'captcha.php'; ?>" />
-										<input type="text" name="captcha" autocomplete="off" required />
+										<input type="text" name="captcha" maxlength="255" autocomplete="off" required />
 									</div>
 									<div>
 										<span>
