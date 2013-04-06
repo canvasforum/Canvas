@@ -18,6 +18,7 @@
  * New lines are treated literally.
  * Modified for htmlspecialchars escape.
  * Do not parse any links containing JS.
+ * Whitelist of some HTML tags.
  */
 
 
@@ -61,7 +62,24 @@ function Markdown($text) {
 	}
 
 	# Transform text using parser.
-	return $parser->transform($text);
+	$html = $parser->transform($text);
+
+	/*
+	 * Parse even more.
+	 * Whitelist some HTML tags.
+	 */
+
+	$canvas = array(
+		'#(&lt;|<)(/)?(s|b|em|strong|i|p|h1|h2|h3|h4|h5|h6|table|tr|td|th|blockquote)(&gt;|>)#' => '<\2\3>',
+		'#(&lt;|<)a href=("|\'|&quot;|&apos;)((https?|ftp|dict):[^\'">\s]+)\2(&gt;|>)(([^<])*)(&lt;|<)/a(&gt;|>)#' => '<a href="\3">\6</a>',
+		'#(&lt;|<)img src=("|\'|&quot;|&apos;)((https?|ftp|dict):[^\'">\s]+)\2( )?/?(&gt;|>)#' => '<img src="\3" />'
+	);
+
+	foreach($canvas as $regex => $transform){
+		$html = preg_replace($regex, $transform, $html);
+	}
+
+	return $html;
 }
 
 
@@ -1298,7 +1316,7 @@ class Markdown_Parser {
 		$text = preg_replace_callback('/
 			  (								# Wrap whole match in $1
 				(?>
-				  ^[ ]*>[ ]?			# ">" at the start of a line
+				  ^[ ]*(&gt;|>)[ ]?			# ">" at the start of a line
 					.+\n					# rest of the first line
 				  (.+\n)*					# subsequent consecutive lines
 				  \n*						# blanks
@@ -1312,8 +1330,9 @@ class Markdown_Parser {
 	function _doBlockQuotes_callback($matches) {
 		$bq = $matches[1];
 		# trim one level of quoting - trim whitespace-only lines
-		$bq = preg_replace('/^[ ]*>[ ]?|^[ ]+$/m', '', $bq);
-		$bq = $this->runBlockGamut($bq);		# recurse
+		$bq = preg_replace('/^[ ]*(&gt;|>)[ ]?|^[ ]+$/m', '', $bq);
+
+		$bq = $this->runBlockGamut($bq); # recurse
 
 		$bq = preg_replace('/^/m', "  ", $bq);
 		# These leading spaces cause problem with <pre> content, 

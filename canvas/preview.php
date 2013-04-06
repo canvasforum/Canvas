@@ -17,6 +17,10 @@
  */
 
 if(isset($_POST['contents'])){
+	if(empty($_POST['contents'])){
+		echo '<span>Nothing to preview.</span>';
+	}
+
 	echo Markdown(htmlspecialchars($_POST['contents']));
 }
 else{

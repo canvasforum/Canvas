@@ -22,6 +22,10 @@ use \Wires\Error as Error;
 use \Wires\Routing\URI as URI;
 use \Wires\Autoloader as Autoloader;
 
+//UTF-8
+ini_set('default_charset','utf-8');
+header('Content-type: text/html; charset=utf-8');
+
 //Load all our ACP pages.
 $acp = APP . 'views' . DS . 'admin' . DS;
 $paths = array('admin' => $acp);

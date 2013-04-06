@@ -74,6 +74,11 @@ class Post {
 
 	//Returns the contents of the post.
 	public function getContents(){
+		return Markdown($this->contents);
+	}
+
+	//Returns the raw contents of this post.
+	public function getRaw(){
 		return $this->contents;
 	}
 

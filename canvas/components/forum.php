@@ -17,6 +17,7 @@
  */
 
 use \Wires\Database\DB as DB;
+use \Wires\Arr as Arr;
 
 class Forum {
 	private $name;
@@ -31,13 +32,21 @@ class Forum {
 			return $this->topics;
 		}
 		else{		
-			$result = DB::queryObj('SELECT tid, fid, name, author, startDate FROM topics WHERE fid = :fid ORDER BY updateDate DESC', array('fid' => $this->fid));
-			$result = $result->fetchAll(PDO::FETCH_CLASS, 'Topic');
+			$result = Canvas::getTopics($this->fid);
 
 			$this->topics = $result;
 
 			return is_null($result) ? array() : $result;
 		}
+	}
+
+	//Returns the last topic to be updated.
+	public function getLastTopic(){
+		if(is_null($this->topics)){
+			$this->getTopics();
+		}
+
+		return $this->topics[0];
 	}
 
 	//Returns the name of the forum.
@@ -53,6 +62,11 @@ class Forum {
 	//Returns the description of the forum.
 	public function getDescription(){
 		return $this->description;
+	}
+
+	//Returns if this forum has any topics or not.
+	public function hasTopics(){
+		return count($this->getTopics());
 	}
 }
 ?>

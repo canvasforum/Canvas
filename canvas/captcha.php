@@ -24,7 +24,7 @@ $captcha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 $captcha = substr(str_shuffle($captcha), 0, 4);
 $_SESSION['captcha'] = $captcha;
 
-$image = imagecreatetruecolor(100, 50);
+$image = imagecreatetruecolor(200, 50);
 $white = imagecolorallocate($image, 255, 255, 255);
 $black = imagecolorallocate($image, 83, 83, 83);
 

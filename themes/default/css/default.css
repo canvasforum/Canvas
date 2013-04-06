@@ -1,4 +1,8 @@
+/* Import Fonts */
+
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+/* Global Styles */
 
 * {
 	padding: 0px;
@@ -29,6 +33,64 @@ hr {
 	margin: 15px 0px;
 }
 
+h1 {
+	font-size: 28px;
+}
+
+h2 {
+	font-size: 20px;
+}
+
+h3 {
+	font-size: 14px;
+}
+
+h1, h2, h3 {
+	font-weight: 400;
+	line-height: 1em;
+}
+
+header h3 {
+	color: #989898;
+	margin: 0px;
+	display: inline-block;
+	float: left;
+	padding: 12px 16px;
+}
+
+ul {
+	margin: 15px 0px;
+}
+
+ul, ol {
+	margin-left: 16px;
+}
+
+li {
+	line-height: 1.8em;
+}
+
+/* Useful Stuff */
+
+.left, .right, .clear {
+	vertical-align: middle;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.clear {
+	clear: both;
+	overflow: hidden;
+}
+
+/* Wrappers */
+
 #wrapper {
 	max-width: 960px;
 	margin: 50px auto;
@@ -54,10 +116,6 @@ hr {
 	padding-left: 10px;
 }
 
-input[type=submit] + input[type=checkbox] {
-	margin-left: 5px;
-}
-
 .wrap {
 	background: #eee;
 	padding: 3px;
@@ -65,23 +123,6 @@ input[type=submit] + input[type=checkbox] {
 
 .innerwrap {
 	border: 1px solid #d3d3d3;
-}
-
-h1 {
-	font-size: 28px;
-}
-
-h2 {
-	font-size: 20px;
-}
-
-h3 {
-	font-size: 14px;
-}
-
-h1, h2, h3 {
-	font-weight: 400;
-	line-height: 1em;
 }
 
 .innerwrap > header {
@@ -97,70 +138,11 @@ h1, h2, h3 {
 	overflow: hidden;
 }
 
-header h3 {
-	color: #989898;
-	margin: 0px;
-	display: inline-block;
-	float: left;
-	padding: 12px 16px;
-}
-
-#head_buttons, .postbuttons {
-	display: inline-block;
-	font-family: FontAwesome;
-	float: right;
-}
-
-#head_buttons a {
-	color: #b7b7b7;
-	text-shadow: 0px 1px 0px #fff;
-	display: inline-block;
-	padding: 14px 16px 14px;
-	border-left: 1px solid #d3d3d3;
-	cursor: pointer;
-}
-
-#head_buttons a:hover {
-	background: #f9f9f9;
-	background: -moz-linear-gradient(top,  #f9f9f9 0%, #f2f2f2 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9f9f9), color-stop(100%,#f2f2f2));
-	background: -webkit-linear-gradient(top,  #f9f9f9 0%,#f2f2f2 100%);
-	background: -o-linear-gradient(top,  #f9f9f9 0%,#f2f2f2 100%);
-	background: -ms-linear-gradient(top,  #f9f9f9 0%,#f2f2f2 100%);
-	background: linear-gradient(to bottom,  #f9f9f9 0%,#f2f2f2 100%);
-}
-
-#head_buttons a:active {
-	background: #efefef;
-	background: -moz-linear-gradient(top,  #efefef 0%, #e5e5e5 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#efefef), color-stop(100%,#e5e5e5));
-	background: -webkit-linear-gradient(top,  #efefef 0%,#e5e5e5 100%);
-	background: -o-linear-gradient(top,  #efefef 0%,#e5e5e5 100%);
-	background: -ms-linear-gradient(top,  #efefef 0%,#e5e5e5 100%);
-	background: linear-gradient(to bottom,  #efefef 0%,#e5e5e5 100%);
-	box-shadow: 0px -1px 5px #dcdcdc inset;
-}
-
 .wrap + .wrap {
 	margin-top: 30px;
 }
 
-header + .bodywrap .row, .row + .row, .postinfo + .bodywrap .row {
-	border-top: 1px solid #d3d3d3;
-}
-
-.row {
-	padding: 12px 16px;
-	background: #fff;
-}
-
-.row header a {
-	font-size: 14px;
-}
-
-.row p, .row span, form label, .row time, #recentactivity {
-	color: #a5a5a5;
-}
+/* Form Input Elements */
 
 label {
 	display: block;
@@ -236,6 +218,65 @@ textarea {
 	font-size: 12px;
 }
 
+input[type=submit] + input[type=checkbox] {
+	margin-left: 5px;
+}
+
+/* Header Buttons */
+
+#head_buttons, .postbuttons {
+	display: inline-block;
+	font-family: FontAwesome;
+	float: right;
+}
+
+#head_buttons a {
+	color: #b7b7b7;
+	text-shadow: 0px 1px 0px #fff;
+	display: inline-block;
+	padding: 14px 16px 14px;
+	border-left: 1px solid #d3d3d3;
+	cursor: pointer;
+}
+
+#head_buttons a:hover {
+	background: #f9f9f9;
+	background: -moz-linear-gradient(top,  #f9f9f9 0%, #f2f2f2 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9f9f9), color-stop(100%,#f2f2f2));
+	background: -webkit-linear-gradient(top,  #f9f9f9 0%,#f2f2f2 100%);
+	background: -o-linear-gradient(top,  #f9f9f9 0%,#f2f2f2 100%);
+	background: -ms-linear-gradient(top,  #f9f9f9 0%,#f2f2f2 100%);
+	background: linear-gradient(to bottom,  #f9f9f9 0%,#f2f2f2 100%);
+}
+
+#head_buttons a:active {
+	background: #efefef;
+	background: -moz-linear-gradient(top,  #efefef 0%, #e5e5e5 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#efefef), color-stop(100%,#e5e5e5));
+	background: -webkit-linear-gradient(top,  #efefef 0%,#e5e5e5 100%);
+	background: -o-linear-gradient(top,  #efefef 0%,#e5e5e5 100%);
+	background: -ms-linear-gradient(top,  #efefef 0%,#e5e5e5 100%);
+	background: linear-gradient(to bottom,  #efefef 0%,#e5e5e5 100%);
+	box-shadow: 0px -1px 5px #dcdcdc inset;
+}
+
+header + .bodywrap .row, .row + .row, .postinfo + .bodywrap .row {
+	border-top: 1px solid #d3d3d3;
+}
+
+.row {
+	padding: 12px 16px;
+	background: #fff;
+}
+
+.row header a {
+	font-size: 14px;
+}
+
+.row p, .row span, form label, .row time, #recentactivity {
+	color: #a5a5a5;
+}
+
 #errors {
 	background: #ffcfcf;
 	color: #e06f6f;
@@ -261,61 +302,107 @@ textarea {
 	margin-top: -20px;
 }
 
-ul {
-	margin: 15px 0px;
-}
-
-ul, ol {
-	margin-left: 16px;
-}
-
-li {
-	line-height: 1.8em;
-}
-
 .post, #post_preview {
 	line-height: 1.8em;
 }
 
 #head {
 	border-bottom: 1px solid #d3d3d3;
-	overflow: auto;
 	font-size: 14px;
 	margin-bottom: 50px;
+	background: #f8f8f8;
+}
+
+#head a {
+	color: #989898;
 }
 
 #head aside {
 	float: left;
 	position: relative;
-	top: 14px;
+	top: 10px;
 	font-size: 22px;
 }
 
 #head nav {
 	float: right;
+	padding: 5px 0px;
 }
 
-#head div {
+#head > div {
 	width: 960px;
 	margin: 0px auto;
 }
 
-#head nav {
-	border-right: 1px solid #d3d3d3;
+#topdrop {
+	position: relative;
+	z-index: 3;
 }
 
-#head nav a {
-	border-left: 1px solid #d3d3d3;
+#topdrop > a, nav > a {
+	padding: 10px 14px 7px;
+	border: 1px solid #f8f8f8;
 	display: inline-block;
-	padding: 20px 25px 25px;
+	position: relative;
+	z-index: 3;
 }
 
-#head nav a + a {
-	margin-left: -4px;
+nav > a {
+	padding: 10px 14px;
 }
 
-#head nav a:hover {
-	box-shadow: 0px -4px 0px #416eb2 inset;
+#topdrop:hover > a, nav > a:hover {
+	background: #fefefe;
+	border: 1px solid #d3d3d3;
+	border-bottom: 1px solid #fff;
+}
+
+nav > a:hover {
+	border-bottom: 1px solid #d3d3d3;
+}
+
+#topdrop img {
+	height: 16px;
+	width: 16px;
+}
+
+#topdrop span {
+	position: relative;
+	top: -3px;
+	margin-left: 5px;
+}
+
+#topdrop a {
+	display: block;
+}
+
+#topmenu {
+	position: absolute;
+	top: 37px;
+	right: 0px;
+	width: 150px;
+	border: 1px solid #d3d3d3;
+	background: #fefefe;
+	padding: 3px;
+	z-index: 2;
+}
+
+#topmenu a {
+	display: block;
+	padding: 7px 12px;
+}
+
+#topmenu a:hover {
+	background: #6398e6;
+	color: #fff;
+}
+
+#topdrop:hover #topmenu {
+	display: block;
+}
+
+#topmenu {
+	display: none;
 }
 
 #preview_post {
@@ -385,22 +472,6 @@ li {
 
 .post p + p, #preview_post p + p {
 	margin-top: 24px;
-}
-
-.left {
-	float: left;
-	vertical-align: middle;
-}
-
-.right {
-	vertical-align: middle;
-	float: right;
-}
-
-.clear {
-	overflow: hidden;
-	clear: both;
-	vertical-align: middle;
 }
 
 .postinfo {
@@ -523,4 +594,22 @@ nav#leftcol .row ~ .row {
 .activity + .activity {
 	padding: 10px 0px;
 	border-top: 1px solid #d3d3d3;
+}
+
+.foruminfo, .forumstat, .lastava, .lastinfo {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.foruminfo {
+	width: 660px;
+	padding-right: 20px;
+}
+
+.lastinfo span {
+	display: block;
+}
+
+.lastava {
+	padding-right: 10px;
 }

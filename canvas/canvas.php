@@ -60,6 +60,11 @@ class Canvas {
 		return Fetcher::getPost($pid);
 	}
 
+	//Returns all the topics in a given forum.
+	public static function getTopics($fid){
+		return Fetcher::getTOpics($fid);
+	}
+
 	//Returns the base URL for various directories.
 	public static function getBase($type = 'root'){
 		if(is_null(static::$bases)){

@@ -12,7 +12,7 @@
  * @author Andrew Lee
  * @link http://andrewleenj.com
  */
- 
+
 namespace Wires;
 
 //If somebody is trying to directly access this file.

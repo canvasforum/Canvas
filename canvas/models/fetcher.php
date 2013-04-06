@@ -105,6 +105,14 @@ class Fetcher {
 		return $result->fetch();
 	}
 
+	//Returns all the topics in the forum specified.
+	public static function getTopics($fid){
+		$result = DB::queryObj('SELECT tid, fid, name, author, startDate FROM topics WHERE fid = :fid ORDER BY updateDate DESC', array('fid' => $fid));
+		$result = $result->fetchAll(PDO::FETCH_CLASS, 'Topic');
+
+		return $result;
+	}
+
 	//Returns the post object for the post currently being viewed.
 	public static function getPost($pid = -1){
 		$pid = $pid == -1 ? Canvas::getID() : $pid;

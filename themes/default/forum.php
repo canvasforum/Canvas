@@ -39,8 +39,8 @@
 										<aside>
 											<time>
 												Started by
-												 <a href="<?php echo $topic->getAuthor()->getProfileURL(); ?>"><?php echo $topic->getAuthor()->getUsername(); ?></a>
-												 on <?php echo $topic->getStartDate('%B %d, %Y at %#I:%M %p'); ?>.
+											 <a href="<?php echo $topic->getAuthor()->getProfileURL(); ?>"><?php echo $topic->getAuthor()->getUsername(); ?></a>
+											 on <?php echo $topic->getStartDate('%B %d, %Y at %#I:%M %p'); ?>.
 											</time>
 										</aside>
 									</article>

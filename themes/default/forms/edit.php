@@ -30,7 +30,7 @@
 						<?php endif; ?>
 						<div>
 							<label>Contents</label>
-							<textarea name="contents" required><?php echo Poster::getPost()->getContents(); ?></textarea>
+							<textarea name="contents" required><?php echo Poster::getPost()->getRaw(); ?></textarea>
 						</div>
 						<div class="clear">
 							<span class="left">

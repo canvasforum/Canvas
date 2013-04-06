@@ -54,7 +54,7 @@
 								</aside>
 								<section class="bodywrap">
 									<article class="row post">
-										<?php echo Markdown($post->getContents()); ?>
+										<?php echo $post->getContents(); ?>
 									</article>
 									<?php if($post->isEdited()): ?>
 									<aside class="row postedit">

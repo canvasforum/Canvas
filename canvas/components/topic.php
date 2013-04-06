@@ -17,6 +17,7 @@
  */
 
 use \Wires\Database\DB as DB;
+use \Wires\Arr as Arr;
 
 class Topic {
 	private $tid;
@@ -82,12 +83,25 @@ class Topic {
 
 	//Returns the first post in the topic and removes it from the list.
 	public function getFirstPost(){
-		$posts = $this->getPosts();
+		if(is_null($this->posts)){
+			$this->getPosts();
+		}
+		
+		$posts = $this->posts;
 		$post = $posts[0];
 
 		unset($this->posts[0]);
 
 		return $post;
+	}
+
+	//Returns the last post in the topic.
+	public function getLastPost(){
+		if(is_null($this->posts)){
+			$this->getPosts();
+		}
+
+		return Arr::lastElement($this->posts);
 	}
 }
 ?>

@@ -34,4 +34,13 @@ function changeTimeZone($new, $time){
 	$dt->setTimeZone($new);
 	return $dt->format('Y-m-d H:i:s');
 }
+
+//Truncates a string adding on an ellipsis to the end.
+function truncate($str, $len){
+	if(strlen($str) <= $len){
+		return $str;
+	}
+	
+	return substr($str, 0, $len) . '...';
+}
 ?>
