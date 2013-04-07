@@ -116,9 +116,14 @@ li {
 	padding-left: 10px;
 }
 
+#loginwrapper div:nth-of-type(3) div {
+	display: table-row;
+}
+
 .wrap {
 	background: #eee;
 	padding: 3px;
+	border-radius: 3px;
 }
 
 .innerwrap {
@@ -275,26 +280,6 @@ header + .bodywrap .row, .row + .row, .postinfo + .bodywrap .row {
 
 .row p, .row span, form label, .row time, #recentactivity {
 	color: #a5a5a5;
-}
-
-#errors {
-	background: #ffcfcf;
-	color: #e06f6f;
-	padding: 8px 16px;
-	width: 100%;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	border-top: 1px solid #ffb0b0;
-	border-bottom: 1px solid #ffb0b0;
-	margin-bottom: 20px;
-}
-
-#errors span {
-	display: block;
-}
-
-#errors span + span {
-	margin-top: 5px;
 }
 
 #errors + .row, #errors + .bodywrap .row {
@@ -505,34 +490,6 @@ header + .postinfo {
 	display: none;
 }
 
-#notices {
-	background: #e0edff;
-	border-top: 1px solid #a1c2f3;
-	border-bottom: 1px solid #a1c2f3;
-	color: #83a9df;
-	padding: 8px 16px;
-	width: 100%;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	margin-bottom: 20px;
-}
-
-#rightcol #notices {
-	margin-bottom: 0px;
-}
-
-#rightcol #notices + .row {
-	border-top: none;
-}
-
-#notices span {
-	display: block;
-}
-
-#notices span + span {
-	margin-top: 5px;
-}
-
 #leftcol, #rightcol, #profilebar {
 	display: table-cell;
 	vertical-align: top;
@@ -606,10 +563,59 @@ nav#leftcol .row ~ .row {
 	padding-right: 20px;
 }
 
+.lastinfo {
+	position: relative;
+	top: -2px;
+}
+
 .lastinfo span {
 	display: block;
 }
 
 .lastava {
 	padding-right: 10px;
+}
+
+#errors {
+	background: #f36f6f;
+	color: #fff;
+	padding: 8px 16px;
+	width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	margin-bottom: 10px;
+	border-radius: 3px;
+}
+
+#errors span {
+	display: block;
+	color: #fff;
+}
+
+#errors span + span {
+	margin-top: 5px;
+}
+
+#notices {
+	background: #6398e6;
+	color: #fff;
+	padding: 8px 16px;
+	width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	margin-bottom: 10px;
+	border-radius: 3px;
+}
+
+#rightcol #notices + .row {
+	border-top: none;
+}
+
+#notices span {
+	display: block;
+	color: #fff;
+}
+
+#notices span + span {
+	margin-top: 5px;
 }

@@ -34,7 +34,7 @@ if(function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()){
 }
 
 //Suppress all errors.
-//ini_set('display_errors', 'off');
+ini_set('display_errors', 'off');
 
 //Import the autoloader.
 require SYS . 'autoloader.php';
@@ -49,7 +49,6 @@ Autoloader::map();
 //Set our autoloader.
 spl_autoload_register(array('Wires\\Autoloader', 'load'));
 
-/*
 //Set exception handlers.
 set_exception_handler(function($exception){
 	Error::log($exception);
@@ -59,7 +58,6 @@ set_exception_handler(function($exception){
 set_error_handler(function($code, $error, $file, $line){
 	Error::log($code, $error, $file, $line);
 });
-*/
 
 //Load the application configuration.
 Configuration::load();

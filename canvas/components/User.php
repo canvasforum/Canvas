@@ -126,5 +126,10 @@ class User {
 
 		return $this->posts;
 	}
+
+	//Returns the URL at which this user's profile can be found.
+	public function getURL(){
+		return Canvas::getBase() . 'profile/' . $this->uid;
+	}
 }
 ?>

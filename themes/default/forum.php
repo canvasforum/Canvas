@@ -22,7 +22,7 @@
 							<div id="head_buttons">
 								<?php if(Canvas::loggedIn()): ?>
 									<?php if(Canvas::getUser()->hasPermission(Permissions::POST_TOPICS)): ?>
-										<span><a href="<?php echo Canvas::getBase(); ?>post/topic/<?php echo Canvas::getForum()->getID(); ?>" title="New Topic" class="icon-pencil"></a></span>
+										<span><a href="<?php echo Canvas::getForum()->getNewTopicURL(); ?>" title="New Topic" class="icon-pencil"></a></span>
 									<?php endif; ?>
 								<?php endif; ?>
 							</div>
@@ -31,18 +31,36 @@
 							<?php if(count(Canvas::getForum()->getTopics())): ?>
 								<?php foreach(Canvas::getForum()->getTopics() as $topic): ?>
 									<article class="row">
-										<header>
-											<a href="<?php echo Canvas::getBase(); ?>topic/<?php echo $topic->getID(); ?>">
-												<?php echo $topic->getName(); ?>
-											</a>
-										</header>
-										<aside>
-											<time>
-												Started by
-											 <a href="<?php echo $topic->getAuthor()->getProfileURL(); ?>"><?php echo $topic->getAuthor()->getUsername(); ?></a>
-											 on <?php echo $topic->getStartDate('%B %d, %Y at %#I:%M %p'); ?>.
-											</time>
-										</aside>
+										<div class="foruminfo">
+											<header>
+												<a href="<?php echo $topic->getURL(); ?>">
+													<?php echo $topic->getName(); ?>
+												</a>
+											</header>
+											<aside>
+												<time>
+													Started by
+												 <a href="<?php echo $topic->getAuthor()->getProfileURL(); ?>"><?php echo $topic->getAuthor()->getUsername(); ?></a>
+												 on <?php echo $topic->getStartDate('%B %d, %Y at %#I:%M %p'); ?>.
+												</time>
+											</aside>
+										</div>
+										<div class="forumstat">
+											<span class="lastava">
+												<img src="<?php echo $topic->getLastPost()->getAuthor()->getGravatar(30); ?>" />
+											</span>
+											<span class="lastinfo">
+												<span>
+													Last post by 
+													<a href="<?php echo $topic->getLastPost()->getAuthor()->getURL(); ?>">
+														<?php echo $topic->getLastPost()->getAuthor()->getUsername(); ?>
+													</a>
+												</span>
+												<span>
+													<?php echo relativeTime($topic->getLastPost()->getPostDate('%Y-%b-%d %#I:%M %p')); ?>
+												</span>
+											</span>
+										</div>
 									</article>
 								<?php endforeach; ?>
 							<?php else: ?>
@@ -54,9 +72,10 @@
 					</div>
 				</section>
 			<?php else: ?>
-				<h2>
-					Sorry. The forum you requested could not be found.
-				</h2>
+				<?php
+				new Message(Message::ERROR, 'The forum you requested could not be found.', true);
+				Canvas::redirect(Canvas::getBase());
+				?>
 			<?php endif; ?>
 		</section>
 	</body>

@@ -26,9 +26,10 @@
 					<?php include 'forms/edit.php'; ?>
 				<?php endif; ?>
 			<?php else: ?>
-				<h2>
-					Sorry. You can't do this without being logged in. <a href="<?php echo Canvas::getBase() . 'login'; ?>">Click here</a> to log in.
-				</h2>
+				<?php
+				new Message(Message::ERROR, 'Sorry. You must be logged in to do this.', true);
+				Canvas::redirect(Canvas::getBase());
+				?>
 			<?php endif; ?>
 		</section>
 	</body>

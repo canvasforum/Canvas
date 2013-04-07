@@ -15,31 +15,33 @@
 					</header>
 					<section class="bodywrap">
 						<?php if(!Login::attempt() && !Canvas::loggedIn()): ?>
-							<?php if(Canvas::hasErrors()): ?>
-								<aside id="errors">
-									<?php foreach(Canvas::getErrors() as $error): ?>
-										<span class="error"><?php echo $error->getMessage(); ?></span>
-									<?php endforeach; ?>
-								</aside>
-							<?php endif; ?>
 							<article class="row">
+								<?php if(Canvas::hasErrors()): ?>
+									<aside id="errors">
+										<?php foreach(Canvas::getErrors() as $error): ?>
+											<span class="error"><?php echo $error->getMessage(); ?></span>
+										<?php endforeach; ?>
+									</aside>
+								<?php endif; ?>
 								<form method="POST" action="<?php echo Canvas::getURL(); ?>">
 									<div>
 										<label>Username or Email</label>
 										<input type="text" name="handle" autocomplete="off" value="<?php echo Form::getInput('handle'); ?>" required />
 									</div>
 									<div>
-										<label>Password <a href="<?php echo Canvas::getBase(); ?>login/forgot">(Forgot your password?)</a></label>
+										<label>Password <a href="<?php echo Canvas::getBase(); ?>forgot">(Forgot your password?)</a></label>
 										<input type="password" name="password" autocomplete="off" required />
 									</div>
 									<div>
-										<span>
-											<input type="submit" name="sub" value="Log In" />
-											<input type="checkbox" name="remember" /> Remember Me
-										</span>
-										<span>
-											<a href="<?php echo Canvas::getBase(); ?>register">Need an account?</a>
-										</span>
+										<div>
+											<span>
+												<input type="submit" name="sub" value="Log In" />
+												<input type="checkbox" name="remember" /> Remember Me
+											</span>
+											<span>
+												<a href="<?php echo Canvas::getBase(); ?>register">Need an account?</a>
+											</span>
+										</div>
 									</div>
 								</form>
 							</article>

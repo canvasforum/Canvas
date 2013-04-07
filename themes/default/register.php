@@ -15,11 +15,11 @@
 					</header>
 					<section class="bodywrap">
 						<?php if(!Canvas::loggedIn() && !Register::attempt()): ?>
-							<?php include 'includes/notes.php'; ?>
 							<article class="row">
 								<p>All fields are required. You will be able to customize your profile further after registering.</p>
 							</article>
 							<article class="row">
+								<?php include 'includes/notes.php'; ?>
 								<form method="POST" action="<?php echo Canvas::getURL(); ?>">
 									<div>
 										<label>Email Address</label>

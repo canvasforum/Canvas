@@ -100,7 +100,7 @@ class Canvas {
 			}
 		}
 
-		return -1;
+		return -42;
 	}
 
 	//Logs an error in the system.

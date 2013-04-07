@@ -1,21 +1,21 @@
-<?php if(!Preferences::attempt()): ?>
-	<?php if(Canvas::hasErrors()): ?>
-		<aside id="errors">
-			<?php foreach(Canvas::getErrors() as $error): ?>
-				<span class="error"><?php echo $error->getMessage(); ?></span>
-			<?php endforeach; ?>
-		</aside>
-	<?php endif; ?>
-<?php else: ?>
-	<?php if(Canvas::hasNotices()): ?>
-		<aside id="notices">
-			<?php foreach(Canvas::getNotices() as $notice): ?>
-				<span class="error"><?php echo $notice->getMessage(); ?></span>
-			<?php endforeach; ?>
-		</aside>
-	<?php endif; ?>
-<?php endif; ?>
 <article class="row">
+	<?php if(!Preferences::attempt()): ?>
+		<?php if(Canvas::hasErrors()): ?>
+			<aside id="errors">
+				<?php foreach(Canvas::getErrors() as $error): ?>
+					<span class="error"><?php echo $error->getMessage(); ?></span>
+				<?php endforeach; ?>
+			</aside>
+		<?php endif; ?>
+	<?php else: ?>
+		<?php if(Canvas::hasNotices()): ?>
+			<aside id="notices">
+				<?php foreach(Canvas::getNotices() as $notice): ?>
+					<span class="error"><?php echo $notice->getMessage(); ?></span>
+				<?php endforeach; ?>
+			</aside>
+		<?php endif; ?>
+	<?php endif; ?>
 	<form method="POST" action="<?php echo Canvas::getURL(); ?>">
 		<div>
 			<label>Current Password</label>

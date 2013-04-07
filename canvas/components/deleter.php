@@ -57,13 +57,13 @@ class Deleter {
 				Garbage::removeTopic($post->getParent());
 
 				new Message(Message::NOTICE, 'Topic Successfully Deleted', true);
-				header('Location: ' . Canvas::getBase() . 'forum/' . $topic->getParent());
+				Canvas::redirect(Canvas::getBase() . 'forum/' . $topic->getParent());
 
 				return true;
 			}
 
 			new Message(Message::ERROR, 'You do not have permission to delete this item.', true);
-			header('Location: ' . $_SERVER['HTTP_REFERER']);
+			Canvas::redirect($_SERVER['HTTP_REFERER']);
 		}
 		else if(static::getType() == Deleter::POST){
 			$post = static::getPost();
@@ -72,17 +72,17 @@ class Deleter {
 				Garbage::removePost($post->getID());
 
 				new Message(Message::NOTICE, 'Post Successfully Deleted', true);
-				header('Location: ' . Canvas::getBase() . 'topic/' . $post->getParent());
+				Canvas::redirect(Canvas::getBase() . 'topic/' . $post->getParent());
 
 				return true;
 			}
 
 			new Message(Message::ERROR, 'You do not have permission to delete this item.', true);
-			header('Location: ' . $_SERVER['HTTP_REFERER']);
+			Canvas::redirect($_SERVER['HTTP_REFERER']);
 		}
 		
 		new Message(Message::ERROR, 'Invalid command specified.', true);
-		header('Location: ' . $_SERVER['HTTP_REFERER']);
+		Canvas::redirect(Canvas::getBase());
 
 		return false;
 	}

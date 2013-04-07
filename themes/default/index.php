@@ -19,7 +19,7 @@
 								<article class="row">
 									<div class="foruminfo">
 										<header>
-											<a href="<?php echo Canvas::getBase(); ?>forum/<?php echo $forum->getID(); ?>">
+											<a href="<?php echo $forum->getURL(); ?>">
 												<?php echo $forum->getName(); ?>
 											</a>
 										</header>
@@ -34,15 +34,17 @@
 											</span>
 											<span class="lastinfo">
 												<span>
-													<a href="<?php echo Canvas::getBase(); ?>topic/<?php echo $forum->getLastTopic()->getID(); ?>">
+													<a href="<?php echo $forum->getLastTopic()->getLastPost()->getURL(); ?>">
 														<?php echo truncate($forum->getLastTopic()->getName(), 20); ?>
 													</a>
-													by <a href="<?php echo $forum->getLastTopic()->getLastPost()->getAuthor()->getProfileURL(); ?>">
+												</span>
+												<span>
+													by <a href="<?php echo $forum->getLastTopic()->getLastPost()->getAuthor()->getURL(); ?>">
 														<?php echo $forum->getLastTopic()->getLastPost()->getAuthor()->getUsername(); ?>
 													</a>
 												</span>
 												<span>
-													<?php echo $forum->getLastTopic()->getLastPost()->getPostDate(); ?>
+													<?php echo relativeTime($forum->getLastTopic()->getLastPost()->getPostDate('%Y-%b-%d %#I:%M %p')); ?>
 												</span>
 											</span>
 										<?php endif; ?>

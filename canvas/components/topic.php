@@ -103,5 +103,10 @@ class Topic {
 
 		return Arr::lastElement($this->posts);
 	}
+
+	//Returns the URL at which this topic can be found.
+	public function getURL(){
+		return Canvas::getBase() . 'topic/' . $this->tid;
+	}
 }
 ?>

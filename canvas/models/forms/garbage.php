@@ -30,9 +30,21 @@ class Garbage {
 	}
 
 	public static function removePost($pid){
+		$post = Canvas::getPost($pid);
+		$topic = Canvas::getTopic($post->getParent());
+
 		$query = 'DELETE FROM posts WHERE pid = :pid';
 
 		DB::query($query, array('pid' => $pid));
+
+		if($post == $topic->getLastPost()){
+			$query = 'UPDATE topics SET updateDate = :date WHERE tid = :tid';
+
+			DB::query($query, array(
+				'tid' => $topic->getID(),
+				'date' => $topic->getPosts()[count($topic->getPosts()) - 2]->getPostDate()
+			));
+		}
 	}
 }
 ?>

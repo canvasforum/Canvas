@@ -9,19 +9,19 @@
 					</span>
 				</div>
 			</header>
-			<?php $success = Poster::post(); ?>
-			<?php if($success): ?>
-				<?php Canvas::redirect(Canvas::getBase() . 'topic/' . Poster::getTopic()->getID() . '#' . $success); ?>
-			<?php elseif(Canvas::hasErrors(Binds::POST_FORM)): ?>
-				<aside id="errors">
-					<?php foreach(Canvas::getErrors(Binds::POST_FORM) as $error): ?>
-						<span class="error"><?php echo $error->getMessage(); ?></span>
-					<?php endforeach; ?>
-				</aside>
-			<?php endif; ?>
 			<section class="bodywrap">
 				<article class="row" id="preview_post"></article>
 				<article class="row">
+					<?php $success = Poster::post(); ?>
+					<?php if($success): ?>
+						<?php Canvas::redirect(Canvas::getBase() . 'topic/' . Poster::getTopic()->getID() . '#' . $success); ?>
+					<?php elseif(Canvas::hasErrors(Binds::POST_FORM)): ?>
+						<aside id="errors">
+							<?php foreach(Canvas::getErrors(Binds::POST_FORM) as $error): ?>
+								<span class="error"><?php echo $error->getMessage(); ?></span>
+							<?php endforeach; ?>
+						</aside>
+					<?php endif; ?>
 					<form method="POST" action="<?php echo Canvas::getBase(); ?>post/post/<?php echo Canvas::getID(); ?>">
 						<div>
 							<textarea name="contents" required><?php echo Form::getInput('contents'); ?></textarea>
@@ -40,7 +40,8 @@
 		</div>
 	</section>
 <?php else: ?>
-	<h2>
-		Sorry. You don't have permission to reply to this topic.
-	</h2>
+	<?php
+	new Message(Message::ERROR, 'Sorry. You don\'t have permission to reply to this topic.', true);
+	Canvas::redirect(Canvas::getBase());
+	?>
 <?php endif; ?>

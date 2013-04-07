@@ -68,5 +68,15 @@ class Forum {
 	public function hasTopics(){
 		return count($this->getTopics());
 	}
+
+	//Returns the URL at which this forum can be found.
+	public function getURL(){
+		return Canvas::getBase() . 'forum/' . $this->fid;
+	}
+
+	//Returns the URL at which somebody can make a new topic in this forum.
+	public function getNewTopicURL(){
+		return Canvas::getBase() . 'post/topic/' . $this->fid;
+	}
 }
 ?>

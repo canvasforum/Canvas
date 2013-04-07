@@ -70,9 +70,10 @@
 					<?php include 'forms/post.php'; ?>
 				<?php endif; ?>
 			<?php else: ?>
-				<h2>
-					Sorry. The topic you requested could not be found.
-				</h2>
+				<?php
+				new Message(Message::ERROR, 'The forum you requested could not be found.', true);
+				Canvas::redirect(Canvas::getBase());
+				?>
 			<?php endif; ?>
 		</section>
 	</body>

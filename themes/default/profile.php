@@ -27,6 +27,12 @@ $user = Profile::getUser();
 								<article class="row">
 									<img class="avatar" src="<?php echo $user->getGravatar(168); ?>" />
 									<header>
+										<span>Name</span>
+									</header>
+									<p>
+										<?php echo $user->getName(); ?>
+									</p>
+									<header>
 										<span>About</span>
 									</header>
 									<p>

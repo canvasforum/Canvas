@@ -13,8 +13,8 @@
 						</span>
 					</a>
 					<div id="topmenu">
-						<a href="<?php echo Canvas::getBase() ?>profile/<?php echo Canvas::getUser()->getID(); ?>">View Profile</a>
-						<a href="<?php echo Canvas::getBase() ?>preferences/">Preferences</a>
+						<a href="<?php echo Canvas::getBase(); ?>inbox/">Inbox 0</a>
+						<a href="<?php echo Canvas::getBase(); ?>preferences/">Preferences</a>
 						<a href="<?php echo Canvas::getBase(); ?>logout">Log Out</a>
 					</div>
 				</div>

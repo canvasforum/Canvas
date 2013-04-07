@@ -9,18 +9,18 @@
 					</span>
 				</div>
 			</header>
-			<?php if(Poster::post()): ?>
-				<?php Canvas::redirect(Canvas::getBase() . 'topic/' . Poster::getTopic()->getID() . '#' . Poster::getPost()->getID()); ?>
-			<?php elseif(Canvas::hasErrors()): ?>
-				<aside id="errors">
-					<?php foreach(Canvas::getErrors() as $error): ?>
-						<span class="error"><?php echo $error; ?></span>
-					<?php endforeach; ?>
-				</aside>
-			<?php endif; ?>
 			<section class="bodywrap">
 				<article class="row" id="preview_post"></article>
 				<article class="row">
+					<?php if(Poster::post()): ?>
+						<?php Canvas::redirect(Canvas::getBase() . 'topic/' . Poster::getTopic()->getID() . '#' . Poster::getPost()->getID()); ?>
+					<?php elseif(Canvas::hasErrors()): ?>
+						<aside id="errors">
+							<?php foreach(Canvas::getErrors() as $error): ?>
+								<span class="error"><?php echo $error; ?></span>
+							<?php endforeach; ?>
+						</aside>
+					<?php endif; ?>
 					<form method="POST" action="<?php echo Canvas::getURL(); ?>">
 						<?php if(Poster::getPost()->isFirstPost()): ?>
 							<div>
@@ -46,7 +46,8 @@
 		</div>
 	</section>
 <?php else: ?>
-	<h2>
-		Sorry. You don't have permission to edit this post.
-	</h2>
+	<?php
+	new Message(Message::ERROR, 'The forum you requested could not be found.', true);
+	Canvas::redirect(Canvas::getBase());
+	?>
 <?php endif; ?>
