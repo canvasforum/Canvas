@@ -32,11 +32,14 @@ return array(
 	//Installation directory. Leave off the beginning "/".
 	'dir' => 'canvasbb/',
 
-	//Application theme.
+	//Canvas theme.
 	'theme' => 'default',
 
 	//Index page.
 	'index' => 'index',
+
+	//Forum Name.
+	'name' => 'Canvas Forums',
 
 	//Timezone.
 	'timezone' => 'America/New_York'

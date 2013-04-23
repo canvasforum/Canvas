@@ -134,22 +134,6 @@ class Fetcher {
 		return $results->fetchAll(PDO::FETCH_CLASS, 'Post');
 	}
 
-	//Returns the UID of the user whose auto login key matches the one specified.
-	public static function getAutoLogin($key){
-		$query = 'SELECT uid FROM autologin WHERE userkey = :key';
-		$result = DB::single($query, array('key' => $key), 'uid');
-
-		return $result;
-	}
-
-	//Returns the auto login key that matches the UID specified.
-	public static function getAutoLoginKey($uid){
-		$query = 'SELECT userkey FROM autologin WHERE uid = :uid';
-		$result = DB::single($query, array('uid' => $uid), 'userkey');
-
-		return $result;
-	}
-
 	//Returns the specified group as an object.
 	public static function getGroup($id){
 		$query = 'SELECT name, permissions FROM groups WHERE id = :id LIMIT 1';
@@ -181,6 +165,32 @@ class Fetcher {
 		$results = DB::query($query, null, PDO::FETCH_OBJ);
 
 		return $results;
+	}
+
+	//Returns the total rows of a table.
+	public static function getTotal($type){
+		//Total posts.
+		if($type == 1){
+			$query = 'SELECT id FROM posts';
+			return count(DB::query($query));
+		}
+		//Total members.
+		else if($type == 2){
+			$query = 'SELECT id FROM users';
+			return count(DB::query($query));
+		}
+	}
+
+	//Returns the newest row in a table.
+	public static function getNewest($type){
+		//Newest member.
+		if($type == 1){
+			$query = 'SELECT id, name, uid, email, username, regDate, lastLoginDate, groupId, timezone FROM users ORDER BY regDate DESC LIMIT 1';
+			$result = DB::queryObj($query, null);
+			$result->setFetchMode(PDO::FETCH_CLASS, 'User');
+
+			return $result->fetch();
+		}
 	}
 }
 ?>

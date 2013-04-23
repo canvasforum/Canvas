@@ -6,7 +6,8 @@
 	</head>
 	<body>
 		<?php include 'includes/header.php'; ?>
-		<section id="wrapper">
+		<?php include 'includes/breadcrumb.php'; ?>
+		<section class="wrapper">
 			<?php include 'includes/notes.php'; ?>
 			<?php foreach(Canvas::getCategories() as $category): ?>
 				<section class="wrap">
@@ -30,16 +31,16 @@
 									<div class="forumstat">
 										<?php if($forum->hasTopics()): ?>
 											<span class="lastava">
-												<img src="<?php echo $forum->getLastTopic()->getLastPost()->getAuthor()->getGravatar(30); ?>" />
+												<img src="<?php echo $forum->getLastTopic()->getLastPost()->getAuthor()->getGravatar(40); ?>" />
 											</span>
 											<span class="lastinfo">
 												<span>
 													<a href="<?php echo $forum->getLastTopic()->getLastPost()->getURL(); ?>">
-														<?php echo truncate($forum->getLastTopic()->getName(), 20); ?>
+														<?php echo truncate($forum->getLastTopic()->getName(), 30); ?>
 													</a>
 												</span>
 												<span>
-													by <a href="<?php echo $forum->getLastTopic()->getLastPost()->getAuthor()->getURL(); ?>">
+													By <a href="<?php echo $forum->getLastTopic()->getLastPost()->getAuthor()->getURL(); ?>">
 														<?php echo $forum->getLastTopic()->getLastPost()->getAuthor()->getUsername(); ?>
 													</a>
 												</span>
@@ -64,6 +65,22 @@
 					</section>
 				</div>
 			</section>
+		</section>
+		<section id="stats">
+			<article class="wrapper">
+				<span>
+					<?php echo Canvas::getTotalMembers(); ?>
+				</span>
+				<span>Total Members</span>
+				<span>
+					<?php echo Canvas::getTotalPosts(); ?>
+				</span>
+				<span>Total Posts</span>
+				<span>
+					<a href="<?php echo Canvas::getNewestMember()->getURL(); ?>"><?php echo Canvas::getNewestMember()->getUsername(); ?></a>
+				</span>
+				<span>Is Our Newest Member</span>
+			</article>
 		</section>
 	</body>
 </html>

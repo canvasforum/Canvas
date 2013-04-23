@@ -18,24 +18,24 @@
 
 use \Wires\Database\DB as DB;
 
- class Settings {
- 	public static function getSetting($name, $type = 'string'){
- 		$query = 'SELECT value FROM settings WHERE setting = :setting LIMIT 1';
+class Settings {
+	public static function getSetting($name, $type = 'string'){
+		$query = 'SELECT value FROM settings WHERE setting = :setting LIMIT 1';
 
- 		$result = DB::single($query, array(
- 			'setting' => $name
- 		), 'value');
+		$result = DB::single($query, array(
+			'setting' => $name
+		), 'value');
 
- 		switch($type){
- 			case 'string':
- 				return $result;
+		switch($type){
+			case 'string':
+				return $result;
 
- 			case 'int':
- 				return intval($result);
+			case 'int':
+				return intval($result);
 
- 			case 'bool':
- 				return bool($result);
- 		}
- 	}
- }
+			case 'bool':
+				return bool($result);
+		}
+	}
+}
 ?>

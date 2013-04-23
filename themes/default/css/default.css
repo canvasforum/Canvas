@@ -1,6 +1,7 @@
 /* Import Fonts */
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Lato);
 
 /* Global Styles */
 
@@ -91,7 +92,7 @@ li {
 
 /* Wrappers */
 
-#wrapper {
+.wrapper {
 	max-width: 960px;
 	margin: 50px auto;
 }
@@ -294,7 +295,6 @@ header + .bodywrap .row, .row + .row, .postinfo + .bodywrap .row {
 #head {
 	border-bottom: 1px solid #d3d3d3;
 	font-size: 14px;
-	margin-bottom: 50px;
 	background: #f8f8f8;
 }
 
@@ -459,6 +459,10 @@ nav > a:hover {
 	margin-top: 24px;
 }
 
+.post p img {
+	max-width: 100%;
+}
+
 .postinfo {
 	background: #fafafa;
 	padding: 8px 16px;
@@ -618,4 +622,46 @@ nav#leftcol .row ~ .row {
 
 #notices span + span {
 	margin-top: 5px;
+}
+
+/* Forum Stats */
+
+#stats {
+	text-align: center;
+	color: #989898;
+	background: #eee;
+	padding: 0px 0px 20px;
+	border-top: 1px solid #d3d3d3;
+}
+
+#stats span {
+	display: inline-block;
+	padding: 3px 6px;
+}
+
+#stats span:nth-of-type(2n - 1), #stats span:nth-of-type(2n - 1) a {
+	background: #6398e6;
+	border-radius: 3px;
+	color: #fff;
+}
+
+/* Breadcrumb */
+
+#bread {
+	background: #f5f5f5;
+	border-bottom: 1px solid #d3d3d3;
+}
+
+#bread .wrapper {
+	margin: 0px auto;
+	color: #989898;
+}
+
+#bread a, #bread span {
+	padding: 10px 0px;
+	display: inline-block;
+}
+
+#bread .sep {
+	margin: 0px 10px;
 }

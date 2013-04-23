@@ -18,7 +18,6 @@
 
 use \Wires\Routing\URI as URI;
 use \Wires\Configuration as Configuration;
-use \Wires\Database\DB as DB;
 
 class Canvas {
 	private static $errors = array();
@@ -62,7 +61,22 @@ class Canvas {
 
 	//Returns all the topics in a given forum.
 	public static function getTopics($fid){
-		return Fetcher::getTOpics($fid);
+		return Fetcher::getTopics($fid);
+	}
+
+	//Returns the number of posts on the forum.
+	public static function getTotalPosts(){
+		return Fetcher::getTotal(1);
+	}
+
+	//Returns the number of members on the forum.
+	public static function getTotalMembers(){
+		return Fetcher::getTotal(2);
+	}
+
+	//Returns the newest member.
+	public static function getNewestMember(){
+		return Fetcher::getNewest(1);
 	}
 
 	//Returns the base URL for various directories.
@@ -207,14 +221,13 @@ class Canvas {
 	//Checks to see if the user has a persistent login cookie.
 	public static function checkUser(){
 		if(isset($_COOKIE['rememberme'])){
-			$key = $_COOKIE['rememberme'];
-			$results = Fetcher::getAutoLogin($key);
+			$result = Account::getCurrentKey();
 
-			if(!is_null($results)){
-				$results = Fetcher::getUser($results);
+			if(!is_null($result)){
+				$result = Fetcher::getUser($result);
 
-				if(!is_null($results)){
-					return $results;
+				if(!is_null($result)){
+					return $result;
 				}
 			}
 		}
@@ -237,9 +250,7 @@ class Canvas {
 	//Logs the user out.
 	public static function logout(){
 		if(Canvas::loggedIn()){
-			DB::query('DELETE FROM autologin WHERE uid = :uid', array(
-				'uid' => static::getUser()->getID()
-			));
+			Account::logout();
 
 			unset($_SESSION['uid']);
 			unset($_SESSION['uas']);

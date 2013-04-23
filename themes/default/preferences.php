@@ -12,7 +12,8 @@
 	</head>
 	<body>
 		<?php include 'includes/header.php'; ?>
-		<section id="wrapper">
+		<?php include 'includes/breadcrumb.php'; ?>
+		<section class="wrapper">
 			<section class="wrap">
 				<div class="innerwrap">
 					<header>

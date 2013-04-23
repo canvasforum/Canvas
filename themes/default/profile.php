@@ -15,7 +15,7 @@ $user = Profile::getUser();
 	</head>
 	<body>
 		<?php include 'includes/header.php'; ?>
-		<section id="wrapper">
+		<section class="wrapper">
 			<?php if($user): ?>
 				<section class="wrap">
 					<div class="innerwrap">

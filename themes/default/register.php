@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<?php include 'includes/header.php'; ?>
-		<section id="wrapper">
+		<section class="wrapper">
 			<section class="wrap">
 				<div class="innerwrap">
 					<header>

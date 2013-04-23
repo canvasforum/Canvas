@@ -12,7 +12,8 @@
 	</head>
 	<body>
 		<?php include 'includes/header.php'; ?>
-		<section id="wrapper">
+		<?php include 'includes/breadcrumb.php'; ?>
+		<section class="wrapper">
 			<?php include 'includes/notes.php'; ?>
 			<?php if(Canvas::getTopic()): ?>
 				<?php foreach(Canvas::getTopic()->getPosts() as $post): ?>

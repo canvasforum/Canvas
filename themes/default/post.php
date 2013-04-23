@@ -16,7 +16,8 @@
 	</head>
 	<body>
 		<?php include 'includes/header.php'; ?>
-		<section id="wrapper">
+		<?php include 'includes/breadcrumb.php'; ?>
+		<section class="wrapper">
 			<?php if(Canvas::loggedIn()): ?>
 				<?php if(Poster::getType() == Poster::POST): ?>
 					<?php include 'forms/post.php'; ?>
