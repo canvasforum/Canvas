@@ -173,7 +173,8 @@ CREATE TABLE IF NOT EXISTS `settings` (
 --
 
 INSERT INTO `settings` (`id`, `setting`, `value`) VALUES
-(1, 'minPostLength', '5');
+(1, 'minPostLength', '5'),
+(2, 'adminNotepad', '');
 
 -- --------------------------------------------------------
 
