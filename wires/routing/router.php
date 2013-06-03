@@ -66,6 +66,7 @@ class Router {
 						if($file->isReadable() && pathinfo($file->getPathname(), PATHINFO_EXTENSION) == 'php'){
 							//Attempt to get the name of the current file. Exclude the extension.
 							$path = $file->getPathName();
+
 							$path = explode(DS, $path);
 
 							$fname = Arr::lastElement($path);
@@ -73,13 +74,15 @@ class Router {
 							//Remove the file extension.
 							$fname = preg_replace('/\.[a-z]{2,4}/', '', $fname);
 
+							$dircopy = $dir;
+
 							//Add a "/" if there's a parent directory.
-							if($dir != ''){
-								$dir .= '/';
+							if($dircopy != ''){
+								$dircopy .= '/';
 							}
 
 							//Create a new route object.
-							$route = new Route($dir . $fname, $file->getPathName());
+							$route = new Route($dircopy . $fname, $file->getPathName());
 
 							//Add the route to our routes array.
 							static::$routes[] = $route;
@@ -190,6 +193,10 @@ class Router {
 		else{
 			if($path == ''){
 				return static::getPath(Configuration::get('index'));
+			}
+			else if(!is_null(static::getPath($path . 'index'))){
+				$derp =  static::getPath($path . 'index');
+				return $derp;
 			}
 			else if(is_null(static::getPath('404'))){
 				return SYS . 'errors/404.php';

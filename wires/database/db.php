@@ -86,5 +86,15 @@ class DB {
 	public static function isConnected(){
 		return static::$connection !== null;
 	}
+
+	//Returns the currently connected version of database.
+	public static function getVersion(){
+		return explode('-', static::$connection->getAttribute(PDO::ATTR_SERVER_VERSION))[0];
+	}
+
+	//Returns the current database type.
+	public static function getType(){
+		return static::$connection->getAttribute(PDO::ATTR_DRIVER_NAME);
+	}
 }
 ?>

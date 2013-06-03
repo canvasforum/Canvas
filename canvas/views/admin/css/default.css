@@ -1,0 +1,296 @@
+/* Import Fonts */
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+/* Global Styles */
+
+* {
+	padding: 0px;
+	margin: 0px;
+	outline: none;
+	word-wrap: break-word;
+}
+
+html, body {
+	font-family: Open Sans, Helvetica, Arial;
+	font-size: 12px;
+	webkit-font-smoothing: antialiased;
+	background: #fff;
+	color: #202020;
+}
+
+a {
+	color: #6398e6;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #416eb2;
+}
+
+h1, h2, h3 {
+	font-weight: 400;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #d3d3d3;
+	margin-bottom: 10px;
+	color: #878787;
+}
+
+h1 {
+	font-size: 24px;
+}
+
+h2 {
+	font-size: 18px;
+}
+
+h3 {
+	font-size: 16px;
+}
+
+table {
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+table, thead, tbody, th, tr, td {
+	border: 1px solid #dbdbdb;
+	border-collapse: collapse;
+	box-sizing: border-box;
+}
+
+th {
+	text-align: left;
+	font-weight: 400;
+	background: #eaeaea;
+}
+
+th, td {
+	padding: 8px 13px;
+}
+
+hr {
+	margin-bottom: 20px;
+	border-bottom: 1px solid #d3d3d3;
+	padding-bottom: 20px;
+}
+
+label {
+	display: block;
+	margin-bottom: 10px;
+}
+
+label + img {
+	margin-bottom: 10px;
+}
+
+form div + div {
+	margin-top: 10px;
+}
+
+input[type=text], input[type=email], input[type=password], select, textarea {
+	width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	border: 1px solid #dbdbdb;
+	font-family: Open Sans;
+	padding: 8px 13px;
+	margin-bottom: 15px;
+}
+
+select {
+	padding: 8px;
+}
+
+input:focus, textarea:focus {
+	border: 1px solid #6398e6;
+}
+
+input[type=submit] {
+	background: #e3e3e3;
+	padding: 8px 18px;
+	color: #989898;
+	cursor: pointer;
+	border: 1px solid #d0d0d0;
+}
+
+input[type=submit]:hover {
+	background: #6398e6;
+	color: #fff;
+	border: 1px solid #416eb2;
+}
+
+input[type=checkbox] {
+	margin-right: 3px;
+	vertical-align: middle;
+	-webkit-appearance: none;
+	/*-moz-appearance: none;*/
+	appearance: none;
+	background: #fff;
+	border: 1px solid #cacaca;
+	height: 16px;
+	width: 16px;
+	position: relative;
+	bottom: 1px;
+	cursor: pointer;
+}
+
+input[type=checkbox]:checked:after {
+	position: absolute;
+	content: '\2714';
+	top: 1px;
+	left: 3px;
+	color: #989898;
+	font-size: 10px;
+}
+
+textarea {
+	min-height: 240px;
+	overflow: hidden;
+	font-size: 12px;
+}
+
+input[type=submit] + input[type=checkbox], input[type=submit] + .progress {
+	margin-left: 5px;
+}
+
+.progress {
+	opacity: 0.0;
+}
+
+#top {
+	background: #333538;
+	color: #fff;
+	padding: 10px 0px 15px;
+	position: relative;
+	z-index: 2;
+}
+
+#top h2 {
+	padding: 0px;
+	margin: 0px;
+	border: none;
+	color: #fff;
+}
+
+.grid {
+	max-width: 960px;
+	margin: 0px auto;
+}
+
+nav {
+	background: #6398e6;
+}
+
+nav a {
+	display: inline-block;
+	padding: 10px 15px 15px;
+	color: #fff;
+}
+
+nav a + a {
+	margin-left: -3px;
+}
+
+nav a:hover {
+	background: #4b7bc2;
+	color: #fff;
+}
+
+#split #main, #side {
+	display: table-cell;
+	vertical-align: top;
+}
+
+#split #main {
+	width: 720px;
+}
+
+#split > header {
+	margin-top: 20px;
+	margin-bottom: -10px;
+}
+
+#main {
+	padding: 20px 0px;
+}
+
+#side {
+	padding: 20px 0px 0px 20px;
+	width: 240px;
+}
+
+.stat {
+	display: block;
+	margin-bottom: 10px;
+}
+
+.stat .icon, .stat .details {
+	display: table-cell;
+}
+
+.stat .icon {
+	font-size: 44px;
+	padding-right: 10px;
+	vertical-align: middle;
+	color: #6398e6;
+}
+
+.stat .details {
+	vertical-align: top;
+}
+
+.stat .statname {
+	font-size: 14px;
+	display: block;
+}
+
+.stat .statvalue {
+	display: block;
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.statname {
+	width: 130px;
+}
+
+#errors {
+	background: #f36f6f;
+	color: #fff;
+	padding: 8px 16px;
+	width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	margin-bottom: 10px;
+	border-radius: 3px;
+}
+
+#errors span {
+	display: block;
+	color: #fff;
+}
+
+#errors span + span {
+	margin-top: 5px;
+}
+
+#notices {
+	background: #6398e6;
+	color: #fff;
+	padding: 8px 16px;
+	width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	margin-bottom: 10px;
+	border-radius: 3px;
+}
+
+#notices span {
+	display: block;
+	color: #fff;
+}
+
+#notices span + span {
+	margin-top: 5px;
+}

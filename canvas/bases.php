@@ -21,6 +21,8 @@ use \Wires\Configuration as Configuration;
 return array(
 	'root' => DS . Configuration::get('dir'),
 	'canvas' => DS . Configuration::get('dir') . 'canvas' . DS,
-	'theme' => DS . Configuration::get('dir') . 'themes' . DS . Configuration::get('theme') . DS
+	'theme' => DS . Configuration::get('dir') . 'themes' . DS . Configuration::get('theme') . DS,
+	'admin' => DS . Configuration::get('dir') . 'admin' . DS,
+	'admindep' => DS . Configuration::get('dir') . 'canvas' . DS . 'views' . DS . 'admin' . DS
 );
 ?>

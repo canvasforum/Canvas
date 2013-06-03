@@ -98,6 +98,11 @@ class Canvas {
 		return Configuration::get('timezone');
 	}
 
+	//Returns the forum name/title.
+	public static function getName(){
+		return Configuration::get('name');
+	}
+
 	//Returns the current URL.
 	public static function getURL(){
 		$uri = new URI();
