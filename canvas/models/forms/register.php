@@ -40,7 +40,7 @@ class Register {
 			});
 
 			if($uri->getArg(0) == 'register' && $check){
-				$result = Fetcher::getUserByHandle($_POST['email']);
+				$result = Fetcher::getUserByEmail($_POST['email']);
 
 				if($result){
 					new Message(Message::ERROR, 'The email address specified is already in use.');
@@ -49,7 +49,7 @@ class Register {
 					new Message(Message::ERROR, 'You must specify a valid email such as janedoe@email.com.');
 				}
 
-				$result = Fetcher::getUserByHandle($_POST['username']);
+				$result = Fetcher::getUserByUsername($_POST['username']);
 
 				if($result){
 					new Message(Message::ERROR, 'The username specified is already in use.');

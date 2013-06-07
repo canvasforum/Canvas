@@ -10,4 +10,8 @@ $(function(){
 			form.find('.progress').removeClass('icon-spinner').removeClass('icon-spin').text('Successfully updated.');
 		});
 	})
+
+	$('textarea').expand({
+		parent: '#main'
+	});
 });

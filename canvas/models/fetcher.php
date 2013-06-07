@@ -61,7 +61,22 @@ class Fetcher {
 
 	//Returns the user with the given username or email.
 	public static function getUserByHandle($handle){
-		$query = 'SELECT uid, email, password, salt FROM users WHERE username = :handle OR email = :handle LIMIT 1';
+		return static::getUserByEmail($handle) || static::getUserByUsername($handle) || false;
+	}
+
+	//Returns the user with the given email.
+	public static function getUserByEmail($handle){
+		$query = 'SELECT uid, email, password, salt FROM users WHERE email = :handle LIMIT 1';
+		$result = DB::queryObj($query, array('handle' => $handle));
+
+		$result->setFetchMode(PDO::FETCH_CLASS, 'User');
+
+		return $result->fetch();
+	}
+
+	//Returns the user with the given username.
+	public static function getUserByUsername($handle){
+		$query = 'SELECT uid, email, password, salt FROM users WHERE username = :handle LIMIT 1';
 		$result = DB::queryObj($query, array('handle' => $handle));
 
 		$result->setFetchMode(PDO::FETCH_CLASS, 'User');
