@@ -13,7 +13,7 @@
  * 
  * @package Canvas
  * @author Andrew Lee
- * @link http://andrewleenj.com
+ * @link http://wildandrewlee.com
  */
  
 //The PHP equivalent of Python's all() function.
