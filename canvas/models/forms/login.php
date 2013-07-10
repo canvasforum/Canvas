@@ -26,7 +26,7 @@ class Login {
 		if(Response::isPost()){
 			$uri = new URI();
 
-			if($uri->getArg(0) == 'login' && isset($_POST['handle'], $_POST['password'], $_POST['sub'])){
+			if(isset($_POST['handle'], $_POST['password'], $_POST['sub'])){
 				$query = 'SELECT uid, email, password, salt FROM users WHERE username = :handle OR email = :handle LIMIT 1';
 
 				$result = DB::queryObj($query, array(
@@ -45,7 +45,7 @@ class Login {
 							$key = str_shuffle($key);
 							$key .= $result->uid;
 
-							setcookie('rememberme', $key, time() + 2592000);
+							setcookie('rememberme', $key, time() + 2592000, '/');
 
 							DB::query('INSERT INTO autologin (uid, userkey) VALUES (:uid, :key)', array(
 								'uid' => $result->uid,

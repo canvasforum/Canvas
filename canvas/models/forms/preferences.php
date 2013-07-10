@@ -76,7 +76,7 @@ class Preferences {
 						'uid' => Canvas::getUser()->getID()
 					))->fetch(PDO::FETCH_OBJ);
 
-					$hash = md5(md5($_POST['cpassword']) . md5($result->salt));
+					$hash = Hasher::hashPass($_POST['cpassword'], $result->salt);
 
 					if($hash == $result->password){
 						if($_POST['npassword'] != $_POST['cnpassword']){
@@ -89,7 +89,7 @@ class Preferences {
 						if(!Canvas::hasErrors()){
 							$salt = Hasher::createSalt();
 
-							$hash = md5(md5($_POST['npassword']) . md5($salt));
+							$hash = Hasher::hashPass($_POST['npassword'], $salt);
 
 							$query = 'UPDATE users SET password = :password, salt = :salt WHERE uid = :uid';
 
@@ -99,14 +99,14 @@ class Preferences {
 								'uid' => Canvas::getUser()->getID()
 							));
 
-							$autologin = Fetcher::getAutoLoginKey(Canvas::getUser()->getID());
+							$autologin = Account::getAutoLoginKey(Canvas::getUser()->getID());
 
 							if(!empty($autologin)){
 								$key = md5($_SESSION['uas']) . md5(time()) . md5($salt);
 								$key = str_shuffle($key);
 								$key .= Canvas::getUser()->getID();
 
-								setcookie('rememberme', $key, time() + 2592000);
+								setcookie('rememberme', $key, time() + 2592000, '/');
 
 								$query = 'UPDATE autologin SET userkey = :userkey WHERE uid = :uid';
 
@@ -114,11 +114,11 @@ class Preferences {
 									'userkey' => $key,
 									'uid' => Canvas::getUser()->getID()
 								));
-
-								new Message(Message::NOTICE, 'Your password has been successfully updated.');
-
-								return true;
 							}
+
+							new Message(Message::NOTICE, 'Your password has been successfully updated.');
+
+							return true;
 						}
 					}
 					else{

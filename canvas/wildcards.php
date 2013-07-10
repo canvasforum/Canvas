@@ -22,6 +22,7 @@ return array(
 	'post',
 	'preferences',
 	'delete',
-	'profile'
+	'profile',
+	'admin/forums'
 );
 ?>

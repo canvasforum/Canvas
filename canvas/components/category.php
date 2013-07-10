@@ -29,7 +29,7 @@ class Category {
 			return $this->forums;
 		}
 		else{
-			$result = DB::queryObj('SELECT fid, name, description FROM forums WHERE cid = :cid', array('cid' => $this->id));
+			$result = DB::queryObj('SELECT fid, name, description FROM forums WHERE cid = :cid ORDER BY ordering ASC', array('cid' => $this->id));
 			$result = $result->fetchAll(PDO::FETCH_CLASS, 'Forum');
 
 			$this->forums = $result;

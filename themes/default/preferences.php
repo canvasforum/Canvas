@@ -38,7 +38,7 @@
 								<?php include 'forms/preferences_pass.php'; ?>
 							<?php elseif(Preferences::getType() == Preferences::PROFILE): ?>
 								<?php include 'forms/preferences_profile.php'; ?>
-							<?php endif; ?>
+						<?php endif; ?>
 						</section>
 					</section>
 				</div>

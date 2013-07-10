@@ -39,7 +39,7 @@ class Register {
 				return isset($_POST[$item]);
 			});
 
-			if($uri->getArg(0) == 'register' && $check){
+			if($check){
 				$result = Fetcher::getUserByEmail($_POST['email']);
 
 				if($result){

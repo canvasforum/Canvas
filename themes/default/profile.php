@@ -27,36 +27,16 @@ $user = Profile::getUser();
 							<section id="profilebar">
 								<article class="row">
 									<img class="avatar" src="<?php echo $user->getGravatar(168); ?>" />
-									<header>
-										<span>Name</span>
-									</header>
-									<p>
-										<?php echo $user->getName(); ?>
-									</p>
-									<header>
-										<span>About</span>
-									</header>
-									<p>
-										<?php echo $user->getProfile()->getField('about'); ?>
-									</p>
-									<header>
-										<span>Website</span>
-									</header>
-									<p>
-										<a href="<?php echo $user->getProfile()->getField('website'); ?>"><?php echo $user->getProfile()->getField('website'); ?></a>
-									</p>
-									<header>
-										<span>Location</span>
-									</header>
-									<p>
-										<?php echo $user->getProfile()->getField('location'); ?>
-									</p>
-									<header>
-										<span>Group</span>
-									</header>
-									<p>
-										<?php echo $user->getGroup()->getName(); ?>
-									</p>
+									<?php foreach($user->getProfile()->getFields() as $field): ?>
+										<header>
+											<span>
+												<?php echo $field->name; ?>
+											</span>
+										</header>
+										<p>
+											<?php echo Markdown($user->getProfile()->getField($field->name)); ?>
+										</p>
+									<?php endforeach; ?>
 								</article>
 							</section>
 							<section id="rightcol">

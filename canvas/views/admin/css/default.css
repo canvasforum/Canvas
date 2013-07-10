@@ -33,7 +33,7 @@ h1, h2, h3 {
 	padding-bottom: 10px;
 	border-bottom: 1px solid #d3d3d3;
 	margin-bottom: 10px;
-	color: #878787;
+	color: #737373;
 }
 
 h1 {
@@ -41,11 +41,18 @@ h1 {
 }
 
 h2 {
-	font-size: 18px;
+	font-size: 14px;
+	padding: 10px 0px 15px;
+	margin-bottom: 0px;
+	border-bottom: none;
 }
 
 h3 {
-	font-size: 16px;
+	font-size: 12px;
+	display: inline-block;
+	color: #202020;
+	padding: 0px;
+	margin: 0px;
 }
 
 table {
@@ -154,6 +161,11 @@ input[type=submit] + input[type=checkbox], input[type=submit] + .progress {
 	margin-left: 5px;
 }
 
+body > header:nth-of-type(1) {
+	background: #eaeaea;
+	border-bottom: 1px solid #dbdbdb;
+}
+
 .progress {
 	opacity: 0.0;
 }
@@ -204,11 +216,6 @@ nav a:hover {
 
 #split #main {
 	width: 720px;
-}
-
-#split > header {
-	margin-top: 20px;
-	margin-bottom: -10px;
 }
 
 #main {
@@ -293,4 +300,70 @@ nav a:hover {
 
 #notices span + span {
 	margin-top: 5px;
+}
+
+.category {
+	border: 1px solid #dbdbdb;
+}
+
+.category + .category {
+	border-top: none;
+}
+
+.category header h3 {
+	background: #eaeaea;
+	padding: 8px 13px 10px;
+	margin-bottom: 0px;
+	display: block;
+}
+
+.category header h3 {
+	border-bottom: none;
+	position: relative;
+}
+
+.forum {
+	border-top: 1px solid #dbdbdb;
+	background: #fff;
+}
+
+.forum a {
+	display: block;
+	position: relative;
+	padding: 8px 13px 10px;
+}
+
+.category header a:hover h3 {
+	background: #dfdfdf;
+}
+
+.category header h3, .forum a {
+	-webkit-transition: 0.3s padding;
+	-moz-transition: 0.3s padding;
+	-o-transition: 0.3s padding;
+	transition: 0.3s padding;
+}
+
+.reorder {
+	width: 0px;
+	overflow: hidden;
+	position: absolute;
+	top: 0px;
+	color: #787878;
+	left: 0px;
+	font-size: 14px;
+	-webkit-transition: 0.3s all;
+	-moz-transition: 0.3s all;
+	-o-transition: 0.3s all;
+	transition: 0.3s all;
+	padding: 9px 0px;
+}
+
+.category header h3:hover, .forum a:hover {
+	padding-left: 38px;
+}
+
+.category header h3:hover .reorder, .forum a:hover .reorder {
+	width: 12px;
+	padding: 9px 13px;
 }

@@ -79,7 +79,7 @@ class DB {
 	public static function single($query, $param, $col){
 		$result = static::query($query, $param, PDO::FETCH_ASSOC);
 
-		return is_array($result) ? $result[0][$col] : null;
+		return !empty($result) && is_array($result) ? $result[0][$col] : null;
 	}
 
 	//Returns true if the connection is valid otherwise false.

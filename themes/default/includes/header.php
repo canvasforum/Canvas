@@ -6,6 +6,7 @@
 		<nav>
 			<?php if(Canvas::loggedIn()): ?>
 				<div id="topdrop">
+					<?php Canvas::getUser(); ?>
 					<a href="<?php echo Canvas::getUser()->getProfileURL(); ?>">
 						<img src="<?php echo Canvas::getUser()->getGravatar(16); ?>" />
 						<span>

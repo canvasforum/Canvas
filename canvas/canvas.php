@@ -103,10 +103,14 @@ class Canvas {
 		return Configuration::get('name');
 	}
 
+	//Returns a URI object.
+	public static function getURI(){
+		return new URI();
+	}
+
 	//Returns the current URL.
 	public static function getURL(){
-		$uri = new URI();
-		return $uri->getOriginal();
+		return static::getURI()->getOriginal();
 	}
 
 	//Returns the current view ID.
@@ -259,8 +263,9 @@ class Canvas {
 
 			unset($_SESSION['uid']);
 			unset($_SESSION['uas']);
-			
-			setcookie('rememberme', '', time() - 24 * 365 * 60);
+
+			setcookie('rememberme', '', time() - 2592000, '/');
+			setcookie('PHPSESSID', '', time - 2592000, '/');
 
 			session_destroy();
 		}

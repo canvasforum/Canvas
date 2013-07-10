@@ -1,11 +1,12 @@
 <?php
-if(!Canvas::loggedIn()) Canvas::redirect(Canvas::getBase());
+if(!Canvas::loggedIn() || !Canvas::getUser()->hasPermission(Permissions::ADMIN_PANEL)) Canvas::redirect(Canvas::getBase());
 ?>
 <link rel="stylesheet" href="<?php echo Canvas::getBase('admindep'); ?>css/normalize.css">
 <link rel="stylesheet" href="<?php echo Canvas::getBase('admindep'); ?>css/font-awesome.min.css">
 <link rel="stylesheet" href="<?php echo Canvas::getBase('admindep'); ?>css/tipsy.css">
 <link href="<?php echo Canvas::getBase('admindep'); ?>css/default.css" rel="stylesheet" />
 <script src="<?php echo Canvas::getBase('admindep'); ?>js/jquery.js"></script>
+<script src="<?php echo Canvas::getBase('admindep'); ?>js/jquery-ui-1.10.3.custom.min.js"></script>
 <script src="<?php echo Canvas::getBase('admindep'); ?>js/jquery.expand.js"></script>
 <script src="<?php echo Canvas::getBase('admindep'); ?>js/tipsy.js"></script>
 <script src="<?php echo Canvas::getBase('admindep'); ?>js/scripting.js"></script>

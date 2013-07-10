@@ -31,14 +31,12 @@ class Route {
 
 	//Checks to see if the URI provided matches this route's URI.
 	public function match($uri){
-		//var_dump($this->uri);
-
 		if($this->wildcard){		
 			$regex = $this->uri;
-			$regex = preg_replace('/\*/', '.+?', $regex);
-			$regex .= '/.*';
+			$regex = preg_replace('/\*/', '.*', $regex);
+			$regex .= '(/.*)*';
 			$regex = '#^' . $regex . '$#';
-
+			
 			return preg_match($regex, $uri);
 		}
 		else{

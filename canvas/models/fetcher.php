@@ -32,7 +32,7 @@ class Fetcher {
 			return static::$categories;
 		}
 		else{
-			$query = 'SELECT id, name FROM categories ORDER BY id ASC';
+			$query = 'SELECT id, name FROM categories ORDER BY ordering ASC';
 			$result = DB::queryObj($query, null);
 
 			$result = $result->fetchAll(PDO::FETCH_CLASS, 'Category');

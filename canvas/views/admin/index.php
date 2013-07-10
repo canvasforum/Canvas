@@ -7,10 +7,12 @@
 	<body>
 		<?php include 'includes/top.php'; ?>
 		<?php include 'includes/nav.php'; ?>
-		<div id="split" class="grid">
-			<header>
+		<header>
+			<div class="grid">
 				<h2>Dashboard</h2>
-			</header>
+			</div>
+		</header>
+		<div id="split" class="grid">
 			<section id="main">
 				<?php $success = Admin::updateNotepad(); ?>
 				<?php if($success): ?>
