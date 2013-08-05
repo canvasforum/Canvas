@@ -15,6 +15,7 @@ $uri = Canvas::getURI();
 				<h2>Forum Manager</h2>
 			</div>
 		</header>
+		<?php echo Canvas::getBase('admin'); ?>
 		<div class="grid">
 			<section id="main">
 				<?php if($uri->length() == 2): ?>
@@ -42,7 +43,7 @@ $uri = Canvas::getURI();
 						<?php endforeach; ?>
 					</div>
 			<?php elseif($uri->length() == 4): ?>
-
+				<?php include 'includes/forum_editor.php'; ?>
 			<?php endif; ?>
 			</section>
 		</div>
